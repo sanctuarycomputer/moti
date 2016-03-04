@@ -1,0 +1,28 @@
+{
+  "name": "moti",
+  "version": "1.0.0",
+  "description": "Museum of the Internet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sanctuarycomputer/moti.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sanctuarycomputer/moti/issues"
+  },
+  "homepage": "https://github.com/sanctuarycomputer/moti",
+  "devDependencies": {
+    "babel-core": "^6.6.4",
+    "babel-loader": "^6.2.4",
+    "react": "^0.14.7",
+    "react-hot-loader": "^1.3.0",
+    "react-router": "^2.0.0",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1"
+  }
+}
