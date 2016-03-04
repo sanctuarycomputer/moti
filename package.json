@@ -4,7 +4,9 @@
   "description": "Museum of the Internet",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --hot --progress --colors",
+    "build": "webpack --progress --colors"
   },
   "repository": {
     "type": "git",
@@ -19,9 +21,14 @@
   "devDependencies": {
     "babel-core": "^6.6.4",
     "babel-loader": "^6.2.4",
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "node-sass": "^3.4.2",
     "react": "^0.14.7",
     "react-hot-loader": "^1.3.0",
     "react-router": "^2.0.0",
+    "sass-loader": "0.5",
+    "style-loader": "^0.13.0",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
   }

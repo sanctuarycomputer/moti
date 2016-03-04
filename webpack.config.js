@@ -1,4 +1,6 @@
-var webpack = require('webpack');  
+var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 module.exports = {  
     entry: [
       'webpack/hot/only-dev-server',
@@ -12,11 +14,14 @@ module.exports = {
         loaders: [
             { test: /\.js?$/, loaders: ['react-hot', 'babel'], exclude: /node_modules/ },
             { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
-            { test: /\.css$/, loader: "style!css" }
+            { test: /\.scss$/, loader: ExtractTextPlugin.extract('css!sass') }
         ]
     },
     plugins: [
-      new webpack.NoErrorsPlugin()
+      new webpack.NoErrorsPlugin(),
+      new ExtractTextPlugin('public/style.css', {
+        allChunks: true
+      })
     ]
 
 };
