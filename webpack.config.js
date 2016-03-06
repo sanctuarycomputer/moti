@@ -1,14 +1,20 @@
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
+  template: __dirname + '/app/index.html',
+  filename: 'index.html',
+  inject: 'body'
+});
 
 module.exports = {  
     entry: [
       'webpack/hot/only-dev-server',
-      "./js/app.js"
+      "./app/app.js"
     ],
     output: {
         path: __dirname + '/build',
-        filename: "bundle.js"
+        filename: "app_bundle.js"
     },
     module: {
         loaders: [
@@ -21,7 +27,8 @@ module.exports = {
       new webpack.NoErrorsPlugin(),
       new ExtractTextPlugin('public/style.css', {
         allChunks: true
-      })
+      }),
+      HTMLWebpackPluginConfig
     ]
 
 };
