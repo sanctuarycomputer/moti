@@ -1,14 +1,7 @@
 var React    = require('react'),
-    ReactDOM = require('react-dom');
+    ReactDOM = require('react-dom'),
+    routes   = require('./config/routes');
 
-var HelloWorld = React.createClass({
-  render: function(){
-    return(
-      <h1>
-        Hello World
-      </h1>
-    )
-  }
-});
+document.body.style.backgroundColor = "black";
 
-ReactDOM.render(<HelloWorld />, document.getElementById('app'));
+ReactDOM.render(routes, document.getElementById('app'));
