@@ -1,6 +1,6 @@
 var React = require('react');
 
-var Main = React.createClass({
+var App = React.createClass({
   render: function() {
     var mainStyle = {
       color: 'white',
@@ -31,9 +31,10 @@ var Main = React.createClass({
         <div style={topRight}>O</div>
         <div style={bottomLeft}>T</div>
         <div style={bottomRight}>I</div>
+        {this.props.children}
       </div>
     )
   }
 });
 
-module.exports = Main;
+module.exports = App;
