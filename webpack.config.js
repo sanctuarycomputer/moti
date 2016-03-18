@@ -8,27 +8,33 @@ var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 });
 
 module.exports = {  
-    entry: [
-      'webpack/hot/only-dev-server',
-      "./app/app.js"
-    ],
-    output: {
-        path: __dirname + '/build',
-        filename: "app_bundle.js"
-    },
-    module: {
-        loaders: [
-            { test: /\.js?$/, loaders: ['react-hot'], exclude: /node_modules/ },
-            { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
-            { test: /\.scss$/, loader: ExtractTextPlugin.extract('css!sass') }
-        ]
-    },
-    plugins: [
-      new webpack.NoErrorsPlugin(),
-      new ExtractTextPlugin('public/style.css', {
-        allChunks: true
-      }),
-      HTMLWebpackPluginConfig
+  entry: [
+    'webpack/hot/only-dev-server',
+    './app/app.js'
+  ],
+  output: {
+    path: __dirname + '/build',
+    filename: "app_bundle.js"
+  },
+  module: {
+    loaders: [
+      { test: /\.js?$/, loaders: ['react-hot'], exclude: /node_modules/ },
+      { 
+        test: /\.js$/, 
+        exclude: /node_modules/, 
+        loader: 'babel',
+        query: {
+          presets: ['react', 'es2015']
+        }
+      },
+      { test: /\.scss$/, loader: ExtractTextPlugin.extract('css!sass') }
     ]
-
+  },
+  plugins: [
+    new webpack.NoErrorsPlugin(),
+    new ExtractTextPlugin('public/style.css', {
+      allChunks: true
+    }),
+    HTMLWebpackPluginConfig
+  ]
 };

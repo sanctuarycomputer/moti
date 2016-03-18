@@ -1,25 +1,27 @@
-var React = require('react');
+import React, {
+  Component
+} from 'react';
 
-var App = React.createClass({
-  render: function() {
-    var mainStyle = {
+export default class App extends Component {
+  render() {
+    let mainStyle = {
       color: 'white',
       fontSize: 100,
     };
 
-    var topRight = {
+    let topRight = {
       top: 0,
       right: 0,
       position: 'fixed'
     };
 
-    var bottomLeft = {
+    let bottomLeft = {
       bottom: 0,
       left: 0,
       position: 'fixed'
     };
 
-    var bottomRight = {
+    let bottomRight = {
       bottom: 0,
       right: 0,
       position: 'fixed'
@@ -35,6 +37,4 @@ var App = React.createClass({
       </div>
     )
   }
-});
-
-module.exports = App;
+}
