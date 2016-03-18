@@ -1,7 +1,6 @@
-var React    = require('react'),
-    ReactDOM = require('react-dom'),
-    routes   = require('./config/routes');
+import { render } from 'react-dom';
+import Router from './config/Router';
 
-document.body.style.backgroundColor = "black";
+document.body.style.backgroundColor = 'black';
 
-ReactDOM.render(routes, document.getElementById('app'));
+render(Router, document.getElementById('app'));
