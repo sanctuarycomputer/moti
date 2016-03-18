@@ -56,6 +56,7 @@ class Loader extends Component {
       top: '50%',
       left: '50%',
       transform: 'translate(' + '-50%,' + ' -50%)',
+      zIndex: 2
     };
 
     let loaded = {
@@ -90,7 +91,6 @@ class Loader extends Component {
     };
 
 
-
     let styleVariant = this.state.isLoading ? loading:loaded;
 
     return (
@@ -100,6 +100,43 @@ class Loader extends Component {
         <Letter character='T' isLoading={this.state.isLoading} loaded={bottomLeft}/>
         <Letter character='I' isLoading={this.state.isLoading} loaded={bottomRight}/>
       </div>
+    )
+  }
+}
+
+class Overlay extends Component {
+  constructor(props) {
+    super(...arguments);
+
+    this.state = {
+      isLoading: props.isLoading
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.state.isLoading = nextProps.isLoading;
+    this.setState(this.state);
+  }
+
+  render() {
+    let loading = {
+      backgroundColor: 'black',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+      zIndex: 1
+    }
+
+    let loaded = {
+      display: 'none'
+    }
+
+    let styleVariant = this.state.isLoading ? loading:loaded;
+
+    return (
+      <div style={styleVariant}></div>
     )
   }
 }
@@ -136,6 +173,7 @@ export default class App extends Component {
 
     return (
       <div style={mainStyle}>
+        <Overlay isLoading={this.state.isLoading} />
         <Loader isLoading={this.state.isLoading} /> 
         {this.props.children}
       </div>
