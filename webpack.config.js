@@ -1,15 +1,10 @@
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: __dirname + '/app/index.html',
-  filename: 'index.html',
-  inject: 'body'
-});
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {  
   entry: [
     'webpack/hot/only-dev-server',
+    'babel-polyfill',
     './app/app.js'
   ],
   output: {
@@ -24,17 +19,27 @@ module.exports = {
         exclude: /node_modules/, 
         loader: 'babel',
         query: {
-          presets: ['react', 'es2015']
+          presets: [
+            'react', 
+            'es2015', 
+            'stage-0'
+          ],
+          plugins: [
+            'transform-runtime', 
+            'transform-class-properties', 
+            'syntax-decorators',
+            'transform-decorators-legacy'
+          ]
         }
-      },
-      { test: /\.scss$/, loader: ExtractTextPlugin.extract('css!sass') }
+      }
     ]
   },
   plugins: [
     new webpack.NoErrorsPlugin(),
-    new ExtractTextPlugin('public/style.css', {
-      allChunks: true
-    }),
-    HTMLWebpackPluginConfig
+    new HtmlWebpackPlugin({
+      template: __dirname + '/app/index.html',
+      filename: 'index.html',
+      inject: false
+    })
   ]
 };
