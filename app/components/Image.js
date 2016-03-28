@@ -3,7 +3,7 @@ const { PropTypes } = React;
 import Radium from 'radium';
 
 const Styles = {
-  base:    { transition: 'opacity 500ms' },
+  base:    { transition: 'opacity 500ms', width: '100%', paddingTop: '10vh' },
   loading: { opacity: 0 },
   loaded:  { opacity: 1 },
   errored: { opacity: 0 }

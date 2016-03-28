@@ -1,27 +1,14 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
-import Image from './Image.js';
 
-const Styles = {
-  base: {
-    backgroundColor: 'pink'
-  },
-  active: {
-    backgroundColor: 'blue' 
-  }
-}
+import Gallery from './Gallery.js';
 
-@Radium
+const ImageUrls = [
+  'http://payload397.cargocollective.com/1/0/128/10253258/Unknown-9_1600_c.jpeg',
+  'http://payload397.cargocollective.com/1/0/128/10253258/Unknown-8_1600_c.jpeg',
+  'http://payload397.cargocollective.com/1/0/128/10253258/Unknown-6_1600_c.jpeg'
+]
+
 export default class Home extends Component {
-  render() {
-    const {
-      reactIsRad 
-    } = this.props;
-
-    return (
-      <div style={[Styles.base]}>
-        <Image src={'https://pbs.twimg.com/media/CeGrzp6WoAAn-jQ.jpg'} />
-      </div>
-    );
-  }
+  render() { return (<Gallery imageUrls={ImageUrls} />); }
 }
