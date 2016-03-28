@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
-
-const {
-  PropTypes: { bool }
-} = React;
+import Image from './Image.js';
 
 const Styles = {
   base: {
@@ -16,21 +13,14 @@ const Styles = {
 
 @Radium
 export default class Home extends Component {
-  static propTypes = {
-    reactIsRad: bool.isRequired
-  }
-
   render() {
     const {
       reactIsRad 
     } = this.props;
 
     return (
-      <div
-        style={[
-          Styles.base
-        ]}>
-          Homepage Specific
+      <div style={[Styles.base]}>
+        <Image src={'https://pbs.twimg.com/media/CeGrzp6WoAAn-jQ.jpg'} />
       </div>
     );
   }
