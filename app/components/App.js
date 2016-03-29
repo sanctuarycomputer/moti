@@ -1,7 +1,16 @@
-import React, {
-  Component
-} from 'react';
+import React, { Component } from 'react';
+import Radium from 'radium';
 
+const Styles = {
+  base: {
+    width: '80vw',
+    marginLeft: '10vw',
+    height: '100vh',
+    overflow: 'scroll'
+  }
+}
+
+@Radium
 export default class App extends Component {
   render() {
     let mainStyle = {
@@ -33,7 +42,8 @@ export default class App extends Component {
         <div style={topRight}>O</div>
         <div style={bottomLeft}>T</div>
         <div style={bottomRight}>I</div>
-        {this.props.children}
+
+        <div style={[Styles.base]}>{this.props.children}</div>
       </div>
     )
   }
