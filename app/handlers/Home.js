@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
 
-import Gallery from './Gallery.js';
+import Gallery from '../components/Gallery.js';
 
 const ImageUrls = [
   'http://payload397.cargocollective.com/1/0/128/10253258/Unknown-9_1600_c.jpeg',
