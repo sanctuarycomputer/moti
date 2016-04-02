@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 const { PropTypes } = React;
 
 export default class Letter extends Component {

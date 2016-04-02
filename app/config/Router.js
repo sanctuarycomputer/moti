@@ -1,19 +1,25 @@
 import React from 'react';
 
 import ReactRouter, {
-  hashHistory,
-  Router,
   Route,
   IndexRoute
 } from 'react-router';
 
-import App from '../components/App';
-import Home from '../components/Home';
+import App from '../handlers/App';
+import Home from '../handlers/Home';
+
+import Information from '../handlers/information/Information';
+import InformationIndex from '../handlers/information/Index';
+import InformationCurators from '../handlers/information/Curators';
 
 export default (
-  <Router history={hashHistory}>
-    <Route path ='/' component={App}>
-      <IndexRoute component={Home} />
+  <Route path ='/' component={App}>
+    <IndexRoute component={Home} />
+
+    <Route path='/information' component={Information}>
+      <IndexRoute component={InformationIndex} />
+      <Route path=':mode' component={InformationCurators} />
     </Route>
-  </Router>
+
+  </Route>
 );
