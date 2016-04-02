@@ -1,6 +1,5 @@
-import React, {
-  Component
-} from 'react';
+import React, { component } from 'react';
+const { PropTypes } = React;
 
 import Loader from './Loader';
 import Overlay from './Overlay';
@@ -8,6 +7,11 @@ import Overlay from './Overlay';
 const LOAD_TIME = 3000;
 
 export default class App extends Component {
+
+  static propTypes = {
+    isLoading: PropTypes.bool.isRequired
+  }
+
   constructor(props) {
     super(...arguments);
 

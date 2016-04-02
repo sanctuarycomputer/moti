@@ -1,8 +1,11 @@
-import React, {
-  Component
-} from 'react';
+import React, { Component } from 'react';
+const { PropTypes } = React;
 
 export default class Overlay extends Component {
+  static propTypes = {
+    isLoading: PropTypes.bool.isRequired
+  }
+
   constructor(props) {
     super(...arguments);
 

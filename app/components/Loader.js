@@ -1,11 +1,14 @@
-import React, {
-  Component
-} from 'react';
+import React, { Component } from 'react';
+const { PropTypes } = React;
 
 import Letter from './Letter';
 
 
 export default class Loader extends Component {
+  static propTypes = {
+    isLoading: PropTypes.bool.isRequired
+  }
+
   constructor(props) {
     super(...arguments);
 
