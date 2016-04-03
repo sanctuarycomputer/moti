@@ -3,7 +3,7 @@ const { PropTypes } = React;
 import Radium from 'radium';
 
 const Styles = {
-  base:    { transition: 'opacity 500ms', width: '100%', paddingTop: '10vh' },
+  base:    { transition: 'opacity 500ms', width: '100%' },
   loading: { opacity: 0 },
   loaded:  { opacity: 1 },
   errored: { opacity: 0 }
@@ -50,6 +50,6 @@ export default class Image extends Component {
   }
 
   render() {
-    return (<img style={[Styles.base, Styles[this.state.status]]} src={this.props.src} />);
+    return (<img style={[Styles.base, Styles[this.state.status], this.props.style]} src={this.props.src} />);
   }
 }

@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
+ import { browserHistory } from 'react-router'
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import StyleableLink from '../components/StyleableLink';
+import CurrentUser from '../components/CurrentUser';
+
 import CoreStyles from '../lib/styles';
 
 const Styles = {
@@ -21,8 +24,9 @@ const Styles = {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+const mapStateToProps = (state) => {
   return {
+    currentUser: state.oAuth.currentUser,
     currentPath: state.routing.locationBeforeTransitions.pathname
   };
 }
@@ -42,6 +46,14 @@ export default class App extends Component {
       path: '/information',
       copy: 'Information'
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.currentUser && !nextProps.currentUser) { this.userDidLogout(); }
+  }
+
+  userDidLogout = () => {
+    if (this.props.currentPath !== '/') { browserHistory.push('/'); }
   }
   
   render() {
@@ -76,6 +88,8 @@ export default class App extends Component {
         <div style={topRight}>O</div>
         <div style={bottomLeft}>T</div>
         <div style={bottomRight}>I</div>
+
+        <CurrentUser />
         
         <StyleableLink to={appNavLinkInfo.path} style={[
           Styles.appNavLink,

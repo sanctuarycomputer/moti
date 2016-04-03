@@ -16,7 +16,7 @@ export default (
   <Route path ='/' component={App}>
     <IndexRoute component={Home} />
 
-    <Route path='/information' component={Information}>
+    <Route path='information' component={Information}>
       <IndexRoute component={InformationIndex} />
       <Route path=':mode' component={InformationCurators} />
     </Route>

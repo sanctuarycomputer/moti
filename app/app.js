@@ -7,24 +7,25 @@ import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import { browserHistory, Router } from 'react-router';
 
 // import reducers from '.config/reducers';
+import oAuth from './reducers/oauth';
 
 import AppRoutes from './config/Router';
 
 const store = createStore(
   combineReducers({
-    //...reducers,
+    oAuth,
     routing: routerReducer
   })
 );
 
-const reduxHistory = syncHistoryWithStore(browserHistory, store);
+store.subscribe(() => console.log(store.getState()));
 
 document.body.style.backgroundColor = 'black';
 document.body.style.margin = 0;
 
 render(
   <Provider store={store}>
-    <Router history={reduxHistory}>{AppRoutes}</Router>
+    <Router history={syncHistoryWithStore(browserHistory, store)}>{AppRoutes}</Router>
   </Provider>,
   document.getElementById('app')
 );
