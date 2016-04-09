@@ -21,7 +21,8 @@ export default class Image extends Component {
     src:     PropTypes.string.isRequired,
     onMount: PropTypes.func,
     onLoad:  PropTypes.func,
-    onError: PropTypes.func
+    onError: PropTypes.func,
+    style:   PropTypes.array
   }
 
   constructor(props) {
