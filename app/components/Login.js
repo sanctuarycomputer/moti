@@ -1,23 +1,32 @@
 import React, { Component } from 'react';
-import ENV from '../config/Environment';
 
 import { connect } from 'react-redux';
 import { oAuthBegin } from '../actions/oauth';
+import copy from '../lib/copy';
 
-@connect()
+const mapStateToProps = (state) => {
+  return {
+    authStatus: state.oAuth.status
+  }
+}
+
+@connect(mapStateToProps)
 export default class Login extends Component {
-
-  constructor(props) {
-    super(...arguments);
-    this.instagramAuthEndpoint = 
-      `https://api.instagram.com/oauth/authorize/?client_id=${ENV.INSTAGRAM_CLIENT_ID}&redirect_uri=${ENV.OAUTH_REDIRECT_URI}&response_type=token`;
+  
+  renderLoginButton = () => {
+    return (<button onClick={() => { oAuthBegin('instagram')(this.props.dispatch) }}>{copy.loginButton}</button>);
   }
 
-  render() { 
-    return (
-      <button onClick={() => {
-        oAuthBegin('instagram', this.instagramAuthEndpoint)(this.props.dispatch)
-      }}>Login with Instgram</button> 
-    ); 
+  render() {
+    switch(this.props.authStatus) {
+      case 'idle':
+        return this.renderLoginButton();
+      case 'pending':
+        return <div>Loading</div>;
+      case 'error':
+        return <div>Error</div>;
+      case 'success':
+        return null;
+    }
   }
 }

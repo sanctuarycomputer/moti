@@ -8,8 +8,8 @@ import { browserHistory, Router } from 'react-router';
 
 // import reducers from '.config/reducers';
 import oAuth from './reducers/oauth';
-
 import AppRoutes from './config/Router';
+import initialize from './lib/initialize';
 
 const store = createStore(
   combineReducers({
@@ -17,6 +17,9 @@ const store = createStore(
     routing: routerReducer
   })
 );
+
+//Intialize the application
+initialize(store.dispatch);
 
 document.body.style.backgroundColor = 'black';
 document.body.style.margin = 0;
