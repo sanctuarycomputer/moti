@@ -3,11 +3,11 @@ import ENV from '../config/Environment';
 import { getCurrentUser } from '../api/instagram';
 
 /* Action Types */
-export const OAUTH_SIGN_IN_START = 'OAUTH_SIGN_IN_START';
-export const OAUTH_SIGN_IN_SUCCESS = 'OAUTH_SIGN_IN_SUCCESS';
+export const OAUTH_SIGN_IN_START    = 'OAUTH_SIGN_IN_START';
+export const OAUTH_SIGN_IN_SUCCESS  = 'OAUTH_SIGN_IN_SUCCESS';
 export const DID_FETCH_CURRENT_USER = 'DID_FETCH_CURRENT_USER';
-export const OAUTH_SIGN_IN_ERROR = 'OAUTH_SIGN_IN_ERROR';
-export const CLEAR_CURRENT_USER = 'CLEAR_CURRENT_USER';
+export const OAUTH_SIGN_IN_ERROR    = 'OAUTH_SIGN_IN_ERROR';
+export const CLEAR_CURRENT_USER     = 'CLEAR_CURRENT_USER';
 
 /* Action Creators */
 export function oAuthSignInStart() {
