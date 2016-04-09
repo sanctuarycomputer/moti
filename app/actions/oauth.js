@@ -19,8 +19,8 @@ export function oAuthSignInSuccess(accessToken) {
 export function didFetchCurrentUser(user) {
   return { type: DID_FETCH_CURRENT_USER, user };
 }
-export function oAuthSignInError(provider, error) {
-  return { type: OAUTH_SIGN_IN_ERROR, provider, error };
+export function oAuthSignInError(error) {
+  return { type: OAUTH_SIGN_IN_ERROR, error };
 }
 export function clearCurrentUser() {
   return { type: CLEAR_CURRENT_USER };
@@ -37,7 +37,6 @@ function oAuthEndpointForProvider(provider) {
 function authenticateViaPopup(popup) {
   return new Promise((resolve, reject) => {
     let popupInterval = window.setInterval(() => {
-      
       let creds;
       try {
         creds = parsePopupURL(popup.document.URL);
@@ -53,7 +52,7 @@ function authenticateViaPopup(popup) {
         window.clearInterval(popupInterval);
         reject({ error: 'Instagram oAuth Window was Closed.' });
       }
-    }, 1000);
+    }, 30);
   });
 }
 
@@ -84,6 +83,6 @@ export function oAuthBegin(provider, accessToken) {
     }
 
     return promise
-      .catch(error => { dispatch(oAuthSignInError(provider, error)); });
+      .catch(error => { dispatch(oAuthSignInError(error)); });
   };
 }
