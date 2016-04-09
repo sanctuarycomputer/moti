@@ -14,32 +14,29 @@ const Styles = {
   }
 }
 
-@Radium
-export default class About extends Component {
-  render() { 
-    return (
-      <div style={[CoreStyles.fontStyle]}>
-        <nav style={[Styles.nav]}>
+export default Radium(() => {
+  return (
+    <div style={[CoreStyles.fontStyle]}>
+      <nav style={[Styles.nav]}>
 
-          <StyleableLink to={'/information'} style={[
-            Styles.navLink,
-            CoreStyles.linkStyle
-          ]}>About</StyleableLink>
+        <StyleableLink to={'/information'} style={[
+          Styles.navLink,
+          CoreStyles.linkStyle
+        ]}>About</StyleableLink>
 
-          <StyleableLink to={'/information/past'} style={[
-            Styles.navLink,
-            CoreStyles.linkStyle
-          ]}>Past</StyleableLink>
+        <StyleableLink to={'/information/past'} style={[
+          Styles.navLink,
+          CoreStyles.linkStyle
+        ]}>Past</StyleableLink>
 
-          <StyleableLink to={'/information/future'} style={[
-            Styles.navLink,
-            CoreStyles.linkStyle
-          ]}>Future</StyleableLink>
+        <StyleableLink to={'/information/future'} style={[
+          Styles.navLink,
+          CoreStyles.linkStyle
+        ]}>Future</StyleableLink>
 
-        </nav>
+      </nav>
 
-        {this.props.children}
-      </div> 
-    ); 
-  }
-}
+      {this.props.children}
+    </div> 
+  ); 
+});

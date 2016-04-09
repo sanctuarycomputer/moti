@@ -24,33 +24,22 @@ const Styles = {
 };
 
 const mapStateToProps = (state) => {
-  return {
-    currentUser: state.oAuth.currentUser 
-  }
+  return { currentUser: state.oAuth.currentUser }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    clearCurrentUser() { return dispatch(clearCurrentUser()) }
-  }
+  return { clearCurrentUser() { return dispatch(clearCurrentUser()) } }
 }
 
-@connect(
-  mapStateToProps,
-  mapDispatchToProps
-)
-@Radium
-export default class CurrentUser extends Component {
-  render() {
-    if (this.props.currentUser) {
-      return (
-        <div style={[Styles.base]}>
-          <Image style={[Styles.profilePicture]} src={this.props.currentUser.profilePicture} />
-          <p style={[CoreStyles.fontStyle, Styles.username]}>{this.props.currentUser.username}</p>
-          <p onClick={() => this.props.clearCurrentUser()}>Exit</p>
-        </div>
-      );
-    }
-    return null;
+export default connect(mapStateToProps, mapDispatchToProps)(Radium(props => {
+  if (props.currentUser) {
+    return (
+      <div style={[Styles.base]}>
+        <Image style={[Styles.profilePicture]} src={props.currentUser.profilePicture} />
+        <p style={[CoreStyles.fontStyle, Styles.username]}>{props.currentUser.username}</p>
+        <p onClick={() => props.clearCurrentUser()}>Exit</p>
+      </div>
+    );
   }
-}
+  return null;
+}));

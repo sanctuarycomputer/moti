@@ -14,10 +14,7 @@ const mapStateToProps = (state) => {
   return { currentUser: state.oAuth.currentUser };
 }
 
-@connect(mapStateToProps)
-export default class Home extends Component {
-  render() {
-    if (this.props.currentUser) { return (<Gallery imageUrls={ImageUrls} />); }
-    return (<Login />);
-  }
-}
+export default connect(mapStateToProps)(props => {
+  if (props.currentUser) { return (<Gallery imageUrls={ImageUrls} />); }
+  return (<Login />);
+});
