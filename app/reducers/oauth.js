@@ -16,12 +16,15 @@ const Status = {
 export default function oAuth(state={}, action) {
   switch(action.type) {
     case OAUTH_SIGN_IN_START:
+      window.localStorage.removeItem('instagramAccessToken');
       return {
         status: Status.PENDING,
         currentUser: null,
         error: null
       };
     case OAUTH_SIGN_IN_SUCCESS:
+      console.log(action);
+      window.localStorage.setItem('instagramAccessToken', action.creds.access_token);
       return {
         status: Status.PENDING,
         currentUser: null,
@@ -34,12 +37,14 @@ export default function oAuth(state={}, action) {
         error: null
       };
     case OAUTH_SIGN_IN_ERROR:
+      window.localStorage.removeItem('instagramAccessToken');
       return {
         status: Status.ERROR,
         currentUser: null,
         error: action.error 
       };
     case CLEAR_CURRENT_USER:
+      window.localStorage.removeItem('instagramAccessToken');
       return {
         status: Status.IDLE,
         currentUser: null,

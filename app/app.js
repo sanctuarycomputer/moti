@@ -18,8 +18,6 @@ const store = createStore(
   })
 );
 
-store.subscribe(() => console.log(store.getState()));
-
 document.body.style.backgroundColor = 'black';
 document.body.style.margin = 0;
 
