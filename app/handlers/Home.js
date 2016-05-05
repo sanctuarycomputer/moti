@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Radium from 'radium';
 
-import Gallery from '../components/Gallery.js';
+import Login from '../components/Login';
+import Gallery from '../components/Gallery';
+import { connect } from 'react-redux';
 
 const ImageUrls = [
   'http://payload397.cargocollective.com/1/0/128/10253258/Unknown-9_1600_c.jpeg',
@@ -9,6 +10,11 @@ const ImageUrls = [
   'http://payload397.cargocollective.com/1/0/128/10253258/Unknown-6_1600_c.jpeg'
 ]
 
-export default class Home extends Component {
-  render() { return (<Gallery imageUrls={ImageUrls} />); }
+const mapStateToProps = (state) => {
+  return { currentUser: state.oAuth.currentUser };
 }
+
+export default connect(mapStateToProps)(props => {
+  if (props.currentUser) { return (<Gallery imageUrls={ImageUrls} />); }
+  return (<Login />);
+});

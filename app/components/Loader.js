@@ -3,7 +3,6 @@ const { PropTypes } = React;
 
 import Letter from './Letter';
 
-
 export default class Loader extends Component {
   static propTypes = {
     isLoading: PropTypes.bool.isRequired
