@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 
 import StyleableLink from '../components/StyleableLink';
 import CurrentUser from '../components/CurrentUser';
+import Icon from '../components/Icon';
 
 import CoreStyles from '../lib/styles';
 
@@ -57,37 +58,39 @@ export default class App extends Component {
   }
   
   render() {
-    let mainStyle = {
-      color: 'white',
-      fontSize: 100,
+
+    let topLeft = {
+      top: 50,
+      left: 50,
+      position: 'fixed'
     };
 
     let topRight = {
-      top: 0,
-      right: 0,
+      top: 50,
+      right: 50,
       position: 'fixed'
     };
 
     let bottomLeft = {
-      bottom: 0,
-      left: 0,
+      bottom: 50,
+      left: 50,
       position: 'fixed'
     };
 
     let bottomRight = {
-      bottom: 0,
-      right: 0,
+      bottom: 50,
+      right: 50,
       position: 'fixed'
     }
     
     let appNavLinkInfo = this.appNavLinkForCurrentPath(this.props.currentPath);
 
     return (
-      <div style={mainStyle}>
-        <div>M</div>
-        <div style={topRight}>O</div>
-        <div style={bottomLeft}>T</div>
-        <div style={bottomRight}>I</div>
+      <div>
+        <Icon icon={'M'} height={100} fill={'#ffffff'} viewbox={'0 0 347 372'} classes={topLeft} />
+        <Icon icon={'O'} height={100} fill={'#ffffff'} viewbox={'0 0 257 372'} classes={topRight} />
+        <Icon icon={'T'} height={100} fill={'#ffffff'} viewbox={'0 0 261 372'} classes={bottomLeft} />
+        <Icon icon={'I'} height={100} fill={'#ffffff'} viewbox={'0 0 258 372'} classes={bottomRight} />
 
         <CurrentUser />
         
