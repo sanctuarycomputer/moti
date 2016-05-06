@@ -1,3 +1,5 @@
+import colors from './colors';
+
 export default {
   fontStyle: {
     letterSpacing: '1px',
@@ -8,12 +10,13 @@ export default {
     marginTop: 0,
     marginRight: 0,
     marginLeft: 0,
-    color: 'white'
+    color: colors.white
   },
   linkStyle: {
     textDecoration: 'none',
     color: 'white',
-    borderBottom: '4px solid white',
-    
-  }
+    borderBottom: '4px solid',
+    borderColor: colors.white
+  },
+  colors
 }

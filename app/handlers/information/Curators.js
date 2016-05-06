@@ -3,18 +3,27 @@ const { PropTypes } = React;
 import Radium from 'radium';
 
 import CoreStyles from '../../lib/styles';
+const { 
+  colors: { 
+    white, 
+    grey 
+  }
+} = CoreStyles;
+
 
 const Styles = {
   title: {
-    borderBottom: '3px solid white',
+    borderBottom: '3px solid',
+    borderColor: white,
     display: 'inline-block',
     marginBottom: '60px'
   },
   curator: {
-    marginBottom: '60px' 
+    marginBottom: '60px',
+    color: white 
   },
   tagList: {
-    color: '#7e7e7e'
+    color: grey
   }
 };
 
