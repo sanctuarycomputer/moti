@@ -5,9 +5,6 @@ import Radium from 'radium';
 import CoreStyles from '../../lib/styles';
 
 const Styles = {
-  base: {
-    textAlign: 'center'
-  },
   title: {
     borderBottom: '3px solid white',
     display: 'inline-block',
@@ -15,14 +12,17 @@ const Styles = {
   },
   curator: {
     marginBottom: '60px' 
+  },
+  tagList: {
+    color: '#7e7e7e'
   }
 };
 
 const DummyCuratorData = [
-  { name: 'Elizabeth Karp Evans', tagList: '#art, #denim, #portrait' },
-  { name: 'Adam Turnbull', tagList: '#art, #denim, #portrait' },
-  { name: 'Sebastian Odell', tagList: '#art, #denim, #portrait' },
-  { name: 'Hugh Francis', tagList: '#art, #denim, #portrait' }
+  { name: 'Elizabeth Karp Evans', date: {month: 'April', year: '1969'}, tagList: '#art, #denim, #portrait' },
+  { name: 'Adam Turnbull', date: {month: 'February', year: '1981'}, tagList: '#art, #denim, #portrait' },
+  { name: 'Sebastian Odell', date: {month: 'March', year: '1989'}, tagList: '#art, #denim, #portrait' },
+  { name: 'Hugh Francis', date: {month: 'May', year: '2016'}, tagList: '#art, #denim, #portrait' }
 ];
 
 @Radium
@@ -31,10 +31,10 @@ export default class Curators extends Component {
   renderCurators(data) {
     return data.map((curator, index) => {
       return (
-        <div key={index} style={[CoreStyles.fontStyle, Styles.curator]}>
-          <span>{curator.name}</span>
+        <div key={index} style={[Styles.curator]}>
+          <span>{curator.name}</span> - <span>{curator.date.month}, {curator.date.year}</span>
           <br />
-          <span>{curator.tagList}</span>
+          <span style={[Styles.tagList]}>{curator.tagList}</span>
         </div>
       );
     });
@@ -42,8 +42,7 @@ export default class Curators extends Component {
 
   render() {
     return (
-      <div style={[Styles.base]}>
-        <p style={[CoreStyles.fontStyle, Styles.title]}>Curators</p>
+      <div>
         {this.renderCurators(DummyCuratorData)}
       </div>
     );

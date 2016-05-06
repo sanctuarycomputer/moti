@@ -14,7 +14,7 @@ import CoreStyles from '../lib/styles';
 const Styles = {
   base: {
     width: '60vw',
-    margin: '0 auto',
+    margin: '50px auto 0 auto',
     height: '100vh',
     overflow: 'scroll'
   },

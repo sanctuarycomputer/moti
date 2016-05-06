@@ -13,6 +13,7 @@ export default {
   linkStyle: {
     textDecoration: 'none',
     color: 'white',
-    borderBottom: '4px solid white'
+    borderBottom: '4px solid white',
+    
   }
 }
