@@ -7,10 +7,9 @@ import Copy from '../../lib/copy';
 
 const Styles = {
   nav: {
-    marginBottom: '60px'  
-  },
-  navLink: {
-    marginRight: '30px',
+    marginBottom: '60px',
+    display: 'flex',
+    justifyContent: 'space-between'  
   }
 }
 
@@ -20,19 +19,16 @@ export default Radium(props => {
       <nav style={[Styles.nav]}>
 
         <StyleableLink to={'/information'} style={[
-          Styles.navLink,
           CoreStyles.linkStyle
         ]}>About</StyleableLink>
 
-        <StyleableLink to={'/information/past'} style={[
-          Styles.navLink,
+        <StyleableLink to={'/information/past-curators'} style={[
           CoreStyles.linkStyle
-        ]}>Past</StyleableLink>
+        ]}>Past Curators</StyleableLink>
 
-        <StyleableLink to={'/information/future'} style={[
-          Styles.navLink,
+        <StyleableLink to={'/information/future-curators'} style={[
           CoreStyles.linkStyle
-        ]}>Future</StyleableLink>
+        ]}>Future Curators</StyleableLink>
 
       </nav>
 
