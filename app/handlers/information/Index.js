@@ -5,5 +5,7 @@ import CoreStyles from '../../lib/styles';
 import Copy from '../../lib/copy';
 
 export default Radium(() => {
-  return (<p style={[CoreStyles.fontStyle]}>{Copy.lorem}</p>); 
+  return ((<p style={[CoreStyles.fontStyle]}>{Copy.lorem}</p>)); 
 });
+
+

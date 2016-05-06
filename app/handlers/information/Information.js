@@ -14,7 +14,7 @@ const Styles = {
   }
 }
 
-export default Radium(() => {
+export default Radium(props => {
   return (
     <div style={[CoreStyles.fontStyle]}>
       <nav style={[Styles.nav]}>
@@ -36,7 +36,7 @@ export default Radium(() => {
 
       </nav>
 
-      {this.props.children}
+      {props.children}
     </div> 
   ); 
 });
