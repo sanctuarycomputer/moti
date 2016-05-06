@@ -9,6 +9,7 @@ import { browserHistory, Router } from 'react-router';
 // import reducers from '.config/reducers';
 import application from './reducers/application';
 import oAuth from './reducers/oauth';
+import gallery from './reducers/gallery';
 import AppRoutes from './config/Router';
 
 import { initializeMOTI } from './actions/application';
@@ -16,6 +17,7 @@ import { initializeMOTI } from './actions/application';
 const store = createStore(
   combineReducers({
     application,
+    gallery,
     oAuth,
     routing: routerReducer
   })

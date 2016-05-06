@@ -14,3 +14,12 @@ export function getCurrentUser(accessToken) {
       })
     });
 }
+
+export function getHashtagPhotos(tag, accessToken) {
+  return fetchJsonp(`${ENV.INSTAGRAM_API_ENDPOINT}/v1/tags/${tag}/media/recent?access_token=${accessToken}`)
+    .then(response => {
+      return response.json().then(data => {
+        return data.data;
+      })
+    });
+}
