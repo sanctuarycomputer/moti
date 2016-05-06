@@ -10,18 +10,25 @@ import CurrentUser from '../components/CurrentUser';
 import Icon from '../components/Icon';
 
 import CoreStyles from '../lib/styles';
+const { 
+  colors: { 
+    white, 
+    grey 
+  }
+} = CoreStyles;
 
 const Styles = {
   base: {
-    width: '80vw',
-    marginLeft: '10vw',
+    width: '60vw',
+    margin: '50px auto 0 auto',
     height: '100vh',
     overflow: 'scroll'
   },
   appNavLink: {
     position: 'fixed',
     top: '50%',
-    transform: 'translateY(-50%) rotate(-90deg)'
+    transform: 'translateY(-50%) rotate(-90deg)',
+    color: white
   }
 }
 
@@ -86,10 +93,10 @@ export default class App extends Component {
 
     return (
       <div>
-        <Icon icon={'M'} height={100} fill={'#ffffff'} viewbox={'0 0 347 372'} classes={Positions.topLeft} />
-        <Icon icon={'O'} height={100} fill={'#ffffff'} viewbox={'0 0 257 372'} classes={Positions.topRight} />
-        <Icon icon={'T'} height={100} fill={'#ffffff'} viewbox={'0 0 261 372'} classes={Positions.bottomLeft} />
-        <Icon icon={'I'} height={100} fill={'#ffffff'} viewbox={'0 0 258 372'} classes={Positions.bottomRight} />
+        <Icon icon={'M'} height={100} fill={white} viewbox={'0 0 347 372'} classes={Positions.topLeft} />
+        <Icon icon={'O'} height={100} fill={white} viewbox={'0 0 257 372'} classes={Positions.topRight} />
+        <Icon icon={'T'} height={100} fill={white} viewbox={'0 0 261 372'} classes={Positions.bottomLeft} />
+        <Icon icon={'I'} height={100} fill={white} viewbox={'0 0 258 372'} classes={Positions.bottomRight} />
 
         <CurrentUser />
         

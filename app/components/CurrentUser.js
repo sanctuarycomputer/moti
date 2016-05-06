@@ -8,18 +8,25 @@ import Image from '../components/Image';
 import CoreStyles from '../lib/styles';
 const Styles = {
   base: {
-    width: '100%',
     position: 'fixed',
-    top: 0,
+    bottom: 0,
+    left: '50%',
+    transform: 'translateX(-50%)', 
     textAlign: 'center'
   },
   profilePicture: {
-    width: '60px',
+    width: '40px',
     borderRadius: '50px' 
   },
   username: {
     fontSize: '1rem',
     lineHeight: 'initial',
+  },
+  logout: {
+    fontSize: '1.5rem',
+    cursor: 'pointer',
+    textDecoration: 'underline',
+    margin: 0
   }
 };
 
@@ -37,7 +44,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Radium(props => {
       <div style={[Styles.base]}>
         <Image style={[Styles.profilePicture]} src={props.currentUser.profilePicture} />
         <p style={[CoreStyles.fontStyle, Styles.username]}>{props.currentUser.username}</p>
-        <p onClick={() => props.clearCurrentUser()}>Exit</p>
+        <p style={[Styles.logout]} onClick={() => props.clearCurrentUser()}>Exit</p>
       </div>
     );
   }
