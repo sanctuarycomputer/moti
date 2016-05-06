@@ -25,6 +25,29 @@ const Styles = {
   }
 }
 
+const Positions = {
+  topLeft: {
+    top: 50,
+    left: 50,
+    position: 'fixed'
+  },
+  topRight: {
+    top: 50,
+    right: 50,
+    position: 'fixed'
+  },
+  bottomLeft: {
+    bottom: 50,
+    left: 50,
+    position: 'fixed'
+  },
+  bottomRight: {
+    bottom: 50,
+    right: 50,
+    position: 'fixed'
+  }  
+}
+
 const mapStateToProps = (state) => {
   return {
     currentUser: state.oAuth.currentUser,
@@ -58,39 +81,15 @@ export default class App extends Component {
   }
   
   render() {
-
-    let topLeft = {
-      top: 50,
-      left: 50,
-      position: 'fixed'
-    };
-
-    let topRight = {
-      top: 50,
-      right: 50,
-      position: 'fixed'
-    };
-
-    let bottomLeft = {
-      bottom: 50,
-      left: 50,
-      position: 'fixed'
-    };
-
-    let bottomRight = {
-      bottom: 50,
-      right: 50,
-      position: 'fixed'
-    }
     
     let appNavLinkInfo = this.appNavLinkForCurrentPath(this.props.currentPath);
 
     return (
       <div>
-        <Icon icon={'M'} height={100} fill={'#ffffff'} viewbox={'0 0 347 372'} classes={topLeft} />
-        <Icon icon={'O'} height={100} fill={'#ffffff'} viewbox={'0 0 257 372'} classes={topRight} />
-        <Icon icon={'T'} height={100} fill={'#ffffff'} viewbox={'0 0 261 372'} classes={bottomLeft} />
-        <Icon icon={'I'} height={100} fill={'#ffffff'} viewbox={'0 0 258 372'} classes={bottomRight} />
+        <Icon icon={'M'} height={100} fill={'#ffffff'} viewbox={'0 0 347 372'} classes={Positions.topLeft} />
+        <Icon icon={'O'} height={100} fill={'#ffffff'} viewbox={'0 0 257 372'} classes={Positions.topRight} />
+        <Icon icon={'T'} height={100} fill={'#ffffff'} viewbox={'0 0 261 372'} classes={Positions.bottomLeft} />
+        <Icon icon={'I'} height={100} fill={'#ffffff'} viewbox={'0 0 258 372'} classes={Positions.bottomRight} />
 
         <CurrentUser />
         
