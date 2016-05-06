@@ -13,9 +13,6 @@ export default class Icon extends Component {
   }
 
   render() {
-
-    console.log(this.props.styles);
-
     return (
       <svg viewBox={this.props.viewbox} 
            width={this.props.width} 
