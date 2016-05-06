@@ -1,6 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 
-export default class Icon extends React.Component {
+export default class Icon extends Component {
+
+  static propTypes = {
+    icon: PropTypes.string.isRequired,
+    viewbox: PropTypes.string.isRequired,
+    width: PropTypes.number,
+    height: PropTypes.number,
+    classes: PropTypes.object,
+    fill: PropTypes.string
+  }
+
   renderIcon() {
     switch (this.props.icon) {
       case 'M':
@@ -33,13 +43,4 @@ export default class Icon extends React.Component {
       </svg>
     );
   }
-}
-
-Icon.propTypes = {
-  icon: React.PropTypes.string.isRequired,
-  viewbox: React.PropTypes.string.isRequired,
-  width: React.PropTypes.number,
-  height: React.PropTypes.number,
-  classes: React.PropTypes.object,
-  fill: React.PropTypes.string
 }
