@@ -3,6 +3,11 @@ const { PropTypes } = React;
 
 import Loader from './Loader';
 import Overlay from './Overlay';
+import Colors from '../lib/colors';
+const { 
+  white, 
+  grey 
+} = Colors;
 
 const LOAD_TIME = 3000;
 
@@ -37,7 +42,7 @@ export default class App extends Component {
 
   render() {
     let mainStyle = {
-      color: 'white',
+      color: white,
       fontSize: 100,
     };
 
