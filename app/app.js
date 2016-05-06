@@ -8,11 +8,13 @@ import { browserHistory, Router } from 'react-router';
 
 // import reducers from '.config/reducers';
 import oAuth from './reducers/oauth';
+import gallery from './reducers/gallery';
 import AppRoutes from './config/Router';
 import initialize from './lib/initialize';
 
 const store = createStore(
   combineReducers({
+    gallery,
     oAuth,
     routing: routerReducer
   })
