@@ -8,6 +8,7 @@ export default {
     marginTop: 0,
     marginRight: 0,
     marginLeft: 0,
+    color: 'white'
   },
   linkStyle: {
     textDecoration: 'none',
