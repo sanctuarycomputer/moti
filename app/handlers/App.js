@@ -24,7 +24,8 @@ const Styles = {
     width: '60vw',
     margin: '0 auto 0 auto',
     height: '100vh',
-    overflow: 'scroll'
+    overflow: 'scroll',
+    textAlign: 'center'
   },
   appNavLink: {
     position: 'fixed',
@@ -66,6 +67,7 @@ export default class App extends Component {
   userDidLogout = () => {
     if (this.props.currentPath !== '/') { browserHistory.push('/'); }
   }
+
   
   render() {
     let appNavLinkInfo = this.appNavLinkForCurrentPath(this.props.currentPath);
