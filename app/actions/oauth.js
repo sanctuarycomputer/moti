@@ -30,7 +30,7 @@ export function clearCurrentUser() {
 function oAuthEndpointForProvider(provider) {
   switch(provider) {
     case 'instagram':
-      return `${ENV.INSTAGRAM_API_ENDPOINT}/oauth/authorize/?client_id=${ENV.INSTAGRAM_CLIENT_ID}&redirect_uri=${ENV.OAUTH_REDIRECT_URI}&response_type=token`;
+      return `${ENV.INSTAGRAM_API_ENDPOINT}/oauth/authorize/?client_id=${ENV.INSTAGRAM_CLIENT_ID}&redirect_uri=${ENV.OAUTH_REDIRECT_URI}&response_type=token&scope=basic+public_content`;
   }
 }
 
