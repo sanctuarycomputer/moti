@@ -1,0 +1,118 @@
+//This is dummy data 
+//for configuring the Firebase DB
+
+{ 
+  "currentCurator": {
+  "name": "Elizabeth Karp Evans",
+  "date": {
+    "month": "April",
+    "year": "1969"
+  },
+  "tagList": [
+    "art",
+    "denim",
+    "portrait"
+  ]
+},
+  "pastCurators": [
+    {
+      "name": "Elizabeth Karp Evans",
+      "date": {
+        "month": "April",
+        "year": "1969"
+      },
+      "tagList": [
+        "art",
+        "denim",
+        "portrait"
+      ]
+    },
+    {
+      "name": "Adam Turnbull",
+      "date": {
+        "month": "February",
+        "year": "1981"
+      },
+      "tagList": [
+        "art",
+        "denim",
+        "portrait"
+      ]
+    },
+    {
+      "name": "Elizabeth Karp Evans",
+      "date": {
+        "month": "April",
+        "year": "1969"
+      },
+      "tagList": [
+        "art",
+        "denim",
+        "portrait"
+      ]
+    },
+    {
+      "name": "Elizabeth Karp Evans",
+      "date": {
+        "month": "April",
+        "year": "1969"
+      },
+      "tagList": [
+        "art",
+        "denim",
+        "portrait"
+      ]
+    }
+  ],
+  "futureCurators": [
+    {
+      "name": "Elizabeth Karp Evans",
+      "date": {
+        "month": "August",
+        "year": "2016"
+      },
+      "tagList": [
+        "art",
+        "denim",
+        "portrait"
+      ]
+    },
+    {
+      "name": "Adam Turnbull",
+      "date": {
+        "month": "February",
+        "year": "2017"
+      },
+      "tagList": [
+        "art",
+        "denim",
+        "portrait"
+      ]
+    },
+    {
+      "name": "Elizabeth Karp Evans",
+      "date": {
+        "month": "April",
+        "year": "2018"
+      },
+      "tagList": [
+        "art",
+        "denim",
+        "portrait"
+      ]
+    },
+    {
+      "name": "Elizabeth Karp Evans",
+      "date": {
+        "month": "September",
+        "year": "2020"
+      },
+      "tagList": [
+        "art",
+        "denim",
+        "portrait"
+      ]
+    }
+  ]
+}
+
