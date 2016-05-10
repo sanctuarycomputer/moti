@@ -2,13 +2,20 @@ import { oAuthBegin } from '../actions/oauth';
 import { fetchPhotosForHashtag } from '../actions/gallery';
 import { getHashtagPhotos } from '../api/instagram';
 
-export default function(dispatch) {
+import { connectToCuratorsSocket } from '../actions/curator';
+
+export default function(store) {
+  let dispatch = store.dispatch;
+
   const accessToken = window.localStorage.getItem('instagramAccessToken');
 
   if (accessToken) {
-    oAuthBegin('instgram', accessToken)(dispatch).then(currentUser => {
-      return fetchPhotosForHashtag('bortsimpson', accessToken)(dispatch).then(() => {
-        return fetchPhotosForHashtag('houndstooth', accessToken)(dispatch);
+    oAuthBegin('instagram', accessToken)(dispatch).then(currentUser => {
+      connectToCuratorsSocket()(dispatch).then(curators => {
+        let currentCurator = store.getState().curator.currentCurator.tags;
+        if (currentCurator) {
+          return Promise.all(currentCurator.tags.map(tag => fetchPhotosForHashtag(tag, accessToken)(dispatch)));
+        }
       })
     });
   }

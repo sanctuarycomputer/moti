@@ -1,0 +1,89 @@
+{
+  "curators": [
+    {
+      "name": "Adam Turnbull",
+      "date": {
+        "month": "1",
+        "year": "1981"
+      },
+      "tags": [
+        "shoes",
+        "blue",
+        "math"
+      ]
+    },
+    {
+      "name": "Sebastian Odell",
+      "date": {
+        "month": "6",
+        "year": "2016"
+      },
+      "tags": [
+        "graffiti",
+        "color",
+        "coffee"
+      ]
+    },
+    {
+      "name": "Elizabeth Karp Evans",
+      "date": {
+        "month": "1",
+        "year": "1969"
+      },
+      "tags": [
+        "art",
+        "denim",
+        "portrait"
+      ]
+    },
+    {
+      "name": "Steve Jobs",
+      "date": {
+        "month": "3",
+        "year": "1995"
+      },
+      "tags": [
+        "computers",
+        "picasso",
+        "blankets"
+      ]
+    },
+    {
+      "name": "Daniel Hunninghake",
+      "date": {
+        "month": "7",
+        "year": "2016"
+      },
+      "tags": [
+        "type",
+        "keys",
+        "kansas"
+      ]
+    },
+    {
+      "name": "Jean Michelle Basquiat",
+      "date": {
+        "month": "4",
+        "year": "2016"
+      },
+      "tags": [
+        "bortsimpson",
+        "edruscha",
+        "colbyposters"
+      ]
+    },
+    {
+      "name": "Hugh Francis",
+      "date": {
+        "month": "5",
+        "year": "2016"
+      },
+      "tags": [
+        "design",
+        "code",
+        "fish"
+      ]
+    }
+  ]
+}
+

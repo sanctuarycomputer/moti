@@ -5,6 +5,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import { browserHistory, Router } from 'react-router';
+import promiseMiddleware from 'redux-promise';
 
 // import reducers from '.config/reducers';
 import oAuth from './reducers/oauth';
@@ -19,11 +20,12 @@ const store = createStore(
     curator,
     oAuth,
     routing: routerReducer
-  })
+  }),
+  applyMiddleware(promiseMiddleware)
 );
 
 //Intialize the application
-initialize(store.dispatch);
+initialize(store);
 
 document.body.style.backgroundColor = 'black';
 document.body.style.margin = 0;
