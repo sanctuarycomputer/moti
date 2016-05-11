@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
 import StyleableLink from '../../components/StyleableLink';
+import { connect } from 'react-redux';
 
 import CoreStyles from '../../lib/styles';
 import Copy from '../../lib/copy';
