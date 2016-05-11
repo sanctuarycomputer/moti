@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
   return { 
+    applicationStatus: state.application.status,
     currentUser: state.oAuth.currentUser,
     images: state.gallery.photos.map(photo => photo.images.standard_resolution.url),
     currentCurator: state.curator.currentCurator

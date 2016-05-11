@@ -18,8 +18,8 @@ export function fetchPhotosForHashtag(hashtag, accessToken) {
   return dispatch => {
     dispatch(didStartFetchingPhotos());
 
-    return getHashtagPhotos(hashtag, accessToken).then(data => {
-      dispatch(didFinishFetchingPhotos(data));
-    });
+    return getHashtagPhotos(hashtag, accessToken)
+      .then(data => { dispatch(didFinishFetchingPhotos(data)); });
+    
   }
 }

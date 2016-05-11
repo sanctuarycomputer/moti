@@ -8,14 +8,17 @@ import { browserHistory, Router } from 'react-router';
 import promiseMiddleware from 'redux-promise';
 
 // import reducers from '.config/reducers';
+import application from './reducers/application';
 import oAuth from './reducers/oauth';
 import gallery from './reducers/gallery';
 import curator from './reducers/curator';
 import AppRoutes from './config/Router';
-import initialize from './lib/initialize';
+
+import { initializeMOTI } from './actions/application';
 
 const store = createStore(
   combineReducers({
+    application,
     gallery,
     curator,
     oAuth,
@@ -24,12 +27,15 @@ const store = createStore(
   applyMiddleware(promiseMiddleware)
 );
 
-//Intialize the application
-initialize(store);
+// Initialize application
+const accessToken = window.localStorage.getItem('instagramAccessToken');
+initializeMOTI(accessToken)(store.dispatch);
 
+// Setup Boilerplate
 document.body.style.backgroundColor = 'black';
 document.body.style.margin = 0;
 
+// Start Rendering 
 render(
   <Provider store={store}>
     <Router history={syncHistoryWithStore(browserHistory, store)}>{AppRoutes}</Router>

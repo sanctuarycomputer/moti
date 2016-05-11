@@ -3,6 +3,8 @@ import {
   DID_FINISH_FETCHING_PHOTOS
 } from '../actions/gallery';
 
+import { shuffle } from '../lib/utils';
+
 const Status = {
   IDLE: 'idle',
   PENDING: 'pending',
@@ -27,7 +29,7 @@ export default function gallery(state=initialState, action) {
     case DID_FINISH_FETCHING_PHOTOS:
       return {
         status: Status.SUCCESS,
-        photos: state.photos.concat(action.photos),
+        photos: shuffle(state.photos.concat(action.photos)),
         error: null
       };
     default:
