@@ -12,7 +12,9 @@ export default function(store) {
   if (accessToken) {
     oAuthBegin('instagram', accessToken)(dispatch).then(currentUser => {
       connectToCuratorsSocket()(dispatch).then(curators => {
-        let currentCurator = store.getState().curator.currentCurator.tags;
+        debugger;
+        let currentCurator = store.getState().curator.currentCurator[0];
+        debugger;
         if (currentCurator) {
           return Promise.all(currentCurator.tags.map(tag => fetchPhotosForHashtag(tag, accessToken)(dispatch)));
         }

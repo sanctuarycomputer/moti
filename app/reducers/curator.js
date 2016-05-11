@@ -11,14 +11,22 @@ const initialState = {
 
 function formatCuratorData(initialCuratorsState=[], newCurators=[]) {
   let date = new Date(),
-      month = date.getMonth(),
-      year = date.getFullYear(),
+      month = date.getMonth().toString(),
+      year = date.getFullYear().toString(),
       allCurators = initialCuratorsState.concat(newCurators),
       curatorSet = {
         allCurators: [],
         pastCurators: [],
         futureCurators: [],
         currentCurator: null
+      },
+      isCurrentCurator = function(curator) {
+        if(curator.date.year === year) {
+          return curator.date.month === month;
+        }
+      },
+      indexOfCurrentCurator= function(currentCurator) {
+        return allCurators.indexOf(currentCurator);
       };
 
   allCurators.sort((a, b) =>  {
@@ -37,20 +45,15 @@ function formatCuratorData(initialCuratorsState=[], newCurators=[]) {
     return 0;
   });
 
-  debugger;
+  let currentCurator = allCurators.filter(isCurrentCurator);
+  let index = indexOfCurrentCurator(currentCurator[0]);
 
-  //Now we need to set all curators
-  //Current Curator
-  //Past Currators
-  //Future curators
+  curatorSet.allCurators = allCurators;
+  curatorSet.pastCurators = allCurators.slice(0, index);
+  curatorSet.futureCurators = allCurators.slice(index+1);
+  curatorSet.currentCurator = currentCurator;
 
-  // curators.sortBy((a, b) => {
-  //   if (a.year > b.year) {
-
-  //   }
-  // })
-
-  // Find Current Curator
+  // Return sorted curator object
   return curatorSet;
 }
 
