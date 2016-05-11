@@ -13,26 +13,37 @@ const Styles = {
   }
 }
 
-export default Radium(props => {
-  return (
-    <div style={[CoreStyles.fontStyle]}>
-      <nav style={[Styles.nav]}>
+@Radium
+export default class Information extends Component {
 
-        <StyleableLink to={'/information'} style={[
-          CoreStyles.linkStyle
-        ]}>About</StyleableLink>
+  setActiveTab(pathname) {
+    console.log(pathname);
+  }
 
-        <StyleableLink to={'/information/past-curators'} style={[
-          CoreStyles.linkStyle
-        ]}>Past Curators</StyleableLink>
+  render () {
+    
+    console.log(this.props.location.pathname);
 
-        <StyleableLink to={'/information/future-curators'} style={[
-          CoreStyles.linkStyle
-        ]}>Future Curators</StyleableLink>
+    return (
+      <div style={[CoreStyles.fontStyle]}>
+        <nav style={[Styles.nav]}>
 
-      </nav>
+          <StyleableLink to={'/information'} style={[
+            CoreStyles.linkStyle
+          ]}>About</StyleableLink>
 
-      {props.children}
-    </div> 
-  ); 
-});
+          <StyleableLink to={'/information/past-curators'} style={[
+            CoreStyles.linkStyle
+          ]}>Past Curators</StyleableLink>
+
+          <StyleableLink to={'/information/future-curators'} style={[
+            CoreStyles.linkStyle
+          ]}>Future Curators</StyleableLink>
+
+        </nav>
+
+        {this.props.children}
+      </div> 
+    ); 
+  }
+}
