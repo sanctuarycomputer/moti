@@ -29,7 +29,7 @@ const store = createStore(
 
 // Initialize application
 const accessToken = window.localStorage.getItem('instagramAccessToken');
-initializeMOTI(accessToken)(store.dispatch);
+initializeMOTI(accessToken)(store);
 
 // Setup Boilerplate
 document.body.style.backgroundColor = 'black';

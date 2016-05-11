@@ -1,5 +1,6 @@
 import { oAuthBegin } from './oauth';
 import { fetchPhotosForHashtag } from './gallery';
+import { connectToCuratorsSocket } from './curator';
 
 /* Action Types */
 export const APPLICATION_DID_LOAD = 'APPLICATION_DID_LOAD';
@@ -16,17 +17,18 @@ export function applicationDidNotLoad(errors) {
 
 /* For Dispatch */
 export function initializeMOTI(accessToken) {
-  return dispatch => {
+  return store => {
+    let dispatch = store.dispatch
     if (accessToken) {
-      // User is returning, do setup.
-      return oAuthBegin('instagram', accessToken)(dispatch).then(() => {
-        return Promise.all([
-          fetchPhotosForHashtag('bortsimpson', accessToken)(dispatch),
-          fetchPhotosForHashtag('houndstooth', accessToken)(dispatch),
-          fetchPhotosForHashtag('edruscha', accessToken)(dispatch)
-        ])
-        .then(() => dispatch(applicationDidLoad()))
-        .catch(errors => dispatch(applicationDidNotLoad(errors)));
+      oAuthBegin('instagram', accessToken)(dispatch).then(currentUser => {
+        connectToCuratorsSocket()(dispatch).then(curators => {
+          let currentCurator = store.getState().curator.currentCurator;
+          if (currentCurator && !currentCurator.isDummy) {
+            return Promise.all(currentCurator.tags.map(tag => fetchPhotosForHashtag(tag, accessToken)(dispatch)))
+            .then(() => dispatch(applicationDidLoad()))
+            .catch(errors => dispatch(applicationDidNotLoad(errors)));
+          }
+        })
       });
     } else {
       // Nothing to load!
