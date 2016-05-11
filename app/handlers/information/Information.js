@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import CoreStyles from '../../lib/styles';
 import Copy from '../../lib/copy';
+import colors from '../../lib/colors';
 
 const Styles = {
   nav: {
@@ -12,8 +13,16 @@ const Styles = {
     display: 'flex',
     justifyContent: 'space-between',
   },
-  active: { borderBottomWidth: '10px' },
-  inactive: { borderBottomWidth: '5px' }
+  active: { 
+    borderBottomWidth: '3px',
+    borderBottomStyle: 'solid',
+    borderColor: colors.white 
+  },
+  inactive: { 
+    borderBottomWidth: '3px',
+    borderBottomStyle: 'solid',
+    borderColor: 'transparent'
+  }
 }
 
 const Status = {

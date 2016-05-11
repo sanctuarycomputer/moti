@@ -15,8 +15,14 @@ export default {
   linkStyle: {
     textDecoration: 'none',
     color: 'white',
-    borderBottom: '4px solid',
-    borderColor: colors.white
+    borderBottomWidth: '3px',
+    borderBottomStyle: 'solid',
+    borderColor: 'transparent',
+    ':hover': {
+      borderBottomWidth: '3px',
+      borderBottomStyle: 'solid',
+      borderColor: colors.white,
+    },
   },
   colors
 }
