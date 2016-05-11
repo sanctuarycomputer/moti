@@ -6,16 +6,13 @@ import { connectToCuratorsSocket } from '../actions/curator';
 
 export default function(store) {
   let dispatch = store.dispatch;
-
   const accessToken = window.localStorage.getItem('instagramAccessToken');
 
   if (accessToken) {
     oAuthBegin('instagram', accessToken)(dispatch).then(currentUser => {
       connectToCuratorsSocket()(dispatch).then(curators => {
-        debugger;
-        let currentCurator = store.getState().curator.currentCurator[0];
-        debugger;
-        if (currentCurator) {
+        let currentCurator = store.getState().curator.currentCurator;
+        if (currentCurator && !currentCurator.isDummy) {
           return Promise.all(currentCurator.tags.map(tag => fetchPhotosForHashtag(tag, accessToken)(dispatch)));
         }
       })
