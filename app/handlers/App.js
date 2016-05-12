@@ -23,9 +23,18 @@ const Styles = {
   base: {
     width: '60vw',
     margin: '0 auto 0 auto',
-    height: '100vh',
-    overflow: 'scroll',
-    textAlign: 'center'
+    textAlign: 'center',
+  },
+  wrapper: {
+    background: [
+      'rgba(0,0,0,1)', 
+      '-moz-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(64,64,65,1) 52%, rgba(0,0,0,1) 100%)', 
+      '-webkit-gradient(left top, left bottom, color-stop(0%, rgba(0,0,0,1)), color-stop(52%, rgba(64,64,65,1)), color-stop(100%, rgba(0,0,0,1)))', 
+      '-webkit-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(64,64,65,1) 52%, rgba(0,0,0,1) 100%)', 
+      '-o-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(64,64,65,1) 52%, rgba(0,0,0,1) 100%)', 
+      '-ms-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(64,64,65,1) 52%, rgba(0,0,0,1) 100%)', 
+      'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(64,64,65,1) 52%, rgba(0,0,0,1) 100%)'
+    ],
   },
   appNavLink: {
     position: 'fixed',
@@ -84,7 +93,9 @@ export default class App extends Component {
           CoreStyles.fontStyle
         ]}>{appNavLinkInfo.copy}</StyleableLink>
 
-        <div style={[Styles.base]}>{this.props.children}</div>
+        <div style={[Styles.wrapper]}>
+          <div style={[Styles.base]}>{this.props.children}</div>
+        </div>
       </div>
     )
   }
