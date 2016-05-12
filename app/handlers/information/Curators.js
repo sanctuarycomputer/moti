@@ -30,13 +30,6 @@ const Styles = {
   }
 };
 
-// const DummyCuratorData = [
-//   { name: 'Elizabeth Karp Evans', date: {month: 'April', year: '1969'}, tagList: '#art, #denim, #portrait' },
-//   { name: 'Adam Turnbull', date: {month: 'February', year: '1981'}, tagList: '#art, #denim, #portrait' },
-//   { name: 'Sebastian Odell', date: {month: 'March', year: '1989'}, tagList: '#art, #denim, #portrait' },
-//   { name: 'Hugh Francis', date: {month: 'May', year: '2016'}, tagList: '#art, #denim, #portrait' }
-// ];
-
 const mapStateToProps = (state) => {
   return {
     pastCurators: state.curator.pastCurators,

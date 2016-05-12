@@ -83,6 +83,18 @@
         "code",
         "fish"
       ]
+    },
+    {
+      "name": "Craig David",
+      "date": {
+        "month": "8",
+        "year": "2017"
+      },
+      "tags": [
+        "words",
+        "astronomy",
+        "england"
+      ]
     }
   ]
 }

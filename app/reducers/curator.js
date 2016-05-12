@@ -2,7 +2,7 @@ import {
   CURATORS_DID_LOAD,
 } from '../actions/curator';
 
-const dummyCurator = { isDummy: true }
+const dummyCurator = { isDummy: true };
 
 const initialState = {
   allCurators: [],
@@ -16,7 +16,6 @@ function formatCuratorData(initialCuratorsState=[], newCurators=[]) {
       month = date.getMonth().toString(),
       year = date.getFullYear().toString(),
       allCurators = initialCuratorsState.concat(newCurators);
-
   //Sort curators in ascending order
   allCurators.sort((a, b) =>  {
     if(a.date.year < b.date.year) { return -1; }
