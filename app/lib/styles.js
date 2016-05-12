@@ -1,6 +1,11 @@
 import colors from './colors';
 
 export default {
+  container: {
+    width: '60vw',
+    margin: '0 auto 0 auto',
+    textAlign: 'center',
+  },
   fontStyle: {
     letterSpacing: '1px',
     fontSize: '2.8rem',
