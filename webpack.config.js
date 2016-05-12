@@ -35,7 +35,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.NoErrorsPlugin(),
+    //new webpack.NoErrorsPlugin(),
     new HtmlWebpackPlugin({
       template: __dirname + '/app/index.html',
       filename: 'index.html',

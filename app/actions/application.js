@@ -27,42 +27,39 @@ export function firebaseDidUpdate(snapshot) {
   return { type: FIREBASE_DID_UPDATE, snapshot }
 }
 
-// const firebaseURL = 'incandescent-fire-671.firebaseIO.com';
-
 /* For Dispatch */
+export function authorizeUserAndLoadImages(tags=[], accessToken) {
+  return dispatch => {
+    return oAuthBegin('instagram', accessToken)(dispatch).then(currentUser => {
+      if (!accessToken) { accessToken = window.localStorage.instagramAccessToken; }
+      return Promise.all(tags.map(tag => fetchPhotosForHashtag(tag, accessToken)(dispatch)))
+    });
+  }
+}
+
 export function initializeMOTI(accessToken) {
   return store => {
     let dispatch = store.dispatch
-    if (accessToken) {
 
-      // Init Firebase
-      dispatch(firebaseDidInitialize(new Firebase(ENV.FIREBASE_ROOT_URL)));
-      const firebaseRef = store.getState().application.firebaseRef;
+    dispatch(firebaseDidInitialize(new Firebase(ENV.FIREBASE_ROOT_URL)));
+    const firebaseRef = store.getState().application.firebaseRef;
 
-
-      // Listen for all Firebase Changes
-      let firebaseHasLoadedFirstPayload = false;
+    let firebasePromise = new Promise(resolve => {
       firebaseRef.on('value', snapshot => {
-
         dispatch(firebaseDidUpdate(snapshot));
-
-        if (!firebaseHasLoadedFirstPayload) {
-          firebaseHasLoadedFirstPayload = true;
-          // We have firebase 
-          oAuthBegin('instagram', accessToken)(dispatch).then(currentUser => {
-            let currentCurator = store.getState().curator.currentCurator;
-            if (currentCurator && !currentCurator.isDummy) {
-              return Promise.all(currentCurator.tags.map(tag => fetchPhotosForHashtag(tag, accessToken)(dispatch)))
-              .then(() => dispatch(applicationDidLoad()))
-              .catch(errors => dispatch(applicationDidNotLoad(errors)));
-            }
-          });
-        }
-
+        resolve();
       });
-    } else {
-      // Nothing to load!
-      window.setTimeout(() => { dispatch(applicationDidLoad()); }, 1);
+    });
+
+    if (accessToken) { 
+      firebasePromise.then(() => {
+        let tags = store.getState().curator.currentCurator.tags;
+        return authorizeUserAndLoadImages(tags, accessToken)(dispatch);
+      })
     }
+
+    return firebasePromise
+      .then(() => { dispatch(applicationDidLoad()) })
+      .catch(errors => dispatch(applicationDidNotLoad(errors)));
   };
 }

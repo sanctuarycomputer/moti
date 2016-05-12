@@ -22,6 +22,7 @@ const {
 const Styles = {
   base: {
     width: '60vw',
+    minHeight: '100vh',
     margin: '0 auto 0 auto',
     textAlign: 'center',
   },
@@ -76,11 +77,9 @@ export default class App extends Component {
   userDidLogout = () => {
     if (this.props.currentPath !== '/') { browserHistory.push('/'); }
   }
-
   
   render() {
     let appNavLinkInfo = this.appNavLinkForCurrentPath(this.props.currentPath);
-
     return (
       <div>
         <Loader isLoading={this.props.isLoading} />
