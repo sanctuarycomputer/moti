@@ -76,7 +76,7 @@ export default class App extends Component {
             Styles.appNavLink
           ]}>Featured Gallery</StyleableLink>
 
-          <StyleableLink to='/informaion' style={[
+          <StyleableLink to='/collection' style={[
             CoreStyles.linkStyle,
             Styles.appNavLink
           ]}>Permenant Collection</StyleableLink>
