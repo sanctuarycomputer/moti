@@ -40,15 +40,18 @@ const mapStateToProps = (state) => {
 @connect(mapStateToProps)
 @Radium
 export default class Curators extends Component {
+
+  renderTags(tags=[]) {
+    return (tags.map((tag, index) => <span key={index} style={[Styles.tagList]}>#{tag}</span>))
+  }
+
   renderCurators(data) {
     return data.map((curator, index) => {
       return (
         <div key={index} style={[Styles.curator]}>
           <span>{curator.name}</span> - <span>{months[curator.date.month]}, {curator.date.year}</span>
           <br />
-          <span style={[Styles.tagList]}>#{curator.tags[0]}</span>
-          <span style={[Styles.tagList]}>#{curator.tags[1]}</span>
-          <span style={[Styles.tagList]}>#{curator.tags[2]}</span>
+          {this.renderTags(curator.tags)}
         </div>
       );
     });
