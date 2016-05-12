@@ -1,6 +1,6 @@
-import { 
-  CURATORS_DID_LOAD,
-} from '../actions/curator';
+import {
+  FIREBASE_DID_UPDATE
+} from '../actions/application';
 
 const dummyCurator = { isDummy: true };
 
@@ -45,8 +45,8 @@ function formatCuratorData(initialCuratorsState=[], newCurators=[]) {
 
 export default function curators(state=initialState, action) {
   switch(action.type) {
-    case CURATORS_DID_LOAD:
-      return formatCuratorData(state.curators, action.curators);
+    case FIREBASE_DID_UPDATE:
+      return formatCuratorData(state.curators, action.snapshot.val().curators.curators);
     default:
       return state;
   }
