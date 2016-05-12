@@ -60,7 +60,7 @@ export default class App extends Component {
   render() {
 
     return (
-      <div style={[CoreStyles.fontFamily]}>
+      <div>
         <Loader isLoading={this.props.isLoading} />
 
         <CurrentUser />

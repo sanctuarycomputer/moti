@@ -6,9 +6,6 @@ export default {
     margin: '0 auto 0 auto',
     textAlign: 'center',
   },
-  fontFamily: {
-    fontFamily: 'Helvetica Neue',
-  },
   fontStyle: {
     letterSpacing: '1px',
     fontSize: '2.8rem',
