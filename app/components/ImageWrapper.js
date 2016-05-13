@@ -27,6 +27,9 @@ const Styles = {
       opacity: 1
     }
   },
+  iconContainer: {
+    textAlign: 'center'
+  },
   heart: {
     transition: '200ms ease-in-out',
     opacity: .3,
