@@ -80,9 +80,11 @@ export default class App extends Component {
   
   render() {
     let appNavLinkInfo = this.appNavLinkForCurrentPath(this.props.currentPath);
+    let hasCurrentUser = !this.props.currentUser;
+
     return (
       <div>
-        <Loader isLoading={this.props.isLoading} />
+        <Loader isLoading={hasCurrentUser} />
 
         <CurrentUser />
 

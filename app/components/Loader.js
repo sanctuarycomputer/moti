@@ -77,12 +77,13 @@ const Wrapper = {
   top: 0,
   left: 0,
   zIndex: 1,
-  transition: `background-color ${LOADER_SPEED_MS}ms ease-in-out ${LOADER_SPEED_MS/2}ms`
+  transition: `background-color ${LOADER_SPEED_MS}ms ease-in-out`
 }
 
 const WrapperLoaded = {
   backgroundColor: 'transparent',
-  pointerEvents: 'none'
+  pointerEvents: 'none',
+  transition: `background-color ${LOADER_SPEED_MS}ms ease-in-out ${LOADER_SPEED_MS/2}ms`
 }
 
 @Radium
