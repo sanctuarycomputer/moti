@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
 export default class Gallery extends Component {
 
   didClickImageWrapper = (media) => {
-    //Firebase success callback
+    //Firebase success/error callback
     let onComplete = function(error) {
       if (error) {
         console.log('Synchronization failed');
