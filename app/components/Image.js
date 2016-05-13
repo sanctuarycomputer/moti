@@ -3,7 +3,7 @@ const { PropTypes } = React;
 import Radium from 'radium';
 
 const Styles = {
-  base:    { transition: 'opacity 500ms', width: '100%' },
+  base:    { transition: 'opacity 500ms' },
   loading: { opacity: 0 },
   loaded:  { opacity: 1 },
   errored: { opacity: 0 }
@@ -22,11 +22,15 @@ export default class Image extends Component {
     onMount: PropTypes.func,
     onLoad:  PropTypes.func,
     onError: PropTypes.func,
-    style:   PropTypes.array
+    style:   PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.object
+    ]),
   }
 
   constructor(props) {
     super(...arguments);
+    console.log(props.style);
     this.state = { status: Status.LOADING };
   }
 
@@ -50,7 +54,15 @@ export default class Image extends Component {
     if (this.props.onError) { this.props.onError(); };
   }
 
+
   render() {
-    return (<img style={[Styles.base, Styles[this.state.status], this.props.style]} src={this.props.src} />);
+    return (
+      <img style={[
+        Styles.base, 
+        Styles[this.state.status], 
+        this.props.style,
+      ]} 
+           src={this.props.src}
+           width={this.props.width} />);
   }
 }
