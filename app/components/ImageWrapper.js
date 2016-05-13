@@ -20,16 +20,19 @@ const Styles = {
     bottom: 0,
     opacity: 0,
     cursor: 'pointer',
-    transition: 'opacity 250ms ease-in-out',
+    background: 'rgba(255,255,255,0)',
+    transition: '250ms ease-in-out',
     ':hover': {
-      opacity: .3,
-      backgroundColor: 'black',
+      background: 'rgba(255,255,255,.3)',
+      opacity: 1
     }
   },
   heart: {
     transition: '200ms ease-in-out',
+    opacity: .3,
     ':hover': {
       height: '60px',
+      opacity: 1
     }
   }
 }
@@ -39,25 +42,34 @@ export default class ImageWrapper extends Component {
   static propTypes = {
     src: PropTypes.string.isRequired,
     onClick: PropTypes.func,
-    media: PropTypes.object
+    media: PropTypes.object,
+    bumpCount: PropTypes.number
   }
 
   didClickSelf = () => {
     if (this.props.onClick) { this.props.onClick(this.props.media); }
   }
 
+  renderOverlayContents = () => {
+    if (this.props.overlayRenderFunction) {
+      return this.props.overlayRenderFunction(this);
+    }
+    return null;
+  }
+
   render() {
     return (
-      <div style={Styles.wrapperPosition}>
+      <div data-name='ImageWrapper' style={Styles.wrapperPosition}>
         <div onClick={this.didClickSelf}>
           <Image src={this.props.src} />
         </div>
         <div style={[Styles.overlay]}>
+          {this.renderOverlayContents()}
           <div style={[Styles.iconContainer]}>
             <div onClick={this.didClickSelf}>
               <Icon icon={'Heart'} height={50} viewbox={'0 0 57.947 57.947'} style={[Styles.heart]}/>
             </div>
-            <h3>bump count</h3>
+            <h3>{this.props.bumpCount}</h3>
           </div>
         </div>
       </div>

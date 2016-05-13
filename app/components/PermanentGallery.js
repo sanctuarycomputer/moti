@@ -44,7 +44,8 @@ export default class PermanentGallery extends Component {
         <ImageWrapper key={index} 
                       src={photo.media.images.standard_resolution.url} 
                       onClick={this.didBumpImage} 
-                      media={photo}/>
+                      media={photo}
+                      bumpCount={photo.bumpCount}/>
       )
     });
     return (<div style={Styles.wrapper}>{images}</div>);
