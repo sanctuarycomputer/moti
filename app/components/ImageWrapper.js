@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
+import Icon from './Icon';
 const { PropTypes } = React;
 
 import Image from './Image';
@@ -10,6 +11,9 @@ const Styles = {
   },
   overlay: {
     position: 'absolute',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     top: 0,
     left: 0,
     right: 0,
@@ -20,6 +24,12 @@ const Styles = {
     ':hover': {
       opacity: .3,
       backgroundColor: 'black',
+    }
+  },
+  heart: {
+    transition: '200ms ease-in-out',
+    ':hover': {
+      height: '60px',
     }
   }
 }
@@ -42,7 +52,14 @@ export default class ImageWrapper extends Component {
         <div onClick={this.didClickSelf}>
           <Image src={this.props.src} />
         </div>
-        <div style={[Styles.overlay]}>overlay</div>
+        <div style={[Styles.overlay]}>
+          <div style={[Styles.iconContainer]}>
+            <div onClick={this.didClickSelf}>
+              <Icon icon={'Heart'} height={50} viewbox={'0 0 57.947 57.947'} style={[Styles.heart]}/>
+            </div>
+            <h3>bump count</h3>
+          </div>
+        </div>
       </div>
     );
   }
