@@ -53,13 +53,6 @@ export default class ImageWrapper extends Component {
     if (this.props.onClick) { this.props.onClick(this.props.media); }
   }
 
-  renderOverlayContents = () => {
-    if (this.props.overlayRenderFunction) {
-      return this.props.overlayRenderFunction(this);
-    }
-    return null;
-  }
-
   render() {
     return (
       <div data-name='ImageWrapper' style={Styles.wrapperPosition}>
