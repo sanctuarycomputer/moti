@@ -30,7 +30,6 @@ export default class Image extends Component {
 
   constructor(props) {
     super(...arguments);
-    console.log(props.style);
     this.state = { status: Status.LOADING };
   }
 
@@ -56,13 +55,6 @@ export default class Image extends Component {
 
 
   render() {
-    return (
-      <img style={[
-        Styles.base, 
-        Styles[this.state.status], 
-        this.props.style,
-      ]} 
-           src={this.props.src}
-           width={this.props.width} />);
+    return (<img style={[Styles.base, Styles[this.state.status], this.props.style]} src={this.props.src} />);
   }
 }
