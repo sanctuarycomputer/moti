@@ -49,11 +49,22 @@ export default function gallery(state=initialState, action) {
           permanents.push(mediaObj);
         }
       }
-      console.log(permanents)
+
+      let orderedPermanents = permanents.sort(function (a, b) {
+        if (a.bumpCount > b.bumpCount) {
+          return -1;
+        }
+        if (a.bumpCount < b.bumpCount) {
+          return 1;
+        }
+        return 0;
+      });
+      console.log(orderedPermanents)
+
       return {
         status: Status.SUCCESS,
         photos: state.photos,
-        collection: state.collection.concat(permanents),
+        collection: orderedPermanents,
         error: null
       };
     default:

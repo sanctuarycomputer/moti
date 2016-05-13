@@ -21,42 +21,29 @@ const mapStateToProps = (state) => {
 
 @connect(mapStateToProps)
 export default class PermanentGallery extends Component {
+  didBumpImage = (media) => {
+    //Firebase success/error callback
+    let onComplete = function(error) {
+      if (error) {
+        console.log('Synchronization failed');
+      } else {
+        console.log('Synchronization succeeded');
+      }
+    };
 
-  // didClickImageWrapper = (media) => {
-  //   // Check if media id is in permanents
-  //   let permanentsRef = this.props.firebaseRef.child('/permanents');
+    let imageRef = this.props.firebaseRef.child('/permanents/' + media.id + '/bumpCount')
 
-  //   let match = this.props.collection.find(permanentMedia => permanentMedia.media.id === media.id);
-
-  //   if(match) {
-
-  //   } else {
-  //     let newPermanent = permanentsRef.push();
-  //     newPermanent.set({
-  //       media,
-  //       bumpCount: 1
-  //     });
-  //   }
-  // }
-
-//   render() {
-//     let images = this.props.collection.map((photo, index) => {
-//       return (
-//         <img key={index} src={photo.media.images.standard_resolution.url} />
-//         )
-//       }
-//     )
-//     return (<div>{images}</div>);
-//   }
-// }
-
+    imageRef.transaction(function (currentBumpCount) {
+      return (currentBumpCount) + 1;
+    }, onComplete);
+  }
 
   render() {
     let images = this.props.collection.map((photo, index) => {
       return (
         <ImageWrapper key={index} 
                       src={photo.media.images.standard_resolution.url} 
-                      onClick={this.didClickImageWrapper} 
+                      onClick={this.didBumpImage} 
                       media={photo}/>
       )
     });

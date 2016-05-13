@@ -17,21 +17,22 @@ const mapStateToProps = (state) => {
 export default class Gallery extends Component {
 
   didClickImageWrapper = (media) => {
+    //Firebase success callback
+    let onComplete = function(error) {
+      if (error) {
+        console.log('Synchronization failed');
+      } else {
+        console.log('Synchronization succeeded');
+      }
+    };
+
     // Check if media id is in permanents
     let permanentsRef = this.props.firebaseRef.child('/permanents');
 
     let match = this.props.collection.find(permanentMedia => permanentMedia.media.id === media.id);
 
     if(match) {
-      let matchRef = this.props.firebaseRef.child('/permanents/'+match.id+'/bumpCount')
-      debugger;
-      let onComplete = function(error) {
-        if (error) {
-          console.log('Synchronization failed');
-        } else {
-          console.log('Synchronization succeeded');
-        }
-      };
+      let matchRef = this.props.firebaseRef.child('/permanents/' + match.id + '/bumpCount')
 
       matchRef.transaction(function (currentBumpCount) {
         return (currentBumpCount) + 1;
