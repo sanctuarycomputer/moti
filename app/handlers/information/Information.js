@@ -67,7 +67,10 @@ export default class Information extends Component {
 
   render () {
     return (
-      <div style={[CoreStyles.fontStyle]}>
+      <div style={[
+        CoreStyles.fontStyle,
+        CoreStyles.container
+      ]}>
         <nav style={[Styles.nav]}>
 
           <StyleableLink to={'/information'} style={[

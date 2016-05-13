@@ -23,6 +23,19 @@ export default class Gallery extends Component {
     let match = this.props.collection.find(permanentMedia => permanentMedia.media.id === media.id);
 
     if(match) {
+      let matchRef = this.props.firebaseRef.child('/permanents/'+match.id+'/bumpCount')
+      debugger;
+      let onComplete = function(error) {
+        if (error) {
+          console.log('Synchronization failed');
+        } else {
+          console.log('Synchronization succeeded');
+        }
+      };
+
+      matchRef.transaction(function (currentBumpCount) {
+        return (currentBumpCount) + 1;
+      }, onComplete);
 
     } else {
       let newPermanent = permanentsRef.push();

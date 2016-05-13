@@ -2,7 +2,15 @@ import React, { Component } from 'react';
 
 const { PropTypes } = React;
 
+import ImageWrapper from './ImageWrapper';
 import { connect } from 'react-redux';
+
+const Styles = {
+  wrapper: {
+    width: '60vw',
+    margin: '0 auto'
+  }
+}
 
 const mapStateToProps = (state) => {
   return { 
@@ -31,13 +39,27 @@ export default class PermanentGallery extends Component {
   //   }
   // }
 
+//   render() {
+//     let images = this.props.collection.map((photo, index) => {
+//       return (
+//         <img key={index} src={photo.media.images.standard_resolution.url} />
+//         )
+//       }
+//     )
+//     return (<div>{images}</div>);
+//   }
+// }
+
+
   render() {
     let images = this.props.collection.map((photo, index) => {
       return (
-        <img key={index} src={photo.media.images.standard_resolution.url} />
-        )
-      }
-    )
-    return (<div>{images}</div>);
+        <ImageWrapper key={index} 
+                      src={photo.media.images.standard_resolution.url} 
+                      onClick={this.didClickImageWrapper} 
+                      media={photo}/>
+      )
+    });
+    return (<div style={Styles.wrapper}>{images}</div>);
   }
 }
