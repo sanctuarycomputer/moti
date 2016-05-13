@@ -64,7 +64,7 @@ export default class App extends Component {
       } 
     }
     return {
-      path: '/information',
+      path: '/infromation',
       copy: 'Information'
     }
   }
