@@ -60,7 +60,6 @@ export default class ImageWrapper extends Component {
           <Image src={this.props.src} />
         </div>
         <div style={[Styles.overlay]}>
-          {this.renderOverlayContents()}
           <div style={[Styles.iconContainer]}>
             <div onClick={this.didClickSelf}>
               <Icon icon={'Heart'} height={50} viewbox={'0 0 57.947 57.947'} style={[Styles.heart]}/>
