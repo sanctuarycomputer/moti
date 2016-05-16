@@ -25,14 +25,41 @@ const mapStateToProps = (state) => {
 
 @connect(mapStateToProps)
 export default class PermanentGallery extends Component {
+  
   didBumpImage = (media) => {
     let imageRef = this.props.firebaseRef.child('/permanents/' + media.id + '/bumpCount')
 
     imageRef.transaction(currentBumpCount => currentBumpCount+1 )
   }
 
+  orderImagesForFlexbox(images) {
+    
+    let columns = [[],[],[]];
+    let currentColumn = 0;
+
+    while (images.length) {
+      columns[currentColumn].push(images.shift());
+      if (currentColumn === columns.length - 1) {
+        currentColumn = 0; 
+      } else {
+        currentColumn++;
+      }
+    }
+
+    console.log(columns);
+
+    columns.forEach(column => {
+      let finalColumn = columns[columns.length - 1];
+      if (column.length > finalColumn.length) {
+        
+      }
+    });
+
+    return images;
+  }
+
   render() {
-    let images = this.props.collection.map((photo, index) => {
+    let images = this.orderImagesForFlexbox(this.props.collection).map((photo, index) => {
       return (
         <ImageWrapper key={index} 
                       src={photo.media.images.standard_resolution.url} 
