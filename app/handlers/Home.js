@@ -1,27 +1,50 @@
 import React, { Component } from 'react';
+import Radium from 'radium';
 
 import Login from '../components/Login';
 import Gallery from '../components/Gallery';
 import CurrentCurator from '../components/currentCurator';
 import { connect } from 'react-redux';
 
+import CoreStyles from '../lib/styles';
+
+const Styles = {
+  wrapper: {
+    background: [
+      'rgba(0,0,0,1)', 
+      '-moz-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(64,64,65,1) 52%, rgba(0,0,0,1) 100%)', 
+      '-webkit-gradient(left top, left bottom, color-stop(0%, rgba(0,0,0,1)), color-stop(52%, rgba(64,64,65,1)), color-stop(100%, rgba(0,0,0,1)))', 
+      '-webkit-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(64,64,65,1) 52%, rgba(0,0,0,1) 100%)', 
+      '-o-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(64,64,65,1) 52%, rgba(0,0,0,1) 100%)', 
+      '-ms-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(64,64,65,1) 52%, rgba(0,0,0,1) 100%)', 
+      'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(64,64,65,1) 52%, rgba(0,0,0,1) 100%)'
+    ]
+  }
+}
+
 const mapStateToProps = (state) => {
   return { 
     applicationStatus: state.application.status,
     currentUser: state.oAuth.currentUser,
-    images: state.gallery.photos.map(photo => photo.images.standard_resolution.url),
-    currentCurator: state.curator.currentCurator
+    currentCurator: state.curator.currentCurator,
   };
 }
 
-export default connect(mapStateToProps)(props => {
-  if (props.currentUser) { 
-    return (
-      <div>
-        <Gallery imageUrls={props.images} />,
-        <CurrentCurator currentCurator={props.currentCurator} />
-      </div>
-    ); 
+
+@connect(mapStateToProps)
+@Radium
+export default class Home extends Component {
+  render() {
+    if (this.props.currentUser) { 
+      return (
+        <div style={[Styles.wrapper]}>
+          <div style={[CoreStyles.container]}>
+            <Gallery imageUrls={this.props.images} />
+            <CurrentCurator currentCurator={this.props.currentCurator} />
+          </div>
+        </div>
+      ); 
+    }
+    return (<Login />);
   }
-  return (<Login />);
-});
+}

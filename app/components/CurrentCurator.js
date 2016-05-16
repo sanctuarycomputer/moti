@@ -1,26 +1,39 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
 import months from '../lib/months';
-import colors from '../lib/colors';
 import styles from '../lib/styles';
-const { PropTypes } = React;
+import CoreStyles from '../lib/styles';
 
-const {
-  white
-} = colors;
+const { PropTypes } = React;
 
 const {
   fontStyle
 } = styles;
 
+const { 
+  colors: {
+    greyMid
+  }
+} = CoreStyles;
+
 const Styles = {
-  curatorAttribution: {
+  curatorWrapper: {
+    display: 'inline-block',
+    height: '400px',
     position: 'fixed',
+    right: '50px',
     top: '50%',
-    right: 0,
+    transform: 'translateY(-50%)'
+  },
+  curatorString: {
+    textAlign: 'center',
+    width: '400px',
+    position: 'absolute',
+    top: '0',
+    left: '0',
     transform: 'rotate(90deg)',
-    fontFamily: 'Helvetica Neue',
-    color: white,
+    transformOrigin: 'top left',
+    color: greyMid
   },
   month: {
     marginRight: '.5rem'
@@ -46,7 +59,10 @@ export default class CurrentCurator extends Component {
     let monthString = months[month];
 
     return(
-      <div style={Styles.curatorAttribution}><span style={Styles.month}>{monthString}</span>|<span style={Styles.name}>{name}</span>
+      <div style={Styles.curatorWrapper}>
+        <div style={Styles.curatorString}>
+          <span style={Styles.month}>{monthString}</span>|<span style={Styles.name}>{name}</span>
+        </div>
       </div>
     )
   }

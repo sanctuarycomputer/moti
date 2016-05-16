@@ -15,7 +15,8 @@ import { Status as ApplicationStatusMap } from '../reducers/application';
 const { 
   colors: { 
     white, 
-    grey 
+    grey,
+    greyMid
   }
 } = CoreStyles;
 
@@ -37,11 +38,18 @@ const Styles = {
       'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(64,64,65,1) 52%, rgba(0,0,0,1) 100%)'
     ],
   },
-  appNavLink: {
+  appNav: {
     position: 'fixed',
     top: '50%',
-    transform: 'translateY(-50%) rotate(-90deg)',
-    color: white
+    left: '0',
+    transform: 'translateX(-36%) rotate(-90deg)'
+  },
+  appNavLink: {
+    color: greyMid,
+    fontSize: '1rem',
+    lineHeight: '2rem',
+    display: 'inline-block',
+    margin: '0 15px'
   }
 }
 
@@ -57,19 +65,6 @@ const mapStateToProps = (state) => {
 @Radium
 export default class App extends Component {
 
-  appNavLinkForCurrentPath(pathname) {
-    if (pathname.includes('information'))  {
-      return {
-        path: '/',
-        copy: 'Gallery'
-      } 
-    }
-    return {
-      path: '/information',
-      copy: 'Information'
-    }
-  }
-
   componentWillReceiveProps(nextProps) {
     if (this.props.currentUser && !nextProps.currentUser) { this.userDidLogout(); }
   }
@@ -79,7 +74,6 @@ export default class App extends Component {
   }
   
   render() {
-    let appNavLinkInfo = this.appNavLinkForCurrentPath(this.props.currentPath);
     let hasCurrentUser = !this.props.currentUser;
 
     return (
@@ -88,15 +82,24 @@ export default class App extends Component {
 
         <CurrentUser />
 
-        <StyleableLink to={appNavLinkInfo.path} style={[
-          Styles.appNavLink,
-          CoreStyles.linkStyle,
-          CoreStyles.fontStyle
-        ]}>{appNavLinkInfo.copy}</StyleableLink>
+        <nav style={[Styles.appNav]}>
+          <StyleableLink to='/information' style={[
+            CoreStyles.linkStyle,
+            Styles.appNavLink
+          ]}>About</StyleableLink>
 
-        <div style={[Styles.wrapper]}>
-          <div style={[Styles.base]}>{this.props.children}</div>
-        </div>
+          <StyleableLink to='/' style={[
+            CoreStyles.linkStyle,
+            Styles.appNavLink
+          ]}>Featured Gallery</StyleableLink>
+
+          <StyleableLink to='/permanent-collection' style={[
+            CoreStyles.linkStyle,
+            Styles.appNavLink
+          ]}>Permenant Collection</StyleableLink>
+        </nav>
+
+        <div>{this.props.children}</div>
       </div>
     )
   }
