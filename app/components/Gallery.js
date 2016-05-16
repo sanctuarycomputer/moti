@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 const { PropTypes } = React;
+const MULTIPLE = 5;
 
 import ImageWrapper from './ImageWrapper';
 import { connect } from 'react-redux';
@@ -47,15 +48,44 @@ export default class Gallery extends Component {
     }
   }
 
+  randomNumberFromRange(min, max) {
+    return Math.floor(Math.random()*(max-min+1)+min);
+  }
+
+  buildPositioningStyles(nudge={}) {
+
+    let Styles = {
+      positioning: {
+        position: 'relative',
+        width: this.randomNumberFromRange(50, 100) + '%',
+      }
+    }
+    return Object.assign(Styles.positioning, nudge);
+  }
+
+  nudge(index) {
+    if (index % MULTIPLE === 0 || (index+1) % MULTIPLE === 0) {
+      return {right: '20%'};
+    } else if ((index+3) % MULTIPLE === 0 || (index+4) % MULTIPLE === 0) {
+      return {left: '20%'};
+    } else {
+      return {left: 'auto'};
+    }
+  }
+
   render() {
     let images = this.props.photos.map((photo, index) => {
+      debugger;
+      console.log(index + ': ' + photo)
       return (
         <ImageWrapper key={index} 
                       src={photo.images.standard_resolution.url} 
                       onClick={this.didClickImageWrapper} 
-                      media={photo} />
+                      media={photo}
+                      style={this.buildPositioningStyles(this.nudge(index))} />
       )
     });
+    console.log('images:' + images)
     return (<div>{images}</div>);
   }
 }
