@@ -33,16 +33,16 @@ export default function application(state=initialState, action) {
       };
     case FIREBASE_DID_INITIALIZE:
       return { 
-        status: Status.ERROR,
-        errors: action.errors,
+        status: state.status,
+        errors: state.errors,
         firebaseRef: action.firebaseRef
       };
     case FIREBASE_DID_UPDATE:
       console.log('Firebase Updated:');
       console.log(action.snapshot.val());
       return { 
-        status: Status.ERROR,
-        errors: action.errors,
+        status: state.status,
+        errors: state.errors,
         firebaseRef: state.firebaseRef
       };
     default:
