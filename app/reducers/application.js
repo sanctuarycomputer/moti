@@ -43,7 +43,7 @@ export default function application(state=initialState, action) {
       return { 
         status: Status.ERROR,
         errors: action.errors,
-        firebaseRef: action.firebaseRef
+        firebaseRef: state.firebaseRef
       };
     default:
       return state;

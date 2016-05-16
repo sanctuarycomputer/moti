@@ -1,13 +1,40 @@
 import React, { Component } from 'react';
-import Image from './Image.js';
 
 const { PropTypes } = React;
-
 const MULTIPLE = 5;
 
+import ImageWrapper from './ImageWrapper';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => {
+  return { 
+    photos: state.gallery.photos.slice(0),
+    firebaseRef: state.application.firebaseRef,
+    collection: state.gallery.collection.slice(0)
+  };
+}
+
+@connect(mapStateToProps)
 export default class Gallery extends Component {
-  static propTypes = {
-    imageUrls: PropTypes.array.isRequired,
+
+  didClickImageWrapper = (media) => {
+    // Check if media id is in permanents
+    let permanentsRef = this.props.firebaseRef.child('/permanents');
+
+    let match = this.props.collection.find(permanentMedia => permanentMedia.media.id === media.id);
+
+    if(match) {
+      let matchRef = this.props.firebaseRef.child('/permanents/' + match.id + '/bumpCount')
+
+      matchRef.transaction(currentBumpCount => currentBumpCount+1 )
+
+    } else {
+      let newPermanent = permanentsRef.push();
+      newPermanent.set({
+        media,
+        bumpCount: 1
+      });
+    }
   }
 
   randomNumberFromRange(min, max) {
@@ -36,7 +63,15 @@ export default class Gallery extends Component {
   }
 
   render() {
-    let images = this.props.imageUrls.map((url, index) => <Image key={index} style={this.buildPositioningStyles(this.nudge(index))} src={url} />);
+    let images = this.props.photos.map((photo, index) => {
+      return (
+        <ImageWrapper key={index} 
+                      src={photo.images.standard_resolution.url} 
+                      onClick={this.didClickImageWrapper} 
+                      media={photo}
+                      style={this.buildPositioningStyles(this.nudge(index))} />
+      )
+    });
     return (<div>{images}</div>);
   }
 }
