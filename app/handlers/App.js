@@ -25,7 +25,8 @@ const Styles = {
     position: 'fixed',
     top: '50%',
     left: '0',
-    transform: 'translateX(-36%) rotate(-90deg)'
+    transform: 'translateX(-36%) rotate(-90deg)',
+    zIndex: 3,
   },
   appNavLink: {
     color: greyMid,

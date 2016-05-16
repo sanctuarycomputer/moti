@@ -12,11 +12,12 @@ const Styles = {
     bottom: 0,
     left: '50%',
     transform: 'translateX(-50%)', 
-    textAlign: 'center'
+    textAlign: 'center',
+    zIndex: 10,
   },
   profilePicture: {
     width: '40px',
-    borderRadius: '50px' 
+    borderRadius: '50%'
   },
   username: {
     fontSize: '1rem',

@@ -46,6 +46,7 @@ export default class Gallery extends Component {
     let Styles = {
       positioning: {
         position: 'relative',
+        display: 'inline-block',
         width: this.randomNumberFromRange(50, 100) + '%',
       }
     }
