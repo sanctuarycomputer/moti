@@ -59,7 +59,6 @@ export default function gallery(state=initialState, action) {
         }
         return 0;
       });
-      console.log(orderedPermanents)
 
       return {
         status: Status.SUCCESS,

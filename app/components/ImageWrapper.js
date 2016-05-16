@@ -46,7 +46,8 @@ export default class ImageWrapper extends Component {
     src: PropTypes.string.isRequired,
     onClick: PropTypes.func,
     media: PropTypes.object,
-    bumpCount: PropTypes.number
+    bumpCount: PropTypes.number,
+    style: PropTypes.object
   }
 
   didClickSelf = () => {
@@ -55,9 +56,9 @@ export default class ImageWrapper extends Component {
 
   render() {
     return (
-      <div data-name='ImageWrapper' style={Styles.wrapperPosition}>
+      <div data-name='ImageWrapper' style={[Styles.wrapperPosition, this.props.style]}>
         <div onClick={this.didClickSelf}>
-          <Image src={this.props.src} />
+          <Image src={this.props.src}/>
         </div>
         <div style={[Styles.overlay]}>
           <div style={[Styles.iconContainer]}>

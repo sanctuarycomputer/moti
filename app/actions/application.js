@@ -27,8 +27,6 @@ export function firebaseDidUpdate(snapshot) {
   return { type: FIREBASE_DID_UPDATE, snapshot }
 }
 
-// const firebaseURL = 'incandescent-fire-671.firebaseIO.com';
-
 /* For Dispatch */
 export function initializeMOTI(accessToken) {
   return store => {

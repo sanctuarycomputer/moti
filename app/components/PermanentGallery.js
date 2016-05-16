@@ -22,20 +22,9 @@ const mapStateToProps = (state) => {
 @connect(mapStateToProps)
 export default class PermanentGallery extends Component {
   didBumpImage = (media) => {
-    //Firebase success/error callback
-    let onComplete = function(error) {
-      if (error) {
-        console.log('Synchronization failed');
-      } else {
-        console.log('Synchronization succeeded');
-      }
-    };
-
     let imageRef = this.props.firebaseRef.child('/permanents/' + media.id + '/bumpCount')
 
-    imageRef.transaction(function (currentBumpCount) {
-      return (currentBumpCount) + 1;
-    }, onComplete);
+    imageRef.transaction(currentBumpCount => currentBumpCount+1 )
   }
 
   render() {
