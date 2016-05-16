@@ -7,8 +7,12 @@ import { connect } from 'react-redux';
 
 const Styles = {
   wrapper: {
-    width: '60vw',
-    margin: '0 auto'
+    width: '80vw',
+    margin: '0 auto',
+    columnCount: 3,
+    columnGap: '0px',
+    padding: '20px 20px 0',
+    textAlign: 'center',
   }
 }
 

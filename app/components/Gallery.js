@@ -47,7 +47,8 @@ export default class Gallery extends Component {
       positioning: {
         position: 'relative',
         display: 'inline-block',
-        width: this.randomNumberFromRange(50, 100) + '%',
+        width: this.randomNumberFromRange(50, 90) + '%',
+        margin: '30px 0',
       }
     }
     return Object.assign(Styles.positioning, nudge);

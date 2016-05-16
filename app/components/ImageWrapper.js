@@ -8,7 +8,6 @@ import Image from './Image';
 const Styles = {
   wrapper: {
     position: 'relative',
-    margin: '2rem 0',
   },
   overlay: {
     position: 'absolute',
