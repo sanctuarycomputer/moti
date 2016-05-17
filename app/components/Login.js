@@ -1,25 +1,61 @@
 import React, { Component } from 'react';
+import Radium from 'radium';
 import { connect } from 'react-redux';
 import { oAuthBegin } from '../actions/oauth';
+import { authorizeUserAndLoadImages } from '../actions/application';
 import copy from '../lib/copy';
+import CoreStyles from '../lib/styles';
 
-const mapStateToProps = (state) => {
-  return { authStatus: state.oAuth.status }
-}
+const { 
+  colors: { white, grey }
+} = CoreStyles;
 
-const mapDispatchToProps = (dispatch) => {
-  return { loginWithInstgram() { return oAuthBegin('instagram')(dispatch) } }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(props => {
-  switch(props.authStatus) {
-    case 'idle':
-      return <button onClick={props.loginWithInstgram}>{copy.loginButton}</button>;
-    case 'pending':
-      return <h6>Loading</h6>;
-    case 'error':
-      return <h6>Error</h6>;
-    case 'success':
-      return null;
+const mapStateToProps = state => {
+  return { 
+    applicationStatus: state.application.status,
+    tags: state.curator.currentCurator.tags,
+    authStatus: state.oAuth.status 
   }
-});
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return { 
+    loginWithInstgram() {
+      return authorizeUserAndLoadImages(this)(dispatch);
+    }
+  }
+}
+
+const ButtonStyle = {
+  padding: '20px',
+  backgroundColor: 'transparent',
+  color: white,
+  border: `4px solid ${white}`,
+  fontSize: '2rem',
+  cursor: 'pointer',
+  position: 'absolute',
+  zIndex: 1,
+  top: '75%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  transition: '1s',
+  opacity: 0,
+  ':hover': {
+    color: grey,
+    border: `4px solid ${grey}`
+  }
+}
+
+const ButtonShow = {
+  opacity: 1
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Radium(props => {
+  let styleArray = props.applicationStatus === 'ready' ? [ButtonStyle, ButtonShow] : [ButtonStyle];
+   
+  if (props.authStatus === 'success') { return null; }
+  if (props.authStatus === 'error') { return <h6>Error</h6>; }
+  let buttonCopy = props.authStatus === 'idle' ? copy.loginButton : 'Loading...';
+  return ( <button style={styleArray} onClick={props.loginWithInstgram.bind(props.tags)}>{buttonCopy}</button> );
+}));

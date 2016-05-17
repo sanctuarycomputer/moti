@@ -12,6 +12,9 @@ import Loader from '../components/Loader';
 import CoreStyles from '../lib/styles';
 import { Status as ApplicationStatusMap } from '../reducers/application';
 
+import Atomic from '../lib/Atomic';
+
+
 const { 
   colors: { 
     white, 
@@ -20,34 +23,47 @@ const {
   }
 } = CoreStyles;
 
-const Styles = {
-  appNav: {
+const AppNav = new Atomic({
+  small: {
     position: 'fixed',
     top: '50%',
     left: '0',
     transform: 'translateX(-36%) rotate(-90deg)',
+    minWidth: '405px',
     zIndex: 3,
-  },
-  appNavLink: {
+  }
+});
+
+const AppNavLink = new Atomic({
+  defaults: [CoreStyles.linkStyle],
+  small: {
     color: greyMid,
     fontSize: '1rem',
     lineHeight: '2rem',
     display: 'inline-block',
     margin: '0 15px'
   }
-}
+});
 
 const mapStateToProps = (state) => {
   return {
     isLoading: state.application.status === ApplicationStatusMap.LOADING,
     currentUser: state.oAuth.currentUser,
-    currentPath: state.routing.locationBeforeTransitions.pathname
+    currentPath: state.routing.locationBeforeTransitions.pathname,
+    breakpoint: state.application.breakpoint
   };
 }
 
 @connect(mapStateToProps)
 @Radium
 export default class App extends Component {
+
+  constructor(props) {
+    super(...arguments);
+    this.state = {
+      hello: 'bar'
+    }
+  }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.currentUser && !nextProps.currentUser) { this.userDidLogout(); }
@@ -57,30 +73,20 @@ export default class App extends Component {
     if (this.props.currentPath !== '/') { browserHistory.push('/'); }
   }
 
-  
   render() {
 
     return (
       <div>
-        <Loader isLoading={this.props.isLoading} />
+        <Loader isLoading={this.props.isLoading} breakpoint={this.props.breakpoint} />
 
         <CurrentUser />
 
-        <nav style={[Styles.appNav]}>
-          <StyleableLink to='/information' style={[
-            CoreStyles.linkStyle,
-            Styles.appNavLink
-          ]}>About</StyleableLink>
+        <nav style={AppNav.calculate(this.props.breakpoint)}>
+          <StyleableLink to='/information' style={AppNavLink.calculate(this.props.breakpoint)}>About</StyleableLink>
 
-          <StyleableLink to='/' style={[
-            CoreStyles.linkStyle,
-            Styles.appNavLink
-          ]}>Featured Gallery</StyleableLink>
+          <StyleableLink to='/' style={AppNavLink.calculate(this.props.breakpoint)}>Featured Gallery</StyleableLink>
 
-          <StyleableLink to='/permanent-collection' style={[
-            CoreStyles.linkStyle,
-            Styles.appNavLink
-          ]}>Permenant Collection</StyleableLink>
+          <StyleableLink to='/permanent-collection' style={AppNavLink.calculate(this.props.breakpoint)}>Permenant Collection</StyleableLink>
         </nav>
 
         <div>{this.props.children}</div>

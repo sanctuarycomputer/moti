@@ -3,6 +3,8 @@ import ImageWrapper from './ImageWrapper';
 import { connect } from 'react-redux';
 var Masonry = require('react-masonry-component');
 
+const { PropTypes } = React;
+
 const Styles = {
   wrapper: {
     width: '80vw',
@@ -19,7 +21,6 @@ let masonryOptions = {
   transitionDuration: '1s'
 };
 
-
 const mapStateToProps = (state) => {
   return { 
     firebaseRef: state.application.firebaseRef,
@@ -29,7 +30,7 @@ const mapStateToProps = (state) => {
 
 @connect(mapStateToProps)
 export default class PermanentGallery extends Component {
-  
+
   didBumpImage = (media) => {
     let imageRef = this.props.firebaseRef.child('/permanents/' + media.id + '/bumpCount')
 
