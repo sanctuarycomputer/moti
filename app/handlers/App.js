@@ -86,7 +86,7 @@ export default class App extends Component {
 
     return (
       <div>
-        <Loader isLoading={this.props.isLoading} />
+        <Loader isLoading={this.props.isLoading} breakpoint={this.props.breakpoint} />
 
         <CurrentUser />
 

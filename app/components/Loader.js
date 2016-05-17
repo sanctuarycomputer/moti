@@ -102,13 +102,14 @@ export default class Loader extends Component {
   render() {
     let iconState = this.props.isLoading ? DefaultPositions : Positions;
     let wrapperStyle = this.props.isLoading ? [Wrapper] : [Wrapper, WrapperLoaded];
+    let modularHeight = this.props.breakpoint === 'small' ? 50 : 100;
 
     return (
       <div style={wrapperStyle}>
-        <Icon icon={'M'} height={100} fill={white} viewbox={'0 0 347 372'} style={[IconBase, iconState.topLeft]} />
-        <Icon icon={'O'} height={100} fill={white} viewbox={'0 0 257 372'} style={[IconBase, iconState.topRight]} />
-        <Icon icon={'T'} height={100} fill={white} viewbox={'0 0 261 372'} style={[IconBase, iconState.bottomLeft]} />
-        <Icon icon={'I'} height={100} fill={white} viewbox={'0 0 258 372'} style={[IconBase, iconState.bottomRight]} />
+        <Icon icon={'M'} height={modularHeight} fill={white} viewbox={'0 0 347 372'} style={[IconBase, iconState.topLeft]} />
+        <Icon icon={'O'} height={modularHeight} fill={white} viewbox={'0 0 257 372'} style={[IconBase, iconState.topRight]} />
+        <Icon icon={'T'} height={modularHeight} fill={white} viewbox={'0 0 261 372'} style={[IconBase, iconState.bottomLeft]} />
+        <Icon icon={'I'} height={modularHeight} fill={white} viewbox={'0 0 258 372'} style={[IconBase, iconState.bottomRight]} />
       </div>
     )
   }
