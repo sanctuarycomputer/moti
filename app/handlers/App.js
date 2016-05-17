@@ -30,16 +30,6 @@ const AppNav = new Atomic({
     left: '0',
     transform: 'translateX(-36%) rotate(-90deg)',
     minWidth: '405px'
-  },
-  medium: {
-    backgroundColor: 'red'
-  },
-  large: {
-    backgroundColor: 'blue'
-  },
-  states: {
-    foo: { backgroundColor: 'pink' },
-    bar: { backgroundColor: 'yellow' }
   }
 });
 

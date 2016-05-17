@@ -89,7 +89,8 @@ const WrapperLoaded = {
 @Radium
 export default class Loader extends Component {
   static propTypes = {
-    isLoading: PropTypes.bool.isRequired
+    isLoading: PropTypes.bool.isRequired,
+    breakpoint: PropTypes.string
   }
 
   stylesForIcon(position, isLoading) {

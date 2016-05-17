@@ -1,9 +1,25 @@
 import colors from './colors';
+import Atomic from './Atomic';
+
+let fontSize = new Atomic ({
+  small: {
+    fontSize: '1rem',
+    lineHeight: '1.2rem'
+  },
+  medium: {
+    fontSize: '2rem',
+    lineHeight: '1.4rem'
+  },
+  large: {
+    fontSize: '3rem',
+    lineHeight: '2rem'
+  }
+});
 
 export default {
   container: {
     width: '60vw',
-    margin: '0 auto 0 auto',
+    margin: '0 auto',
     textAlign: 'center',
   },
   fontStyle: {
@@ -24,5 +40,6 @@ export default {
       borderColor: colors.white,
     },
   },
-  colors
+  colors,
+  fontSize
 }
