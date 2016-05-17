@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-
-const { PropTypes } = React;
-
 import ImageWrapper from './ImageWrapper';
 import { connect } from 'react-redux';
+var Masonry = require('react-masonry-component');
 
 const Styles = {
   wrapper: {
@@ -51,15 +49,17 @@ export default class PermanentGallery extends Component {
     columns.forEach(column => {
       let finalColumn = columns[columns.length - 1];
       if (column.length > finalColumn.length) {
-        
+        finalColumn.push(column.pop());
       }
     });
 
-    return images;
+    console.log(columns);
+
+    return columns;
   }
 
   render() {
-    let images = this.orderImagesForFlexbox(this.props.collection).map((photo, index) => {
+    let images = this.orderImagesForFlexbox(this.props.collection)[1].map((photo, index) => {
       return (
         <ImageWrapper key={index} 
                       src={photo.media.images.standard_resolution.url} 
@@ -68,6 +68,8 @@ export default class PermanentGallery extends Component {
                       bumpCount={photo.bumpCount}/>
       )
     });
+    console.log('collection');
+    console.log(this.orderImagesForFlexbox(this.props.collection));
     return (<div style={Styles.wrapper}>{images}</div>);
   }
 }
