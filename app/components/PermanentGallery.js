@@ -7,12 +7,18 @@ const Styles = {
   wrapper: {
     width: '80vw',
     margin: '0 auto',
-    columnCount: 3,
-    columnGap: '0px',
     padding: '20px 20px 0',
     textAlign: 'center',
+  },
+  itemWidth: {
+    width: '25%'
   }
 }
+
+let masonryOptions = {
+  transitionDuration: '1s'
+};
+
 
 const mapStateToProps = (state) => {
   return { 
@@ -30,46 +36,26 @@ export default class PermanentGallery extends Component {
     imageRef.transaction(currentBumpCount => currentBumpCount+1 )
   }
 
-  orderImagesForFlexbox(images) {
-    
-    let columns = [[],[],[]];
-    let currentColumn = 0;
-
-    while (images.length) {
-      columns[currentColumn].push(images.shift());
-      if (currentColumn === columns.length - 1) {
-        currentColumn = 0; 
-      } else {
-        currentColumn++;
-      }
-    }
-
-    console.log(columns);
-
-    columns.forEach(column => {
-      let finalColumn = columns[columns.length - 1];
-      if (column.length > finalColumn.length) {
-        finalColumn.push(column.pop());
-      }
-    });
-
-    console.log(columns);
-
-    return columns;
-  }
-
   render() {
-    let images = this.orderImagesForFlexbox(this.props.collection)[1].map((photo, index) => {
+    let images = this.props.collection.map((photo, index) => {
       return (
         <ImageWrapper key={index} 
                       src={photo.media.images.standard_resolution.url} 
                       onClick={this.didBumpImage} 
                       media={photo}
-                      bumpCount={photo.bumpCount}/>
+                      bumpCount={photo.bumpCount}
+                      style={Styles.itemWidth} />
       )
     });
-    console.log('collection');
-    console.log(this.orderImagesForFlexbox(this.props.collection));
-    return (<div style={Styles.wrapper}>{images}</div>);
+    return (
+      <div style={Styles.wrapper}>
+        <Masonry
+          className={'masonry-grid'}
+          options={masonryOptions}
+          disableImagesLoaded={false}>
+          {images}
+        </Masonry>
+      </div>
+    );
   }
 }
