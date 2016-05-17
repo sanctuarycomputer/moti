@@ -24,6 +24,7 @@ export default class Image extends Component {
     onError: PropTypes.func,
     style:   PropTypes.oneOfType([
       PropTypes.array,
+      PropTypes.object
     ]),
   }
 
@@ -54,6 +55,6 @@ export default class Image extends Component {
 
 
   render() {
-    return (<img style={[Styles.base, Styles[this.state.status]]} src={this.props.src} />);
+    return (<img style={[Styles.base, Styles[this.state.status], this.props.style]} src={this.props.src} />);
   }
 }

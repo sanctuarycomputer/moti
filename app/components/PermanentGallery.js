@@ -1,9 +1,24 @@
 import React, { Component } from 'react';
 import ImageWrapper from './ImageWrapper';
 import { connect } from 'react-redux';
-var Masonry = require('react-masonry-component');
+import Atomic from '../lib/Atomic';
+
+let Masonry = require('react-masonry-component');
 
 const { PropTypes } = React;
+
+const ItemWidth = new Atomic({
+  small: {
+    width: 'calc(100% - 10px)',
+    marginBottom: '10px'
+  },
+  medium: {
+    width: 'calc(50% - 10px)',
+  },
+  large: {
+    width: 'calc(25% - 10px)',
+  }
+});
 
 const Styles = {
   wrapper: {
@@ -11,20 +26,19 @@ const Styles = {
     margin: '0 auto',
     padding: '20px 20px 0',
     textAlign: 'center',
-  },
-  itemWidth: {
-    width: '25%'
   }
 }
 
 let masonryOptions = {
-  transitionDuration: '1s'
+  transitionDuration: '1s',
+  gutter: 10
 };
 
 const mapStateToProps = (state) => {
   return { 
     firebaseRef: state.application.firebaseRef,
-    collection: state.gallery.collection.slice(0)
+    collection: state.gallery.collection.slice(0),
+    breakpoint: state.application.breakpoint
   };
 }
 
@@ -38,6 +52,7 @@ export default class PermanentGallery extends Component {
   }
 
   render() {
+
     let images = this.props.collection.map((photo, index) => {
       return (
         <ImageWrapper key={index} 
@@ -45,7 +60,7 @@ export default class PermanentGallery extends Component {
                       onClick={this.didBumpImage} 
                       media={photo}
                       bumpCount={photo.bumpCount}
-                      style={Styles.itemWidth} />
+                      style={ItemWidth.calculate(this.props.breakpoint)} />
       )
     });
     return (
