@@ -39,7 +39,8 @@ const mapStateToProps = (state) => {
   return { 
     firebaseRef: state.application.firebaseRef,
     collection: state.gallery.collection.slice(0),
-    breakpoint: state.application.breakpoint
+    breakpoint: state.application.breakpoint,
+    currentUser: state.oAuth.currentUser
   };
 }
 
@@ -47,9 +48,29 @@ const mapStateToProps = (state) => {
 export default class PermanentGallery extends Component {
 
   didBumpImage = (media) => {
-    let imageRef = this.props.firebaseRef.child('/permanents/' + media.id + '/bumpCount');
+    let imageRef = this.props.firebaseRef.child('/permanents/' + media.id );
+    let imageBumpCountRef = this.props.firebaseRef.child('/permanents/' + media.id + '/bumpCount');
+    let currentUserId = this.props.currentUser.id;
 
-    imageRef.transaction(currentBumpCount => currentBumpCount+1 )
+    if(!media.bumpers) {
+      imageRef.update({
+        "bumpers": [currentUserId]
+      })
+      imageBumpCountRef.transaction(currentBumpCount => currentBumpCount+1 )
+    } else if(media.bumpers && media.bumpers.indexOf(currentUserId) === -1) {
+
+      imageBumpCountRef.transaction(currentBumpCount => currentBumpCount+1 );
+
+      let newBumpersArray = media.bumpers.slice();
+      newBumpersArray.push(currentUserId);
+
+      imageRef.update({
+        "bumpers": newBumpersArray
+      })
+    } else {
+      //This is where we alert the users that they've already bumped
+      console.log("you've already bumped, homie")
+    }
   }
 
   render() {
