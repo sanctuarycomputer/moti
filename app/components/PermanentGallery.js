@@ -3,6 +3,7 @@ import ImageWrapper from './ImageWrapper';
 import { connect } from 'react-redux';
 import Atomic from '../lib/Atomic';
 import Masonry from 'react-masonry-component';
+import { manageBumpCount } from '../lib/helpers';
 
 const { PropTypes } = React;
 
@@ -50,27 +51,9 @@ export default class PermanentGallery extends Component {
   didBumpImage = (media) => {
     let imageRef = this.props.firebaseRef.child('/permanents/' + media.id );
     let imageBumpCountRef = this.props.firebaseRef.child('/permanents/' + media.id + '/bumpCount');
-    let currentUserId = this.props.currentUser.id;
+    let currentUser = this.props.currentUser;
 
-    if(!media.bumpers) {
-      imageRef.update({
-        "bumpers": [currentUserId]
-      })
-      imageBumpCountRef.transaction(currentBumpCount => currentBumpCount+1 )
-    } else if(media.bumpers && media.bumpers.indexOf(currentUserId) === -1) {
-
-      imageBumpCountRef.transaction(currentBumpCount => currentBumpCount+1 );
-
-      let newBumpersArray = media.bumpers.slice();
-      newBumpersArray.push(currentUserId);
-
-      imageRef.update({
-        "bumpers": newBumpersArray
-      })
-    } else {
-      //This is where we alert the users that they've already bumped
-      console.log("you've already bumped, homie")
-    }
+    manageBumpCount(currentUser, media, imageRef, imageBumpCountRef)
   }
 
   render() {

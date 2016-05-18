@@ -5,13 +5,14 @@ const MULTIPLE = 5;
 
 import ImageWrapper from './ImageWrapper';
 import { connect } from 'react-redux';
+import { manageBumpCount } from '../lib/helpers';
 
 const mapStateToProps = (state) => {
   return { 
     photos: state.gallery.photos.slice(0),
     firebaseRef: state.application.firebaseRef,
     collection: state.gallery.collection.slice(0),
-    currentUser: state.oAuth.currentUser
+    currentUser: state.oAuth.currentUser,
     breakpoint: state.application.breakpoint
   };
 }
@@ -20,34 +21,16 @@ const mapStateToProps = (state) => {
 export default class Gallery extends Component {
 
   didClickImageWrapper = (media) => {
+
     // Check if media id is in permanents
-    let permanentsRef = this.props.firebaseRef.child('/permanents');
     let match = this.props.collection.find(permanentMedia => permanentMedia.media.id === media.id);
+    let permanentsRef = this.props.firebaseRef.child('/permanents');
 
     if(match) {
-      let currentUserId = this.props.currentUser.id;
-      let matchRef = this.props.firebaseRef.child('/permanents/' + match.id);
-      let bumpCountRef = this.props.firebaseRef.child('/permanents/' + match.id + '/bumpCount');
-
-      if(!match.bumpers) {
-        matchRef.update({
-          "bumpers": [currentUserId]
-        })
-        bumpCountRef.transaction(currentBumpCount => currentBumpCount+1 );
-      } else if(match.bumpers && match.bumpers.indexOf(currentUserId) === -1) {
-
-        bumpCountRef.transaction(currentBumpCount => currentBumpCount+1 );
-
-        let newBumpersArray = match.bumpers.slice();
-        newBumpersArray.push(currentUserId);
-
-        matchRef.update({
-          "bumpers": newBumpersArray
-        })
-      } else {
-        //This is where we alert the users that they've already bumped
-        console.log("you've already bumped, homie")
-      }
+      let imageRef = this.props.firebaseRef.child('/permanents/' + match.id);
+      let imageBumpCountRef = this.props.firebaseRef.child('/permanents/' + match.id + '/bumpCount');
+      let currentUser = this.props.currentUser;
+      manageBumpCount(currentUser, match, imageRef, imageBumpCountRef);
     } else {
       let newPermanent = permanentsRef.push();
       newPermanent.set({
