@@ -11,11 +11,8 @@ const mapStateToProps = (state) => {
     photos: state.gallery.photos.slice(0),
     firebaseRef: state.application.firebaseRef,
     collection: state.gallery.collection.slice(0),
-<<<<<<< HEAD
     currentUser: state.oAuth.currentUser
-=======
     breakpoint: state.application.breakpoint
->>>>>>> master
   };
 }
 
