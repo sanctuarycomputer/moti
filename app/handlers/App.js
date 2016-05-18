@@ -28,9 +28,12 @@ const AppNav = new Atomic({
     position: 'fixed',
     top: '50%',
     left: '0',
-    transform: 'translateX(-36%) rotate(-90deg)',
+    transform: 'translateX(-45%) rotate(-90deg)',
     minWidth: '405px',
     zIndex: 3,
+  }, 
+  medium: {
+    transform: 'translateX(-36%) rotate(-90deg)',
   }
 });
 

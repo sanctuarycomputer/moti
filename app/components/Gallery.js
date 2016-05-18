@@ -11,7 +11,11 @@ const mapStateToProps = (state) => {
     photos: state.gallery.photos.slice(0),
     firebaseRef: state.application.firebaseRef,
     collection: state.gallery.collection.slice(0),
+<<<<<<< HEAD
     currentUser: state.oAuth.currentUser
+=======
+    breakpoint: state.application.breakpoint
+>>>>>>> master
   };
 }
 
@@ -60,13 +64,26 @@ export default class Gallery extends Component {
     return Math.floor(Math.random()*(max-min+1)+min);
   }
 
+  settingsFromBreakpoint() {
+    if (this.props.breakpoint === 'small') {
+      return {
+        variableWidth: this.randomNumberFromRange(95, 100),
+        nudgeDistance: '10%'
+      } 
+    }
+    return {
+      variableWidth: this.randomNumberFromRange(50, 90),
+      nudgeDistance: '20%'
+    } 
+  }
+
   buildPositioningStyles(nudge={}) {
 
     let Styles = {
       positioning: {
         position: 'relative',
         display: 'inline-block',
-        width: this.randomNumberFromRange(50, 90) + '%',
+        width: this.settingsFromBreakpoint().variableWidth + '%',
         margin: '30px 0',
       }
     }
@@ -75,11 +92,11 @@ export default class Gallery extends Component {
 
   nudge(index) {
     if (index % MULTIPLE === 0 || (index+1) % MULTIPLE === 0) {
-      return {right: '20%'};
+      return { right: this.settingsFromBreakpoint().nudgeDistance };
     } else if ((index+3) % MULTIPLE === 0 || (index+4) % MULTIPLE === 0) {
-      return {left: '20%'};
+      return { left: this.settingsFromBreakpoint().nudgeDistance };
     } else {
-      return {left: 'auto'};
+      return { left: 'auto' };
     }
   }
 
