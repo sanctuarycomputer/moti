@@ -57,7 +57,6 @@ export default class ImageWrapper extends Component {
   }
 
   didClickSelf = () => {
-    console.log(this.props);
     if (this.props.onClick) {
       this.props.onClick(this.props.media);
     }
