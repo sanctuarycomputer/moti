@@ -2,28 +2,39 @@ import React, { Component } from 'react';
 import Radium from 'radium';
 import StyleableLink from '../../components/StyleableLink';
 import { connect } from 'react-redux';
+import Atomic from '../../lib/Atomic';
 
 import CoreStyles from '../../lib/styles';
 import Copy from '../../lib/copy';
 import colors from '../../lib/colors';
 
-const Styles = {
-  nav: {
+const {
+  fontSize
+} = CoreStyles;
+
+const InfoNav = new Atomic ({
+  small: {
+    fontSize: '1rem',
+    lineHeight: '1.2rem'
+  },
+  medium: {
     marginBottom: '60px',
     display: 'flex',
     justifyContent: 'space-between',
   },
-  active: { 
-    borderBottomWidth: '3px',
-    borderBottomStyle: 'solid',
-    borderColor: colors.white 
-  },
-  inactive: { 
-    borderBottomWidth: '3px',
-    borderBottomStyle: 'solid',
-    borderColor: 'transparent'
+  states: {
+    active: { 
+      borderBottomWidth: '3px',
+      borderBottomStyle: 'solid',
+      borderColor: colors.white 
+    },
+    inactive: { 
+      borderBottomWidth: '3px',
+      borderBottomStyle: 'solid',
+      borderColor: 'transparent'
+    }
   }
-}
+})
 
 const Status = {
   ACTIVE: 'active',
@@ -32,7 +43,8 @@ const Status = {
 
 const mapStateToProps = state => {
   return {
-    currentPath: state.routing.locationBeforeTransitions.pathname
+    currentPath: state.routing.locationBeforeTransitions.pathname,
+    breakpoint: state.application.breakpoint
   };
 }
 
@@ -71,21 +83,21 @@ export default class Information extends Component {
         CoreStyles.fontStyle,
         CoreStyles.container
       ]}>
-        <nav style={[Styles.nav]}>
+        <nav style={[InfoNav.calculate(this.props.breakpoint), fontSize.calculate(this.props.breakpoint)]}>
 
           <StyleableLink to={'/information'} style={[
             CoreStyles.linkStyle,
-            Styles[this.state.information]
+            InfoNav.styles.states[this.state.information]
           ]}>About</StyleableLink>
 
           <StyleableLink to={'/information/past-curators'} style={[
             CoreStyles.linkStyle,
-            Styles[this.state.past]
+            InfoNav.styles.states[this.state.past]
           ]}>Past Curators</StyleableLink>
 
           <StyleableLink to={'/information/future-curators'} style={[
             CoreStyles.linkStyle,
-            Styles[this.state.future]
+            InfoNav.styles.states[this.state.future]
           ]}>Future Curators</StyleableLink>
 
         </nav>

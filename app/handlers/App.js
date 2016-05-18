@@ -12,6 +12,9 @@ import Loader from '../components/Loader';
 import CoreStyles from '../lib/styles';
 import { Status as ApplicationStatusMap } from '../reducers/application';
 
+import Atomic from '../lib/Atomic';
+
+
 const { 
   colors: { 
     white, 
@@ -20,44 +23,34 @@ const {
   }
 } = CoreStyles;
 
-const Styles = {
-  base: {
-    width: '60vw',
-    minHeight: '100vh',
-    margin: '0 auto 0 auto',
-    textAlign: 'center',
-  },
-  wrapper: {
-    background: [
-      'rgba(0,0,0,1)', 
-      '-moz-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(64,64,65,1) 52%, rgba(0,0,0,1) 100%)', 
-      '-webkit-gradient(left top, left bottom, color-stop(0%, rgba(0,0,0,1)), color-stop(52%, rgba(64,64,65,1)), color-stop(100%, rgba(0,0,0,1)))', 
-      '-webkit-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(64,64,65,1) 52%, rgba(0,0,0,1) 100%)', 
-      '-o-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(64,64,65,1) 52%, rgba(0,0,0,1) 100%)', 
-      '-ms-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(64,64,65,1) 52%, rgba(0,0,0,1) 100%)', 
-      'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(64,64,65,1) 52%, rgba(0,0,0,1) 100%)'
-    ],
-  },
-  appNav: {
+const AppNav = new Atomic({
+  small: {
     position: 'fixed',
     top: '50%',
     left: '0',
-    transform: 'translateX(-36%) rotate(-90deg)'
-  },
-  appNavLink: {
+    transform: 'translateX(-36%) rotate(-90deg)',
+    minWidth: '405px',
+    zIndex: 3,
+  }
+});
+
+const AppNavLink = new Atomic({
+  defaults: [CoreStyles.linkStyle],
+  small: {
     color: greyMid,
     fontSize: '1rem',
     lineHeight: '2rem',
     display: 'inline-block',
     margin: '0 15px'
   }
-}
+});
 
 const mapStateToProps = (state) => {
   return {
     isLoading: state.application.status === ApplicationStatusMap.LOADING,
     currentUser: state.oAuth.currentUser,
-    currentPath: state.routing.locationBeforeTransitions.pathname
+    currentPath: state.routing.locationBeforeTransitions.pathname,
+    breakpoint: state.application.breakpoint
   };
 }
 
@@ -72,31 +65,21 @@ export default class App extends Component {
   userDidLogout = () => {
     if (this.props.currentPath !== '/') { browserHistory.push('/'); }
   }
-  
+
   render() {
-    let hasCurrentUser = !this.props.currentUser;
 
     return (
       <div>
-        <Loader isLoading={hasCurrentUser} />
+        <Loader isLoading={this.props.isLoading} breakpoint={this.props.breakpoint} />
 
         <CurrentUser />
 
-        <nav style={[Styles.appNav]}>
-          <StyleableLink to='/information' style={[
-            CoreStyles.linkStyle,
-            Styles.appNavLink
-          ]}>About</StyleableLink>
+        <nav style={AppNav.calculate(this.props.breakpoint)}>
+          <StyleableLink to='/information' style={AppNavLink.calculate(this.props.breakpoint)}>About</StyleableLink>
 
-          <StyleableLink to='/' style={[
-            CoreStyles.linkStyle,
-            Styles.appNavLink
-          ]}>Featured Gallery</StyleableLink>
+          <StyleableLink to='/' style={AppNavLink.calculate(this.props.breakpoint)}>Featured Gallery</StyleableLink>
 
-          <StyleableLink to='/permanent-collection' style={[
-            CoreStyles.linkStyle,
-            Styles.appNavLink
-          ]}>Permenant Collection</StyleableLink>
+          <StyleableLink to='/permanent-collection' style={AppNavLink.calculate(this.props.breakpoint)}>Permenant Collection</StyleableLink>
         </nav>
 
         <div>{this.props.children}</div>

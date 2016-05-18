@@ -8,6 +8,7 @@ export const APPLICATION_DID_LOAD = 'APPLICATION_DID_LOAD';
 export const APPLICATION_DID_NOT_LOAD = 'APPLICATION_DID_NOT_LOAD';
 export const FIREBASE_DID_INITIALIZE = 'FIREBASE_DID_INITIALIZE';
 export const FIREBASE_DID_UPDATE = 'FIREBASE_DID_UPDATE';
+export const BROWSER_DID_RESIZE = 'BROWSER_DID_RESIZE';
 
 
 /* Action Creators */
@@ -25,6 +26,10 @@ export function firebaseDidInitialize(firebaseRef) {
 
 export function firebaseDidUpdate(snapshot) {
   return { type: FIREBASE_DID_UPDATE, snapshot }
+}
+
+export function browserDidResize() {
+  return { type: BROWSER_DID_RESIZE }
 }
 
 /* For Dispatch */
@@ -50,6 +55,8 @@ export function initializeMOTI(accessToken) {
         resolve();
       });
     });
+
+    window.onresize = () => dispatch(browserDidResize());
 
     if (accessToken) { 
       firebasePromise.then(() => {

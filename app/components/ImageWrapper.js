@@ -6,8 +6,8 @@ const { PropTypes } = React;
 import Image from './Image';
 
 const Styles = {
-  wrapperPosition: {
-    position: 'relative'
+  wrapper: {
+    position: 'relative',
   },
   overlay: {
     position: 'absolute',
@@ -21,17 +21,20 @@ const Styles = {
     opacity: 0,
     cursor: 'pointer',
     background: 'rgba(255,255,255,0)',
-    transition: '250ms ease-in-out',
+    transition: '150ms ease-in-out',
     ':hover': {
       background: 'rgba(255,255,255,.3)',
       opacity: 1
     }
   },
+  imageWidth: {
+    width: '100%',
+  },
   iconContainer: {
     textAlign: 'center'
   },
   heart: {
-    transition: '200ms ease-in-out',
+    transition: '150ms ease-in-out',
     opacity: .3,
     ':hover': {
       height: '60px',
@@ -51,15 +54,15 @@ export default class ImageWrapper extends Component {
   }
 
   didClickSelf = () => {
-    if (this.props.onClick) { this.props.onClick(this.props.media); }
+    if (this.props.onClick) {
+      this.props.onClick(this.props.media);
+    }
   }
 
   render() {
     return (
-      <div data-name='ImageWrapper' style={[Styles.wrapperPosition, this.props.style]}>
-        <div onClick={this.didClickSelf}>
-          <Image src={this.props.src}/>
-        </div>
+      <div data-name='ImageWrapper' style={[this.props.style, Styles.wrapper]}>
+        <Image style={[Styles.imageWidth]} src={this.props.src}/>
         <div style={[Styles.overlay]}>
           <div style={[Styles.iconContainer]}>
             <div onClick={this.didClickSelf}>
