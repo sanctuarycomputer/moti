@@ -10,7 +10,8 @@ const mapStateToProps = (state) => {
   return { 
     photos: state.gallery.photos.slice(0),
     firebaseRef: state.application.firebaseRef,
-    collection: state.gallery.collection.slice(0)
+    collection: state.gallery.collection.slice(0),
+    breakpoint: state.application.breakpoint
   };
 }
 
@@ -43,11 +44,18 @@ export default class Gallery extends Component {
 
   buildPositioningStyles(nudge={}) {
 
+    let variableWidth;
+    if (this.props.breakpoint === 'small') {
+      variableWidth = this.randomNumberFromRange(95, 100);
+    } else {
+      variableWidth = this.randomNumberFromRange(50, 90);
+    }
+
     let Styles = {
       positioning: {
         position: 'relative',
         display: 'inline-block',
-        width: this.randomNumberFromRange(50, 90) + '%',
+        width: variableWidth + '%',
         margin: '30px 0',
       }
     }

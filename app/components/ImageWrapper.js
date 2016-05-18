@@ -62,11 +62,10 @@ const Heart = new Atomic({
     height: '30px',
   },
   medium: {
-    opacity: .3,
+    opacity: 1,
     height: '60px',
     ':hover': {
       height: '60px',
-      opacity: 1
     }
   },
 });
@@ -107,7 +106,7 @@ export default class ImageWrapper extends Component {
             <div style={[HeartLockup.calculate(this.props.breakpoint)]}>
               <Icon icon={'Heart'} viewbox={'0 0 57.947 57.947'} style={[Heart.calculate(this.props.breakpoint)]} />
             </div>
-            <h3 style={[HeartLockup.calculate(this.props.breakpoint)]}>{this.props.bumpCount}</h3>
+            <h3 style={[HeartLockup.calculate(this.props.breakpoint)]}>{this.props.bumpCount ? this.props.bumpCount : 'Like'}</h3>
           </div>
         </div>
       </div>
