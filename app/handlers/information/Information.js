@@ -9,7 +9,8 @@ import Copy from '../../lib/copy';
 import colors from '../../lib/colors';
 
 const {
-  fontSize
+  fontSize,
+  container
 } = CoreStyles;
 
 const InfoNav = new Atomic ({
@@ -17,11 +18,11 @@ const InfoNav = new Atomic ({
     fontSize: '1rem',
     lineHeight: '1.2rem',
     marginTop: '20px',
+    overflow: 'hidden',
+    textAlign: 'center',
   },
   medium: {
     marginBottom: '60px',
-    display: 'flex',
-    justifyContent: 'space-between',
   },
   states: {
     active: { 
@@ -35,6 +36,20 @@ const InfoNav = new Atomic ({
       borderColor: 'transparent'
     }
   }
+})
+
+const NavItem = new Atomic ({
+  small: {
+    width: '100%',
+    padding: 0,
+    marginBottom: '20px'
+  },
+  medium: {
+    width: 'auto',
+    display: 'inline-block',
+    verticalAlign: 'middle',
+    padding: '0 30px',
+  },
 })
 
 const Status = {
@@ -80,26 +95,30 @@ export default class Information extends Component {
 
   render () {
     return (
-      <div style={[
-        CoreStyles.fontStyle,
-        CoreStyles.container
-      ]}>
+      <div style={[CoreStyles.fontStyle, container.calculate(this.props.breakpoint)]}>
         <nav style={[InfoNav.calculate(this.props.breakpoint), fontSize.calculate(this.props.breakpoint)]}>
 
-          <StyleableLink to={'/information'} style={[
-            CoreStyles.linkStyle,
-            InfoNav.styles.states[this.state.information]
-          ]}>About</StyleableLink>
+          <div style={[NavItem.calculate(this.props.breakpoint)]}>
+            <StyleableLink to={'/information'} style={[
+              CoreStyles.linkStyle,
+              InfoNav.styles.states[this.state.information],
+            ]}>About</StyleableLink>
+          </div>
 
-          <StyleableLink to={'/information/past-curators'} style={[
-            CoreStyles.linkStyle,
-            InfoNav.styles.states[this.state.past]
-          ]}>Past Curators</StyleableLink>
+          <div style={[NavItem.calculate(this.props.breakpoint)]}>          
+            <StyleableLink to={'/information/past-curators'} style={[
+              CoreStyles.linkStyle,
+              InfoNav.styles.states[this.state.past]
+            ]}>Past Curators</StyleableLink>
+          </div>
 
-          <StyleableLink to={'/information/future-curators'} style={[
-            CoreStyles.linkStyle,
-            InfoNav.styles.states[this.state.future]
-          ]}>Future Curators</StyleableLink>
+          <div style={[NavItem.calculate(this.props.breakpoint)]}>
+            <StyleableLink to={'/information/future-curators'} style={[
+              CoreStyles.linkStyle,
+              InfoNav.styles.states[this.state.future]
+            ]}>Future Curators</StyleableLink>
+          </div>
+          
 
         </nav>
 
