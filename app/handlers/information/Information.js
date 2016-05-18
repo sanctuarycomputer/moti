@@ -15,7 +15,8 @@ const {
 const InfoNav = new Atomic ({
   small: {
     fontSize: '1rem',
-    lineHeight: '1.2rem'
+    lineHeight: '1.2rem',
+    marginTop: '20px',
   },
   medium: {
     marginBottom: '60px',
