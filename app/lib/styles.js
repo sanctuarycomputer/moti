@@ -4,15 +4,13 @@ import Atomic from './Atomic';
 let fontSize = new Atomic ({
   small: {
     fontSize: '1rem',
-    lineHeight: '1.2rem'
+    lineHeight: '1.5',
   },
   medium: {
     fontSize: '2rem',
-    lineHeight: '1.4rem'
   },
   large: {
     fontSize: '3rem',
-    lineHeight: '2rem'
   }
 });
 

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
+import { connect } from 'react-redux';
 import months from '../lib/months';
 import styles from '../lib/styles';
 import CoreStyles from '../lib/styles';
+import Atomic from '../lib/Atomic';
 
 const { PropTypes } = React;
 
@@ -21,7 +23,6 @@ const Styles = {
     display: 'inline-block',
     height: '400px',
     position: 'fixed',
-    right: '50px',
     top: '50%',
     transform: 'translateY(-50%)'
   },
@@ -43,6 +44,23 @@ const Styles = {
   }
 }
 
+const WrapperPosition = new Atomic({
+  small: {
+    right: '15px',
+  }, 
+  medium: {
+    right: '50px',
+  }
+});
+
+const mapStateToProps = (state) => {
+  return {
+    breakpoint: state.application.breakpoint
+  };
+}
+
+@connect(mapStateToProps)
+@Radium
 export default class CurrentCurator extends Component {
   static propTypes = {
     currentCurator: PropTypes.object
@@ -59,7 +77,7 @@ export default class CurrentCurator extends Component {
     let monthString = months[month];
 
     return(
-      <div style={Styles.curatorWrapper}>
+      <div style={[Styles.curatorWrapper, WrapperPosition.calculate(this.props.breakpoint)]}>
         <div style={Styles.curatorString}>
           <span style={Styles.month}>{monthString}</span>|<span style={Styles.name}>{name}</span>
         </div>

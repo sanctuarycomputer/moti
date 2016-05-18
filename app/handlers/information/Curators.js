@@ -9,7 +9,8 @@ const {
   colors: { 
     white, 
     grey 
-  }
+  },
+  fontSize
 } = CoreStyles;
 
 
@@ -33,7 +34,8 @@ const Styles = {
 const mapStateToProps = (state) => {
   return {
     pastCurators: state.curator.pastCurators,
-    futureCurators: state.curator.futureCurators
+    futureCurators: state.curator.futureCurators,
+    breakpoint: state.application.breakpoint
   };
 }
 
@@ -48,7 +50,7 @@ export default class Curators extends Component {
   renderCurators(data) {
     return data.map((curator, index) => {
       return (
-        <div key={index} style={[Styles.curator]}>
+        <div key={index} style={[Styles.curator, fontSize.calculate(this.props.breakpoint)]}>
           <span>{curator.name}</span> - <span>{months[curator.date.month]}, {curator.date.year}</span>
           <br />
           {this.renderTags(curator.tags)}
