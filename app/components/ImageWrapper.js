@@ -50,7 +50,10 @@ export default class ImageWrapper extends Component {
     onClick: PropTypes.func,
     media: PropTypes.object,
     bumpCount: PropTypes.number,
-    style: PropTypes.object
+    style: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.object
+    ]),
   }
 
   didClickSelf = () => {

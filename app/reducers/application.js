@@ -64,7 +64,7 @@ export default function application(state=initialState, action) {
       return {
         status: state.status,
         errors: state.errors,
-        firebaseRef: action.firebaseRef,
+        firebaseRef: state.firebaseRef,
         breakpoint: resolveBreakpoint()
       }
 
