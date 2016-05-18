@@ -9,13 +9,15 @@ const { PropTypes } = React;
 const ItemWidth = new Atomic({
   small: {
     width: 'calc(100% - 10px)',
-    marginBottom: '10px'
+    marginBottom: '50px'
   },
   medium: {
     width: 'calc(50% - 10px)',
+    marginBottom: '10px'
   },
   large: {
     width: 'calc(25% - 10px)',
+    marginBottom: '10px'
   }
 });
 
@@ -45,7 +47,10 @@ const mapStateToProps = (state) => {
 export default class PermanentGallery extends Component {
 
   didBumpImage = (media) => {
-    let imageRef = this.props.firebaseRef.child('/permanents/' + media.id + '/bumpCount')
+    console.log(this.props.firebaseRef);
+    console.log('media.id:');
+    console.log(media.id);
+    let imageRef = this.props.firebaseRef.child('/permanents/' + media.id + '/bumpCount');
 
     imageRef.transaction(currentBumpCount => currentBumpCount+1 )
   }
