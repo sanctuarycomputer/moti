@@ -9,7 +9,7 @@ module.exports = {
   ],
   output: {
     path: __dirname + '/build',
-    filename: "app_bundle.js"
+    filename: "[name].[hash].js"
   },
   module: {
     loaders: [
@@ -35,10 +35,8 @@ module.exports = {
     ]
   },
   plugins: [
-    //new webpack.NoErrorsPlugin(),
     new HtmlWebpackPlugin({
       template: __dirname + '/app/index.html',
-      filename: 'index.html',
       inject: false
     })
   ]
