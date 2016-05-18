@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import ImageWrapper from './ImageWrapper';
 import { connect } from 'react-redux';
 import Atomic from '../lib/Atomic';
-
-let Masonry = require('react-masonry-component');
+import Masonry from 'react-masonry-component';
 
 const { PropTypes } = React;
 

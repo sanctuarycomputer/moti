@@ -58,13 +58,6 @@ const mapStateToProps = (state) => {
 @Radium
 export default class App extends Component {
 
-  constructor(props) {
-    super(...arguments);
-    this.state = {
-      hello: 'bar'
-    }
-  }
-
   componentWillReceiveProps(nextProps) {
     if (this.props.currentUser && !nextProps.currentUser) { this.userDidLogout(); }
   }
