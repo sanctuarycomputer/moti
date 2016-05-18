@@ -42,20 +42,26 @@ export default class Gallery extends Component {
     return Math.floor(Math.random()*(max-min+1)+min);
   }
 
-  buildPositioningStyles(nudge={}) {
-
-    let variableWidth;
+  settingsFromBreakpoint() {
     if (this.props.breakpoint === 'small') {
-      variableWidth = this.randomNumberFromRange(95, 100);
-    } else {
-      variableWidth = this.randomNumberFromRange(50, 90);
+      return {
+        variableWidth: this.randomNumberFromRange(95, 100),
+        nudgeDistance: '10%'
+      } 
     }
+    return {
+      variableWidth: this.randomNumberFromRange(50, 90),
+      nudgeDistance: '20%'
+    } 
+  }
+
+  buildPositioningStyles(nudge={}) {
 
     let Styles = {
       positioning: {
         position: 'relative',
         display: 'inline-block',
-        width: variableWidth + '%',
+        width: this.settingsFromBreakpoint().variableWidth + '%',
         margin: '30px 0',
       }
     }
@@ -64,11 +70,11 @@ export default class Gallery extends Component {
 
   nudge(index) {
     if (index % MULTIPLE === 0 || (index+1) % MULTIPLE === 0) {
-      return {right: '20%'};
+      return { right: this.settingsFromBreakpoint().nudgeDistance };
     } else if ((index+3) % MULTIPLE === 0 || (index+4) % MULTIPLE === 0) {
-      return {left: '20%'};
+      return { left: this.settingsFromBreakpoint().nudgeDistance };
     } else {
-      return {left: 'auto'};
+      return { left: 'auto' };
     }
   }
 
