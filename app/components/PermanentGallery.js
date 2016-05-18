@@ -3,6 +3,7 @@ import ImageWrapper from './ImageWrapper';
 import { connect } from 'react-redux';
 import Atomic from '../lib/Atomic';
 import Masonry from 'react-masonry-component';
+import { manageBumpCount } from '../lib/helpers';
 
 const { PropTypes } = React;
 
@@ -39,7 +40,8 @@ const mapStateToProps = (state) => {
   return { 
     firebaseRef: state.application.firebaseRef,
     collection: state.gallery.collection.slice(0),
-    breakpoint: state.application.breakpoint
+    breakpoint: state.application.breakpoint,
+    currentUser: state.oAuth.currentUser
   };
 }
 
@@ -47,9 +49,11 @@ const mapStateToProps = (state) => {
 export default class PermanentGallery extends Component {
 
   didBumpImage = (media) => {
-    let imageRef = this.props.firebaseRef.child('/permanents/' + media.id + '/bumpCount');
+    let imageRef = this.props.firebaseRef.child('/permanents/' + media.id );
+    let imageBumpCountRef = this.props.firebaseRef.child('/permanents/' + media.id + '/bumpCount');
+    let currentUser = this.props.currentUser;
 
-    imageRef.transaction(currentBumpCount => currentBumpCount+1 )
+    manageBumpCount(currentUser, media, imageRef, imageBumpCountRef)
   }
 
   render() {

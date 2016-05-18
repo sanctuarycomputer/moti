@@ -5,12 +5,14 @@ const MULTIPLE = 5;
 
 import ImageWrapper from './ImageWrapper';
 import { connect } from 'react-redux';
+import { manageBumpCount } from '../lib/helpers';
 
 const mapStateToProps = (state) => {
   return { 
     photos: state.gallery.photos.slice(0),
     firebaseRef: state.application.firebaseRef,
     collection: state.gallery.collection.slice(0),
+    currentUser: state.oAuth.currentUser,
     breakpoint: state.application.breakpoint
   };
 }
@@ -19,16 +21,16 @@ const mapStateToProps = (state) => {
 export default class Gallery extends Component {
 
   didClickImageWrapper = (media) => {
+
     // Check if media id is in permanents
+    let match = this.props.collection.find(permanentMedia => permanentMedia.media.id === media.id);
     let permanentsRef = this.props.firebaseRef.child('/permanents');
 
-    let match = this.props.collection.find(permanentMedia => permanentMedia.media.id === media.id);
-
     if(match) {
-      let matchRef = this.props.firebaseRef.child('/permanents/' + match.id + '/bumpCount')
-
-      matchRef.transaction(currentBumpCount => currentBumpCount+1 )
-
+      let imageRef = this.props.firebaseRef.child('/permanents/' + match.id);
+      let imageBumpCountRef = this.props.firebaseRef.child('/permanents/' + match.id + '/bumpCount');
+      let currentUser = this.props.currentUser;
+      manageBumpCount(currentUser, match, imageRef, imageBumpCountRef);
     } else {
       let newPermanent = permanentsRef.push();
       newPermanent.set({
