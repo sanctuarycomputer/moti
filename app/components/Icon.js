@@ -7,13 +7,10 @@ export default class Icon extends Component {
   static propTypes = {
     icon:    PropTypes.string.isRequired,
     viewbox: PropTypes.string.isRequired,
-    style:   PropTypes.array,
-    fill:    PropTypes.string,
+    width:   PropTypes.number,
     height:  PropTypes.number,
-    width:   PropTypes.oneOfType([
-             PropTypes.string,
-             PropTypes.number
-    ]),
+    style:   PropTypes.array,
+    fill:    PropTypes.string
   }
 
   render() {
