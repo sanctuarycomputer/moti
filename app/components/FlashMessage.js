@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
-import { connect } from 'react-redux';
-import { userDidDismissFlashMessage } from '../actions/flashMessage';
 
 const Styles = {
   flashContainer: {
-    width: '60%',
     padding: '1rem',
-    backgroundColor: 'red',
-    zIndex: '9999',
-    textAlign: 'center',
-    margin: '0 auto'
+    textAlign: 'center'
+  },
+  containerColor: {
+    success: {
+      backgroundColor: 'green'
+    },
+    error: {
+      backgroundColor: 'red'
+    },
+    info: {
+      backgroundColor: 'blue'
+    },
+    warning: {
+      backgroundColor: 'yellow'
+    }
   },
   messageText: {
     fontSize: '18px',
@@ -18,25 +26,14 @@ const Styles = {
   }
 };
 
+@Radium
+export default class FlashMessage extends Component {
 
-
-
-
-const mapStateToProps = (state) => {
-  return { flashMessage: state.flashMessage.message }
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return { userDidDismissFlashMessage() { return dispatch(userDidDismissFlashMessage()) }}
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Radium(props => {
-  if(props.flashMessage.status !== 'idle') {
+  render() {
     return (
-      <div style={[Styles.flashContainer]}>
-        <p style={[Styles.messageText]}>{props.flashMessage.text}</p>
+      <div style={[Styles.flashContainer, Styles.containerColor[this.props.status]]}>
+        <p style={[Styles.messageText]}>{this.props.text}</p>
       </div>
     );
   }
-  return null;
-}));
+}
