@@ -40,9 +40,13 @@ export default class Gallery extends Component {
     }
   }
 
+  randomNumberFromRange(min, max) {     
+    return Math.floor(Math.random()*(max-min+1)+min);     
+  }
+
   settingsFromBreakpoint() {
     if (this.props.breakpoint === 'small') {
-      return { nudgeDistance: '10%' } 
+      return { nudgeDistance: '0' } 
     }
     return { nudgeDistance: '20%' } 
   }
@@ -53,7 +57,7 @@ export default class Gallery extends Component {
       positioning: {
         position: 'relative',
         display: 'inline-block',
-        margin: '30px 0',
+        margin: '5.5rem 0',
       }
     }
     return Object.assign(Styles.positioning, nudge);

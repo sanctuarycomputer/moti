@@ -10,7 +10,6 @@ const { PropTypes } = React;
 const Styles = {
   wrapper: {
     position: 'relative',
-    cursor: 'pointer',
     display: 'block',
     textAlign: 'center'
   },
@@ -21,6 +20,7 @@ const Styles = {
     textAlign: 'center'
   },
   imageContainer: {
+    cursor: 'pointer',
     display: 'inline-block',
     position: 'relative',
     verticalAlign: 'top',
