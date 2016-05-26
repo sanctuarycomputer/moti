@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 
 import StyleableLink from '../components/StyleableLink';
 import CurrentUser from '../components/CurrentUser';
+import FlashMessage from '../components/FlashMessage';
 import Loader from '../components/Loader';
 
 import CoreStyles from '../lib/styles';
@@ -74,6 +75,8 @@ export default class App extends Component {
     return (
       <div>
         <Loader isLoading={this.props.isLoading} breakpoint={this.props.breakpoint} />
+
+        <FlashMessage />
 
         <CurrentUser />
 

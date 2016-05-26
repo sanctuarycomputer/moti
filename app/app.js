@@ -12,6 +12,7 @@ import application from './reducers/application';
 import oAuth from './reducers/oauth';
 import gallery from './reducers/gallery';
 import curator from './reducers/curator';
+import flashMessage from './reducers/flashMessage';
 import AppRoutes from './config/Router';
 
 import { initializeMOTI } from './actions/application';
@@ -22,6 +23,7 @@ const store = createStore(
     gallery,
     curator,
     oAuth,
+    flashMessage,
     routing: routerReducer
   }),
   applyMiddleware(promiseMiddleware)

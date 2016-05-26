@@ -1,35 +1,46 @@
 import { 
   DID_SHOW_FLASH_MESSAGE,
-  FLASH_MESSAGE_DID_TIMEOUT,
-  USER_DID_DISMISS_FLASH_MESSAGE
 } from '../actions/flashMessage';
 
-const Message = {
+const MessageType = {
   bumped: {
     text: 'Thanks for bumping the art work.',
-    color: 'pink'
+    color: 'pink',
+    status: 'success'
   },
   saved: {
     text: 'That piece has been added to our permanent collection.',
-    color: 'green'
+    color: 'green',
+    status: 'success'
   },
   denied: {
     text: 'Sorry, you can only bump once per piece.',
-    color: 'red'
+    color: 'yellow',
+    status: 'error'
+  },
+  cantAuthenticate: {
+    text: 'There was an error logging you in, try again.',
+    color: 'red',
+    status: 'error'
   },
   idle: {
-    text: '',
-    color: ''
+    text: null,
+    color: null,
+    status: 'idle'
   }
 };
 
-const Status = {
-  IDLE: 'idle',
-  SUCCESS: 'success'
-  WARNING: 'warning'
-}
-
 const initialState = {
-  status: Status.idle,
-  message: Message.idle
+  message: MessageType.idle
 };
+
+export default function flashMessage(state=initialState, action) {
+  switch (action.type) {
+    case DID_SHOW_FLASH_MESSAGE:
+      return {
+        message: MessageType.action.payload
+      };
+    default: 
+      return state;
+  }
+}
