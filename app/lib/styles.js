@@ -24,7 +24,7 @@ let container = new Atomic ({
 
 export default {
   fontStyle: {
-    letterSpacing: '1px',
+    letterSpacing: '2px',
     fontSize: '2.8rem',
     lineHeight: '4.5rem',
     margin: '0',
