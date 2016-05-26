@@ -40,10 +40,6 @@ export default class Gallery extends Component {
     }
   }
 
-  randomNumberFromRange(min, max) {     
-    return Math.floor(Math.random()*(max-min+1)+min);     
-  }
-
   settingsFromBreakpoint() {
     if (this.props.breakpoint === 'small') {
       return { nudgeDistance: '0' } 
