@@ -23,17 +23,29 @@ const {
   }
 } = CoreStyles;
 
-const AppNav = new Atomic({
+const AppNavWrapper = new Atomic({
   small: {
     position: 'fixed',
     top: '50%',
+    height: '450px',
+    display: 'inline-block',
+    zIndex: '3',
+  },
+});
+
+const AppNav = new Atomic({
+  small: {
+    textAlign: 'center',
+    width: '450px',
+    position: 'absolute',
+    top: '0',
     left: '0',
-    transform: 'translateX(-45%) rotate(-90deg)',
-    minWidth: '405px',
-    zIndex: 3,
-  }, 
+    transform: 'rotate(-90deg)',
+    marginLeft: '-200px',
+    color: greyMid,
+  },
   medium: {
-    transform: 'translateX(-36%) rotate(-90deg)',
+    marginLeft: '-150px',
   }
 });
 
@@ -80,14 +92,16 @@ export default class App extends Component {
       <div>
         <Loader isLoading={this.props.isLoading} breakpoint={this.props.breakpoint} />
 
-        <nav style={AppNav.calculate(this.props.breakpoint)}>
-          <StyleableLink to='/information' style={AppNavLink.calculate(this.props.breakpoint)}>About</StyleableLink>
-          <StyleableLink to='/' style={AppNavLink.calculate(this.props.breakpoint)}>Featured Gallery</StyleableLink>
-          <StyleableLink to='/permanent-collection' style={AppNavLink.calculate(this.props.breakpoint)}>Permenant Collection</StyleableLink>
-          <span style={AppNavLink.calculate(this.props.breakpoint)}>
-            <CurrentUser />
-          </span>
-        </nav>
+        <div style={AppNavWrapper.calculate(this.props.breakpoint)}>
+          <nav style={AppNav.calculate(this.props.breakpoint)}>
+            <StyleableLink to='/information' style={AppNavLink.calculate(this.props.breakpoint)}>About</StyleableLink>
+            <StyleableLink to='/' style={AppNavLink.calculate(this.props.breakpoint)}>Featured Gallery</StyleableLink>
+            <StyleableLink to='/permanent-collection' style={AppNavLink.calculate(this.props.breakpoint)}>Permenant Collection</StyleableLink>
+            <span style={AppNavLink.calculate(this.props.breakpoint)}>
+              <CurrentUser />
+            </span>
+          </nav>
+        </div>
 
         <div>{this.props.children}</div>
       </div>
