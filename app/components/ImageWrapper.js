@@ -11,12 +11,19 @@ const Styles = {
   wrapper: {
     position: 'relative',
     cursor: 'pointer',
+    display: 'block',
+    textAlign: 'center'
   },
   imageWidth: {
-    width: '100%',
+    maxWidth: '100%',
   },
   iconContainer: {
     textAlign: 'center'
+  },
+  imageContainer: {
+    display: 'inline-block',
+    position: 'relative',
+    verticalAlign: 'top',
   }
 }
 
@@ -100,13 +107,15 @@ export default class ImageWrapper extends Component {
   render() {
     return (
       <div data-name='ImageWrapper' style={[this.props.style, Styles.wrapper]} onClick={this.didClickSelf}>
-        <Image style={[Styles.imageWidth]} src={this.props.src}/>
-        <div style={[Overlay.calculate(this.props.breakpoint)]}>
-          <div style={[Styles.iconContainer]}>
-            <div style={[HeartLockup.calculate(this.props.breakpoint)]}>
-              <Icon icon={'Heart'} viewbox={'0 0 57.947 57.947'} style={[Heart.calculate(this.props.breakpoint)]} />
+        <div style={[Styles.imageContainer]}>
+          <Image style={[Styles.imageWidth]} src={this.props.src}/>
+          <div style={[Overlay.calculate(this.props.breakpoint)]}>
+            <div style={[Styles.iconContainer]}>
+              <div style={[HeartLockup.calculate(this.props.breakpoint)]}>
+                <Icon icon={'Heart'} viewbox={'0 0 57.947 57.947'} style={[Heart.calculate(this.props.breakpoint)]} />
+              </div>
+              <h3 style={[HeartLockup.calculate(this.props.breakpoint)]}>{this.props.bumpCount ? this.props.bumpCount : 'Like'}</h3>
             </div>
-            <h3 style={[HeartLockup.calculate(this.props.breakpoint)]}>{this.props.bumpCount ? this.props.bumpCount : 'Like'}</h3>
           </div>
         </div>
       </div>
