@@ -22,14 +22,18 @@ const Styles = {
   }
 }
 
+const { 
+  container
+} = CoreStyles;
+
 const mapStateToProps = (state) => {
   return { 
     applicationStatus: state.application.status,
     currentUser: state.oAuth.currentUser,
     currentCurator: state.curator.currentCurator,
+    breakpoint: state.application.breakpoint
   };
 }
-
 
 @connect(mapStateToProps)
 @Radium
@@ -38,7 +42,7 @@ export default class Home extends Component {
     if (this.props.currentUser) { 
       return (
         <div style={[Styles.wrapper]}>
-          <div style={[CoreStyles.container]}>
+          <div style={[container.calculate(this.props.breakpoint)]}>
             <Gallery imageUrls={this.props.images} />
             <CurrentCurator currentCurator={this.props.currentCurator} />
           </div>

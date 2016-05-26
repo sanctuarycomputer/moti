@@ -14,12 +14,15 @@ let fontSize = new Atomic ({
   }
 });
 
-export default {
-  container: {
-    width: '60vw',
+let container = new Atomic ({
+  small: {
+    width: '60%',
     margin: '0 auto',
     textAlign: 'center',
   },
+});
+
+export default {
   fontStyle: {
     letterSpacing: '1px',
     fontSize: '2.8rem',
@@ -39,5 +42,6 @@ export default {
     },
   },
   colors,
-  fontSize
+  fontSize,
+  container
 }
