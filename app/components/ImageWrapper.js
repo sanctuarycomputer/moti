@@ -3,9 +3,16 @@ import Radium from 'radium';
 import { connect } from 'react-redux';
 import Icon from './Icon';
 import Atomic from '../lib/Atomic';
+import CoreStyles from '../lib/styles';
 import Image from './Image';
 
 const { PropTypes } = React;
+
+const { 
+  colors: {
+    red
+  }
+} = CoreStyles;
 
 const Styles = {
   wrapper: {
@@ -16,14 +23,23 @@ const Styles = {
   imageWidth: {
     maxWidth: '100%',
   },
-  iconContainer: {
-    textAlign: 'center'
-  },
   imageContainer: {
     cursor: 'pointer',
     display: 'inline-block',
     position: 'relative',
     verticalAlign: 'top',
+  },
+  ribbonColor: {
+    color: red
+  },
+  ribbon: {
+    bumpCount: {
+      textAlign: 'left',
+      position: 'relative',
+      zIndex: '1',
+      margin: '0',
+      padding: '10px 15px',
+    }
   }
 }
 
@@ -32,9 +48,6 @@ const Overlay = new Atomic({
     opacity: 1,
     background: 'rgba(255,255,255,0)',
     position: 'relative',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
     transition: '150ms ease-in-out',
   },
   medium: {
@@ -51,30 +64,14 @@ const Overlay = new Atomic({
   },
 });
 
-const HeartLockup = new Atomic({
+const RibbonBackground = new Atomic({
   small: {
-    display: 'inline-block',
-    verticalAlign: 'middle',
-    margin: '10px 5px',
-  },
-  medium: {
-    display: 'block',
-  }
-});
-
-const Heart = new Atomic({
-  small: {
+    position: 'absolute',
+    top: '-1px',
+    left: 0,
     transition: '150ms ease-in-out',
     opacity: 1,
-    height: '30px',
-  },
-  medium: {
-    opacity: 1,
-    height: '60px',
-    ':hover': {
-      height: '60px',
-    }
-  },
+  }
 });
 
 
@@ -113,11 +110,9 @@ export default class ImageWrapper extends Component {
         <div style={[Styles.imageContainer]}>
           <Image style={[Styles.imageWidth]} src={this.props.src}/>
           <div style={[Overlay.calculate(this.props.breakpoint)]}>
-            <div style={[Styles.iconContainer]}>
-              <div style={[HeartLockup.calculate(this.props.breakpoint)]}>
-                <Icon icon={'Heart'} viewbox={'0 0 57.947 57.947'} style={[Heart.calculate(this.props.breakpoint)]} />
-              </div>
-              <h3 style={[HeartLockup.calculate(this.props.breakpoint)]}>{this.props.bumpCount}</h3>
+            <div>
+              <Icon icon={'Triangle'} viewbox={'0 0 133 133'} fill={Styles.ribbonColor.color} width={75} style={[RibbonBackground.calculate(this.props.breakpoint)]} />
+              <h3 style={[Styles.ribbon.bumpCount]}>{this.props.bumpCount}</h3>
             </div>
           </div>
         </div>
