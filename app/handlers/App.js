@@ -46,9 +46,9 @@ const AppNavLink = new Atomic({
     display: 'inline-block',
     margin: '0 15px',
     cursor: 'pointer',
-    borderBottom: '1px solid transparent',
+    borderBottom: '2px solid transparent',
     ':hover': {
-      borderBottom: '1px solid white',
+      borderBottom: '2px solid rgb(152, 152, 152)',
     }
   }
 });
