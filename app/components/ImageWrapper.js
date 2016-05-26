@@ -91,7 +91,10 @@ export default class ImageWrapper extends Component {
     src: PropTypes.string.isRequired,
     onClick: PropTypes.func,
     media: PropTypes.object,
-    bumpCount: PropTypes.number,
+    bumpCount: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.number
+    ]),
     style: PropTypes.oneOfType([
       PropTypes.array,
       PropTypes.object
@@ -114,7 +117,7 @@ export default class ImageWrapper extends Component {
               <div style={[HeartLockup.calculate(this.props.breakpoint)]}>
                 <Icon icon={'Heart'} viewbox={'0 0 57.947 57.947'} style={[Heart.calculate(this.props.breakpoint)]} />
               </div>
-              <h3 style={[HeartLockup.calculate(this.props.breakpoint)]}>{this.props.bumpCount ? this.props.bumpCount : 'Like'}</h3>
+              <h3 style={[HeartLockup.calculate(this.props.breakpoint)]}>{this.props.bumpCount}</h3>
             </div>
           </div>
         </div>

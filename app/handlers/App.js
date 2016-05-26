@@ -115,13 +115,10 @@ export default class App extends Component {
       exit: Status.INACTIVE 
     };
     if (pathname.includes('information')) {
-      console.log('now info');
       activeStates['about'] = Status.ACTIVE;
     } else if (pathname.includes('permanent-collection')) {
-      console.log('now perm');
       activeStates['permanent'] = Status.ACTIVE;
     } else {
-      console.log('now feat');
       activeStates['featured'] = Status.ACTIVE;
     }
     return activeStates;

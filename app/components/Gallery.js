@@ -63,6 +63,14 @@ export default class Gallery extends Component {
     return Object.assign(Styles.positioning, nudge);
   }
 
+  getBumpCount(id) {
+    return this.props.collection.map((photo) => {
+      if (photo.media.id === id) {
+        return photo.bumpCount;
+      }
+    });
+  }
+
   nudge(index) {
     if (index % MULTIPLE === 0 || (index+1) % MULTIPLE === 0) {
       return { right: this.settingsFromBreakpoint().nudgeDistance };
@@ -75,11 +83,13 @@ export default class Gallery extends Component {
 
   render() {
     let images = this.props.photos.map((photo, index) => {
+      // console.log(photo);
       return (
         <ImageWrapper key={index} 
                       src={photo.images.standard_resolution.url} 
                       onClick={this.didClickImageWrapper} 
                       media={photo}
+                      bumpCount={this.getBumpCount(photo.id)}
                       style={this.buildPositioningStyles(this.nudge(index))} />
       )
     });
