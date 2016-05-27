@@ -48,7 +48,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return { didShowFlashMessage(status, text) { return dispatch(didShowFlashMessage(status, text)) } }
+  return { didShowFlashMessage(status, text) { return dispatch(didShowFlashMessage(status, text)) }}
 }
 
 @connect(mapStateToProps, mapDispatchToProps)

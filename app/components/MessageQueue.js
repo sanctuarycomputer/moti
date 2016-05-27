@@ -8,12 +8,16 @@ const Styles = {
   QueueContainer: {
     width: '100%',
     position: 'fixed',
-    zIndex: 1
+    top: '0',
+    zIndex: '1'
   }
 };
 
 const mapStateToProps = (state) => {
-  return { flashMessages: state.flashMessage.messages }
+  return { 
+    flashMessages: state.flashMessage.messages,
+    currentMessage: state.flashMessage.currentMessage 
+  }
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -24,6 +28,14 @@ const mapDispatchToProps = (dispatch) => {
 @connect(mapStateToProps, mapDispatchToProps)
 @Radium
 export default class MessageQueue extends Component {
+
+  componentWillReceiveProps(nextProps) {
+   if(nextProps.currentMessage) {
+      setTimeout(() => {
+        this.props.didDismissFlashMessage(nextProps.currentMessage)
+      }, 5000)
+    }
+  }
 
   render() {
     if(this.props.flashMessages.length) {

@@ -83,8 +83,6 @@ export default class App extends Component {
 
         <MessageQueue />
 
-        <CurrentUser />
-
         <nav style={AppNav.calculate(this.props.breakpoint)}>
           <StyleableLink to='/information' style={AppNavLink.calculate(this.props.breakpoint)}>About</StyleableLink>
           <StyleableLink to='/' style={AppNavLink.calculate(this.props.breakpoint)}>Featured Gallery</StyleableLink>

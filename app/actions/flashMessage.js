@@ -17,9 +17,8 @@ export const didShowFlashMessage = (status, text) => {
 export const didDismissFlashMessage = (currentMessage) => {
   return {
     type: DID_DISMISS_FLASH_MESSAGE,
-    message: currentMessage
+    currentMessage
   }
 };
-
 
 

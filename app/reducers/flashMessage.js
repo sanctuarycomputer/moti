@@ -12,7 +12,8 @@ export const MessageStatus = {
 
 
 const initialState = {
-  messages: []
+  messages: [],
+  currentMessage: null
 };
 
 
@@ -22,14 +23,17 @@ export default function flashMessage(state=initialState, action) {
     let messagesQueue = state.messages.slice();
         messagesQueue.push(action.payload)
       return {
-        messages: messagesQueue
+        messages: messagesQueue,
+        currentMessage: messagesQueue[messagesQueue.length-1]
       };
     case DID_DISMISS_FLASH_MESSAGE:
-      let messageArray = state.messages;
+      let newMessageArray = state.messages.slice();
       let message = action.currentMessage;
-      let messageIndex = messageArray.indexOf(message);
+      let messageIndex = newMessageArray.indexOf(message);
+      newMessageArray.splice(messageIndex, 1)
       return {
-        messages: state.messages.splice(messageIndex, 1)
+        messages: newMessageArray,
+        currentMessage: newMessageArray.length ? newMessageArray[newMessageArray.length-1] : initialState.currentMessage
       };
     default: 
       return state;
