@@ -50,18 +50,14 @@ const Styles = {
 
 const Overlay = new Atomic({
   small: {
-    opacity: 1,
     background: 'rgba(255,255,255,0)',
-    position: 'relative',
-    transition: '150ms ease-in-out',
-  },
-  medium: {
     opacity: 0,
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
+    transition: '150ms ease-in-out',
     ':hover': {
       background: 'rgba(255,255,255,.3)',
       opacity: 1
