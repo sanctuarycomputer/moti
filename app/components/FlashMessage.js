@@ -8,16 +8,16 @@ const Styles = {
   },
   containerColor: {
     success: {
-      backgroundColor: 'green'
+      backgroundColor: '#00FF19'
     },
     error: {
-      backgroundColor: 'red'
+      backgroundColor: '#FF3030'
     },
     info: {
-      backgroundColor: 'blue'
+      backgroundColor: '#00FFE9'
     },
     warning: {
-      backgroundColor: 'yellow'
+      backgroundColor: '#F6FF00'
     }
   },
   messageText: {

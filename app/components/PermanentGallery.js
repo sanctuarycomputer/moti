@@ -63,7 +63,7 @@ export default class PermanentGallery extends Component {
     if (didBump) {
       this.props.didShowFlashMessage('success', flashMessageText.bumped)
     } else {
-      this.props.didShowFlashMessage('error', flashMessageText.noBump)
+      this.props.didShowFlashMessage('warning', flashMessageText.noBump)
     }
   }
 
