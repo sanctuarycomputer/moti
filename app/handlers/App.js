@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 
 import StyleableLink from '../components/StyleableLink';
 import CurrentUser from '../components/CurrentUser';
+import MessageQueue from '../components/MessageQueue';
 import Loader from '../components/Loader';
 
 import CoreStyles from '../lib/styles';
@@ -23,7 +24,7 @@ const {
   }
 } = CoreStyles;
 
-const AppNavWrapper = new Atomic({
+const AppNavWrapperShow = new Atomic({
   small: {
     position: 'fixed',
     top: '50%',
@@ -33,19 +34,25 @@ const AppNavWrapper = new Atomic({
   },
 });
 
+const AppNavWrapperHide = {
+  opacity: '0',
+  visibiliy: 'hidden'
+};
+
 const AppNav = new Atomic({
   small: {
     textAlign: 'center',
-    width: '450px',
-    position: 'absolute',
-    top: '0',
+    width: '540px',
+    position: 'fixed',
+    top: '50%',
     left: '0',
     transform: 'rotate(-90deg)',
-    marginLeft: '-200px',
+    marginLeft: '-240px',
     color: greyMid,
+    letterSpacing: '2px'
   },
   medium: {
-    marginLeft: '-160px',
+    marginLeft: '-210px',
   }
 });
 
@@ -130,11 +137,15 @@ export default class App extends Component {
 
   render() {
 
+    let navDisplay = this.props.currentUser ? AppNavWrapperShow : AppNavWrapperHide;
+
     return (
       <div>
-        <Loader isLoading={this.props.isLoading} breakpoint={this.props.breakpoint} />
+        <Loader isLoading={this.props.isLoading} currentUser={this.props.currentUser} breakpoint={this.props.breakpoint} />
 
-        <div style={AppNavWrapper.calculate(this.props.breakpoint)}>
+        <MessageQueue />
+
+        <div style={navDisplay}>
           <nav style={AppNav.calculate(this.props.breakpoint)}>
             
             <StyleableLink to='/information' style={[

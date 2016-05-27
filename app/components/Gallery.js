@@ -6,6 +6,8 @@ const MULTIPLE = 5;
 import ImageWrapper from './ImageWrapper';
 import { connect } from 'react-redux';
 import { manageBumpCount } from '../lib/helpers';
+import { didShowFlashMessage } from '../actions/flashMessage';
+import flashMessageText  from '../lib/flashMessage';
 
 const mapStateToProps = (state) => {
   return { 
@@ -17,7 +19,12 @@ const mapStateToProps = (state) => {
   };
 }
 
-@connect(mapStateToProps)
+const mapDispatchToProps = (dispatch) => {
+  return { didShowFlashMessage(status, text) { return dispatch(didShowFlashMessage(status, text)) }}
+}
+
+
+@connect(mapStateToProps, mapDispatchToProps)
 export default class Gallery extends Component {
 
   didClickImageWrapper = (media) => {
@@ -30,13 +37,19 @@ export default class Gallery extends Component {
       let imageRef = this.props.firebaseRef.child('/permanents/' + match.id);
       let imageBumpCountRef = this.props.firebaseRef.child('/permanents/' + match.id + '/bumpCount');
       let currentUser = this.props.currentUser;
-      manageBumpCount(currentUser, match, imageRef, imageBumpCountRef);
+      let didBump = manageBumpCount(currentUser, match, imageRef, imageBumpCountRef);
+      if (didBump) {
+        this.props.didShowFlashMessage('success', flashMessageText.bumped)
+      } else {
+        this.props.didShowFlashMessage('warning', flashMessageText.noBump)
+      }
     } else {
       let newPermanent = permanentsRef.push();
       newPermanent.set({
         media,
         bumpCount: 1
       });
+      this.props.didShowFlashMessage('success', flashMessageText.saved)
     }
   }
 

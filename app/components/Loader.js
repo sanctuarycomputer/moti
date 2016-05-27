@@ -90,7 +90,8 @@ const WrapperLoaded = {
 export default class Loader extends Component {
   static propTypes = {
     isLoading: PropTypes.bool.isRequired,
-    breakpoint: PropTypes.string
+    breakpoint: PropTypes.string,
+    currentUser: PropTypes.object
   }
 
   stylesForIcon(position, isLoading) {
@@ -101,7 +102,7 @@ export default class Loader extends Component {
   }
 
   render() {
-    let iconState = this.props.isLoading ? DefaultPositions : Positions;
+    let iconState = this.props.currentUser ? Positions : DefaultPositions;
     let wrapperStyle = this.props.isLoading ? [Wrapper] : [Wrapper, WrapperLoaded];
     let modularHeight = this.props.breakpoint === 'small' ? 50 : 100;
 
