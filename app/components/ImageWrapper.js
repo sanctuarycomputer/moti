@@ -99,7 +99,6 @@ export default class ImageWrapper extends Component {
   }
 
   render() {
-    console.log(this.props.bumpCount);
     return (
       <div data-name='ImageWrapper' style={[this.props.style, Styles.wrapper]} onClick={this.didClickSelf}>
         <div style={[Styles.imageContainer]}>
