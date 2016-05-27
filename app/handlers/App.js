@@ -24,7 +24,7 @@ const {
   }
 } = CoreStyles;
 
-const AppNavWrapper = new Atomic({
+const AppNavWrapperShow = new Atomic({
   small: {
     position: 'fixed',
     top: '50%',
@@ -34,12 +34,17 @@ const AppNavWrapper = new Atomic({
   },
 });
 
+const AppNavWrapperHide = {
+  opacity: '0',
+  visibiliy: 'hidden'
+};
+
 const AppNav = new Atomic({
   small: {
     textAlign: 'center',
     width: '540px',
-    position: 'absolute',
-    top: '0',
+    position: 'fixed',
+    top: '50%',
     left: '0',
     transform: 'rotate(-90deg)',
     marginLeft: '-240px',
@@ -132,13 +137,15 @@ export default class App extends Component {
 
   render() {
 
+    let navDisplay = this.props.currentUser ? AppNavWrapperShow : AppNavWrapperHide;
+
     return (
       <div>
-        <Loader isLoading={this.props.isLoading} breakpoint={this.props.breakpoint} />
+        <Loader isLoading={this.props.isLoading} currentUser={this.props.currentUser} breakpoint={this.props.breakpoint} />
 
         <MessageQueue />
 
-        <div style={AppNavWrapper.calculate(this.props.breakpoint)}>
+        <div style={navDisplay}>
           <nav style={AppNav.calculate(this.props.breakpoint)}>
             
             <StyleableLink to='/information' style={[

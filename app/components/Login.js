@@ -42,6 +42,10 @@ const ButtonStyle = {
   transform: 'translate(-50%, -50%)',
   transition: '1s',
   opacity: 0,
+  fontFamily: 'inherit',
+  fontWeight: '300',
+  letterSpacing: '2px',
+  outline: 'none',
   ':hover': {
     color: grey,
     border: `4px solid ${grey}`
