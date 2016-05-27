@@ -45,7 +45,12 @@ const AppNavLink = new Atomic({
     fontSize: '1rem',
     lineHeight: '2rem',
     display: 'inline-block',
-    margin: '0 15px'
+    margin: '0 15px',
+    cursor: 'pointer',
+    borderBottom: '2px solid transparent',
+    ':hover': {
+      borderBottom: '2px solid rgb(152, 152, 152)',
+    }
   }
 });
 
@@ -56,7 +61,7 @@ const mapStateToProps = (state) => {
     currentPath: state.routing.locationBeforeTransitions.pathname,
     breakpoint: state.application.breakpoint
   };
-}
+};
 
 @connect(mapStateToProps)
 @Radium
@@ -82,10 +87,11 @@ export default class App extends Component {
 
         <nav style={AppNav.calculate(this.props.breakpoint)}>
           <StyleableLink to='/information' style={AppNavLink.calculate(this.props.breakpoint)}>About</StyleableLink>
-
           <StyleableLink to='/' style={AppNavLink.calculate(this.props.breakpoint)}>Featured Gallery</StyleableLink>
-
           <StyleableLink to='/permanent-collection' style={AppNavLink.calculate(this.props.breakpoint)}>Permenant Collection</StyleableLink>
+          <span style={AppNavLink.calculate(this.props.breakpoint)}>
+            <CurrentUser />
+          </span>
         </nav>
 
         <div>{this.props.children}</div>

@@ -40,21 +40,11 @@ export default class Gallery extends Component {
     }
   }
 
-  randomNumberFromRange(min, max) {
-    return Math.floor(Math.random()*(max-min+1)+min);
-  }
-
   settingsFromBreakpoint() {
     if (this.props.breakpoint === 'small') {
-      return {
-        variableWidth: this.randomNumberFromRange(95, 100),
-        nudgeDistance: '10%'
-      } 
+      return { nudgeDistance: '10%' } 
     }
-    return {
-      variableWidth: this.randomNumberFromRange(50, 90),
-      nudgeDistance: '20%'
-    } 
+    return { nudgeDistance: '20%' } 
   }
 
   buildPositioningStyles(nudge={}) {
@@ -63,7 +53,6 @@ export default class Gallery extends Component {
       positioning: {
         position: 'relative',
         display: 'inline-block',
-        width: this.settingsFromBreakpoint().variableWidth + '%',
         margin: '30px 0',
       }
     }

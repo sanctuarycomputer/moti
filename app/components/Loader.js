@@ -76,7 +76,7 @@ const Wrapper = {
   position: 'fixed',
   top: 0,
   left: 0,
-  zIndex: 1,
+  zIndex: 5,
   transition: `background-color ${LOADER_SPEED_MS}ms ease-in-out`
 }
 
