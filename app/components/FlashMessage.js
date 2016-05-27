@@ -3,26 +3,30 @@ import Radium from 'radium';
 
 const Styles = {
   flashContainer: {
-    padding: '1rem',
+    padding: '0.2rem',
     textAlign: 'center'
   },
   containerColor: {
     success: {
-      backgroundColor: '#00FF19'
+      backgroundColor: 'rgba(37, 37, 37, 0.9)'
     },
     error: {
-      backgroundColor: '#FF3030'
+      backgroundColor: 'rgba(37, 37, 37, 0.9)'
     },
     info: {
-      backgroundColor: '#00FFE9'
+      backgroundColor: 'rgba(37, 37, 37, 0.9)'
     },
     warning: {
-      backgroundColor: '#F6FF00'
+      backgroundColor: 'rgba(37, 37, 37, 0.9)'
     }
   },
   messageText: {
-    fontSize: '18px',
-    color: 'black'
+    fontSize: '15px',
+    color: 'white',
+    lineHeight: '1.5rem',
+    margin: '14px',
+    fontWeight: 400,
+    letterSpacing: '1px'
   }
 };
 
