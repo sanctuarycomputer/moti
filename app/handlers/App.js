@@ -37,16 +37,17 @@ const AppNavWrapper = new Atomic({
 const AppNav = new Atomic({
   small: {
     textAlign: 'center',
-    width: '450px',
+    width: '540px',
     position: 'absolute',
     top: '0',
     left: '0',
     transform: 'rotate(-90deg)',
-    marginLeft: '-200px',
+    marginLeft: '-240px',
     color: greyMid,
+    letterSpacing: '2px'
   },
   medium: {
-    marginLeft: '-160px',
+    marginLeft: '-210px',
   }
 });
 

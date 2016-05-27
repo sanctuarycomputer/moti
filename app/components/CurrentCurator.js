@@ -34,7 +34,8 @@ const Styles = {
     left: '0',
     transform: 'rotate(90deg)',
     transformOrigin: 'top left',
-    color: greyMid
+    color: greyMid,
+    letterSpacing: '2px',
   },
   month: {
     marginRight: '.5rem'
