@@ -14,8 +14,6 @@ export const manageBumpCount = (user, media, permRef, bumpRef) => {
     })
     return true;
   } else {
-    //This is where we alert the users that they've already bumped
-    console.log("you've already bumped, homie")
     return false;
   }
 };
