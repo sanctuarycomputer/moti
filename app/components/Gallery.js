@@ -42,7 +42,7 @@ export default class Gallery extends Component {
 
   settingsFromBreakpoint() {
     if (this.props.breakpoint === 'small') {
-      return { nudgeDistance: '10%' } 
+      return { nudgeDistance: '0' } 
     }
     return { nudgeDistance: '20%' } 
   }
@@ -53,10 +53,17 @@ export default class Gallery extends Component {
       positioning: {
         position: 'relative',
         display: 'inline-block',
-        margin: '30px 0',
+        margin: '5.5rem 0',
       }
     }
     return Object.assign(Styles.positioning, nudge);
+  }
+
+  getBumpCount(id) {
+    let filter = this.props.collection.filter((photo) => {
+      return photo.media.id === id;
+    });
+    return filter.length ? filter[0].bumpCount : 0;
   }
 
   nudge(index) {
@@ -71,11 +78,13 @@ export default class Gallery extends Component {
 
   render() {
     let images = this.props.photos.map((photo, index) => {
+      console.log(this.getBumpCount(photo.id));
       return (
         <ImageWrapper key={index} 
                       src={photo.images.standard_resolution.url} 
                       onClick={this.didClickImageWrapper} 
                       media={photo}
+                      bumpCount={this.getBumpCount(photo.id)}
                       style={this.buildPositioningStyles(this.nudge(index))} />
       )
     });

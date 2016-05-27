@@ -23,17 +23,29 @@ const {
   }
 } = CoreStyles;
 
-const AppNav = new Atomic({
+const AppNavWrapper = new Atomic({
   small: {
     position: 'fixed',
     top: '50%',
+    height: '450px',
+    display: 'inline-block',
+    zIndex: '3',
+  },
+});
+
+const AppNav = new Atomic({
+  small: {
+    textAlign: 'center',
+    width: '450px',
+    position: 'absolute',
+    top: '0',
     left: '0',
-    transform: 'translateX(-45%) rotate(-90deg)',
-    minWidth: '405px',
-    zIndex: 3,
-  }, 
+    transform: 'rotate(-90deg)',
+    marginLeft: '-200px',
+    color: greyMid,
+  },
   medium: {
-    transform: 'translateX(-36%) rotate(-90deg)',
+    marginLeft: '-160px',
   }
 });
 
@@ -46,12 +58,30 @@ const AppNavLink = new Atomic({
     display: 'inline-block',
     margin: '0 15px',
     cursor: 'pointer',
-    borderBottom: '2px solid transparent',
     ':hover': {
-      borderBottom: '2px solid rgb(152, 152, 152)',
+      borderBottomWidth: '2px',
+      borderBottomStyle: 'solid',
+      borderColor: greyMid
+    }
+  },
+  states: {
+    active: {
+      borderBottomWidth: '2px',
+      borderBottomStyle: 'solid',
+      borderColor: greyMid
+    },
+    inactive: {
+      borderBottomWidth: '2px',
+      borderBottomStyle: 'solid',
+      borderColor: 'transparent',
     }
   }
 });
+
+const Status = {
+  ACTIVE: 'active',
+  INACTIVE: 'inactive',
+}
 
 const mapStateToProps = (state) => {
   return {
@@ -66,8 +96,32 @@ const mapStateToProps = (state) => {
 @Radium
 export default class App extends Component {
 
+  constructor(props) {
+    super(...arguments);
+    this.state = this.stateForPathname(props.currentPath);
+  }
+
   componentWillReceiveProps(nextProps) {
     if (this.props.currentUser && !nextProps.currentUser) { this.userDidLogout(); }
+    console.log(nextProps.currentPath);
+    this.setState(this.stateForPathname(nextProps.currentPath));
+  }
+
+  stateForPathname(pathname) {
+    let activeStates = { 
+      about: Status.INACTIVE,
+      featured: Status.INACTIVE,
+      permanent: Status.INACTIVE,
+      exit: Status.INACTIVE 
+    };
+    if (pathname.includes('information')) {
+      activeStates['about'] = Status.ACTIVE;
+    } else if (pathname.includes('permanent-collection')) {
+      activeStates['permanent'] = Status.ACTIVE;
+    } else {
+      activeStates['featured'] = Status.ACTIVE;
+    }
+    return activeStates;
   }
 
   userDidLogout = () => {
@@ -80,14 +134,31 @@ export default class App extends Component {
       <div>
         <Loader isLoading={this.props.isLoading} breakpoint={this.props.breakpoint} />
 
-        <nav style={AppNav.calculate(this.props.breakpoint)}>
-          <StyleableLink to='/information' style={AppNavLink.calculate(this.props.breakpoint)}>About</StyleableLink>
-          <StyleableLink to='/' style={AppNavLink.calculate(this.props.breakpoint)}>Featured Gallery</StyleableLink>
-          <StyleableLink to='/permanent-collection' style={AppNavLink.calculate(this.props.breakpoint)}>Permenant Collection</StyleableLink>
-          <span style={AppNavLink.calculate(this.props.breakpoint)}>
-            <CurrentUser />
-          </span>
-        </nav>
+        <div style={AppNavWrapper.calculate(this.props.breakpoint)}>
+          <nav style={AppNav.calculate(this.props.breakpoint)}>
+            
+            <StyleableLink to='/information' style={[
+              AppNavLink.calculate(this.props.breakpoint),
+              AppNavLink.styles.states[this.state.about],
+            ]}>About</StyleableLink>
+            
+            <StyleableLink to='/' style={[
+              AppNavLink.calculate(this.props.breakpoint),
+              AppNavLink.styles.states[this.state.featured],
+            ]}>Featured Gallery</StyleableLink>
+            
+            <StyleableLink to='/permanent-collection' style={[
+              AppNavLink.calculate(this.props.breakpoint),
+              AppNavLink.styles.states[this.state.permanent],
+            ]}>Permenant Collection</StyleableLink>
+            
+            <span style={[
+              AppNavLink.calculate(this.props.breakpoint),
+              AppNavLink.styles.states[this.state.exit],
+            ]}><CurrentUser /></span>
+         
+          </nav>
+        </div>
 
         <div>{this.props.children}</div>
       </div>

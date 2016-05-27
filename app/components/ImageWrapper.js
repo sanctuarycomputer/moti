@@ -3,27 +3,48 @@ import Radium from 'radium';
 import { connect } from 'react-redux';
 import Icon from './Icon';
 import Atomic from '../lib/Atomic';
+import CoreStyles from '../lib/styles';
 import Image from './Image';
 
 const { PropTypes } = React;
 
+const { 
+  colors: {
+    red
+  }
+} = CoreStyles;
+
 const Styles = {
   wrapper: {
     position: 'relative',
-    cursor: 'pointer',
     display: 'block',
     textAlign: 'center'
   },
   imageWidth: {
     maxWidth: '100%',
   },
-  iconContainer: {
-    textAlign: 'center'
-  },
   imageContainer: {
+    cursor: 'pointer',
     display: 'inline-block',
     position: 'relative',
     verticalAlign: 'top',
+  },
+  ribbon: {
+    color: red,
+    bumpCount: {
+      textAlign: 'left',
+      position: 'relative',
+      zIndex: '1',
+      margin: '0',
+      padding: '10px 15px',
+    },
+    background: {
+      position: 'absolute',
+      top: '-1px',
+      left: 0,
+      transition: '150ms ease-in-out',
+      opacity: 1,
+    }
   }
 }
 
@@ -32,9 +53,6 @@ const Overlay = new Atomic({
     opacity: 1,
     background: 'rgba(255,255,255,0)',
     position: 'relative',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
     transition: '150ms ease-in-out',
   },
   medium: {
@@ -51,33 +69,6 @@ const Overlay = new Atomic({
   },
 });
 
-const HeartLockup = new Atomic({
-  small: {
-    display: 'inline-block',
-    verticalAlign: 'middle',
-    margin: '10px 5px',
-  },
-  medium: {
-    display: 'block',
-  }
-});
-
-const Heart = new Atomic({
-  small: {
-    transition: '150ms ease-in-out',
-    opacity: 1,
-    height: '30px',
-  },
-  medium: {
-    opacity: 1,
-    height: '60px',
-    ':hover': {
-      height: '60px',
-    }
-  },
-});
-
-
 const mapStateToProps = (state) => {
   return {
     breakpoint: state.application.breakpoint
@@ -91,7 +82,10 @@ export default class ImageWrapper extends Component {
     src: PropTypes.string.isRequired,
     onClick: PropTypes.func,
     media: PropTypes.object,
-    bumpCount: PropTypes.number,
+    bumpCount: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.number
+    ]),
     style: PropTypes.oneOfType([
       PropTypes.array,
       PropTypes.object
@@ -105,17 +99,14 @@ export default class ImageWrapper extends Component {
   }
 
   render() {
+    console.log(this.props.bumpCount);
     return (
       <div data-name='ImageWrapper' style={[this.props.style, Styles.wrapper]} onClick={this.didClickSelf}>
         <div style={[Styles.imageContainer]}>
           <Image style={[Styles.imageWidth]} src={this.props.src}/>
           <div style={[Overlay.calculate(this.props.breakpoint)]}>
-            <div style={[Styles.iconContainer]}>
-              <div style={[HeartLockup.calculate(this.props.breakpoint)]}>
-                <Icon icon={'Heart'} viewbox={'0 0 57.947 57.947'} style={[Heart.calculate(this.props.breakpoint)]} />
-              </div>
-              <h3 style={[HeartLockup.calculate(this.props.breakpoint)]}>{this.props.bumpCount ? this.props.bumpCount : 'Like'}</h3>
-            </div>
+            <Icon icon={'Triangle'} viewbox={'0 0 133 133'} fill={Styles.ribbon.color} width={75} style={[Styles.ribbon.background]} />
+            <h3 style={[Styles.ribbon.bumpCount]}>{this.props.bumpCount}</h3>
           </div>
         </div>
       </div>
