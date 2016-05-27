@@ -3,19 +3,10 @@ import {
   DID_DISMISS_FLASH_MESSAGE
 } from '../actions/flashMessage';
 
-export const MessageStatus = {
-  SUCCESS: 'loading',
-  ERROR: 'ready',
-  INFO: 'error',
-  WARNING: 'warning'
-}
-
-
 const initialState = {
   messages: [],
   currentMessage: null
 };
-
 
 export default function flashMessage(state=initialState, action) {
   switch (action.type) {

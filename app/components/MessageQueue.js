@@ -35,7 +35,7 @@ export default class MessageQueue extends Component {
    if(nextProps.currentMessage) {
       setTimeout(() => {
         this.props.didDismissFlashMessage(nextProps.currentMessage)
-      }, 5000)
+      }, 3000)
     }
   }
 
