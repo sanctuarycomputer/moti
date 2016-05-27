@@ -29,16 +29,21 @@ const Styles = {
     position: 'relative',
     verticalAlign: 'top',
   },
-  ribbonColor: {
-    color: red
-  },
   ribbon: {
+    color: red,
     bumpCount: {
       textAlign: 'left',
       position: 'relative',
       zIndex: '1',
       margin: '0',
       padding: '10px 15px',
+    },
+    background: {
+      position: 'absolute',
+      top: '-1px',
+      left: 0,
+      transition: '150ms ease-in-out',
+      opacity: 1,
     }
   }
 }
@@ -63,17 +68,6 @@ const Overlay = new Atomic({
     }
   },
 });
-
-const RibbonBackground = new Atomic({
-  small: {
-    position: 'absolute',
-    top: '-1px',
-    left: 0,
-    transition: '150ms ease-in-out',
-    opacity: 1,
-  }
-});
-
 
 const mapStateToProps = (state) => {
   return {
@@ -105,15 +99,14 @@ export default class ImageWrapper extends Component {
   }
 
   render() {
+    console.log(this.props.bumpCount);
     return (
       <div data-name='ImageWrapper' style={[this.props.style, Styles.wrapper]} onClick={this.didClickSelf}>
         <div style={[Styles.imageContainer]}>
           <Image style={[Styles.imageWidth]} src={this.props.src}/>
           <div style={[Overlay.calculate(this.props.breakpoint)]}>
-            <div>
-              <Icon icon={'Triangle'} viewbox={'0 0 133 133'} fill={Styles.ribbonColor.color} width={75} style={[RibbonBackground.calculate(this.props.breakpoint)]} />
-              <h3 style={[Styles.ribbon.bumpCount]}>{this.props.bumpCount}</h3>
-            </div>
+            <Icon icon={'Triangle'} viewbox={'0 0 133 133'} fill={Styles.ribbon.color} width={75} style={[Styles.ribbon.background]} />
+            <h3 style={[Styles.ribbon.bumpCount]}>{this.props.bumpCount}</h3>
           </div>
         </div>
       </div>

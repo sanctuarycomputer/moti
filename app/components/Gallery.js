@@ -60,11 +60,10 @@ export default class Gallery extends Component {
   }
 
   getBumpCount(id) {
-    return this.props.collection.map((photo) => {
-      if (photo.media.id === id) {
-        return photo.bumpCount;
-      }
+    let filter = this.props.collection.filter((photo) => {
+      return photo.media.id === id;
     });
+    return filter.length ? filter[0].bumpCount : 0;
   }
 
   nudge(index) {
@@ -79,7 +78,7 @@ export default class Gallery extends Component {
 
   render() {
     let images = this.props.photos.map((photo, index) => {
-      // console.log(photo);
+      console.log(this.getBumpCount(photo.id));
       return (
         <ImageWrapper key={index} 
                       src={photo.images.standard_resolution.url} 
