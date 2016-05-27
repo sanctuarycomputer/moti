@@ -78,7 +78,6 @@ export default class Gallery extends Component {
 
   render() {
     let images = this.props.photos.map((photo, index) => {
-      console.log(this.getBumpCount(photo.id));
       return (
         <ImageWrapper key={index} 
                       src={photo.images.standard_resolution.url} 
