@@ -42,7 +42,7 @@ const AppNavWrapperHide = {
 const AppNav = new Atomic({
   small: {
     textAlign: 'center',
-    width: '555px',
+    width: '568px',
     position: 'fixed',
     top: '50%',
     left: '0',

@@ -1,6 +1,5 @@
 export default {
-  bumped: 'Thanks for bumping the art work.',
-  saved:'That piece has been added to our permanent collection.',
-  noBump: 'Sorry, you can only bump once per piece.',
+  saved:'Saved to the permanent collection',
+  beenSaved: 'You\'ve already saved this to the permanent collection',
   cantAuth: 'An error occurred, please try again.'
 };

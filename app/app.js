@@ -35,7 +35,7 @@ initializeMOTI(accessToken)(store);
 
 // Setup Boilerplate
 document.body.style.fontFamily = '"Work Sans", "Helvetica Neue", sans-serif';
-document.body.style.fontWeight = '200';
+document.body.style.fontWeight = '300';
 document.body.style.backgroundColor = 'black';
 document.body.style.color = 'white';
 document.body.style.margin = 0;

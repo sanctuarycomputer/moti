@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import Atomic from '../lib/Atomic';
 import Masonry from 'react-masonry-component';
 import { manageBumpCount } from '../lib/helpers';
-import { didShowFlashMessage } from '../actions/flashMessage';
-import flashMessageText  from '../lib/flashMessage';
 
 const { PropTypes } = React;
 
@@ -47,11 +45,7 @@ const mapStateToProps = (state) => {
   };
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return { didShowFlashMessage(status, text) { return dispatch(didShowFlashMessage(status, text)) }}
-}
-
-@connect(mapStateToProps, mapDispatchToProps)
+@connect(mapStateToProps)
 export default class PermanentGallery extends Component {
 
   didBumpImage = (media) => {
@@ -59,12 +53,7 @@ export default class PermanentGallery extends Component {
     let imageBumpCountRef = this.props.firebaseRef.child('/permanents/' + media.id + '/bumpCount');
     let currentUser = this.props.currentUser;
 
-    let didBump = manageBumpCount(currentUser, media, imageRef, imageBumpCountRef);
-    if (didBump) {
-      this.props.didShowFlashMessage('success', flashMessageText.bumped)
-    } else {
-      this.props.didShowFlashMessage('warning', flashMessageText.noBump)
-    }
+    manageBumpCount(currentUser, media, imageRef, imageBumpCountRef);
   }
 
   render() {

@@ -29,11 +29,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 const ButtonStyle = {
-  padding: '20px',
+  padding: '15px',
   backgroundColor: 'transparent',
   color: white,
-  border: `4px solid ${white}`,
-  fontSize: '2rem',
+  border: `2px solid ${white}`,
+  fontSize: '1.5rem',
   cursor: 'pointer',
   position: 'absolute',
   zIndex: 1,
@@ -48,7 +48,7 @@ const ButtonStyle = {
   outline: 'none',
   ':hover': {
     color: grey,
-    border: `4px solid ${grey}`
+    border: `2px solid ${grey}`
   }
 }
 

@@ -38,11 +38,9 @@ export default class Gallery extends Component {
       let imageBumpCountRef = this.props.firebaseRef.child('/permanents/' + match.id + '/bumpCount');
       let currentUser = this.props.currentUser;
       let didBump = manageBumpCount(currentUser, match, imageRef, imageBumpCountRef);
-      if (didBump) {
-        this.props.didShowFlashMessage('success', flashMessageText.bumped)
-      } else {
-        this.props.didShowFlashMessage('warning', flashMessageText.noBump)
-      }
+      
+      this.props.didShowFlashMessage('warning', flashMessageText.beenSaved)
+      
     } else {
       let newPermanent = permanentsRef.push();
       newPermanent.set({
