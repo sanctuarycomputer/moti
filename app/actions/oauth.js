@@ -59,7 +59,6 @@ function authenticateViaPopup(popup) {
 function resolveCurrentUser(accessToken) {
   return dispatch => {
     dispatch(oAuthSignInSuccess(accessToken));
-
     return getCurrentUser(accessToken)
       .then(currentUser => {
         dispatch(didFetchCurrentUser(currentUser));

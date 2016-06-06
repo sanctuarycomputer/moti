@@ -23,8 +23,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return { 
-    loginWithInstgram: () => { return authorizeUserAndLoadImages(this)(dispatch); },
-    didShowFlashMessage:(status, text) => { return dispatch(didShowFlashMessage(status, text)) }
+    loginWithInstagram: function() { 
+      return authorizeUserAndLoadImages(this)(dispatch); 
+    },
+    didShowFlashMessage: (status, text) => { 
+      return dispatch(didShowFlashMessage(status, text));
+    }
   }
 }
 
@@ -62,5 +66,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(Radium(props => {
   if (props.authStatus === 'success') { return null; }
   if (props.authStatus === 'error') { props.didShowFlashMessage('error', flashMessageText.cantAuth) }
   let buttonCopy = props.authStatus === 'idle' ? copy.loginButton : 'Loading...';
-  return ( <button style={styleArray} onClick={props.loginWithInstgram.bind(props.tags)}>{buttonCopy}</button> );
+
+  return ( <button style={styleArray} onClick={props.loginWithInstagram.bind(props.tags)}>{buttonCopy}</button> );
 }));
