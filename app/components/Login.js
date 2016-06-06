@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { oAuthBegin } from '../actions/oauth';
 import { authorizeUserAndLoadImages } from '../actions/application';
 import { didShowFlashMessage } from '../actions/flashMessage';
-import flashMessageText  from '../lib/flashMessage';
 import copy from '../lib/copy';
 import CoreStyles from '../lib/styles';
 
@@ -60,7 +59,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Radium(props => {
   let styleArray = props.applicationStatus === 'ready' ? [ButtonStyle, ButtonShow] : [ButtonStyle];
    
   if (props.authStatus === 'success') { return null; }
-  if (props.authStatus === 'error') { props.didShowFlashMessage('error', flashMessageText.cantAuth) }
+  if (props.authStatus === 'error') { props.didShowFlashMessage('error', copy.flashMessages.cantAuth) }
   let buttonCopy = props.authStatus === 'idle' ? copy.loginButton : 'Loading...';
   return ( <button style={styleArray} onClick={props.loginWithInstgram.bind(props.tags)}>{buttonCopy}</button> );
 }));
