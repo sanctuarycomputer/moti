@@ -58,7 +58,7 @@ export function initializeMOTI(accessToken) {
 
     window.onresize = () => dispatch(browserDidResize());
 
-    if (accessToken) { 
+    if (accessToken) {
       firebasePromise.then(() => {
         let tags = store.getState().curator.currentCurator.tags;
         return authorizeUserAndLoadImages(tags, accessToken)(dispatch);
