@@ -36,9 +36,7 @@ export default {
     borderBottomStyle: 'solid',
     borderColor: 'transparent',
     ':hover': {
-      borderBottomWidth: '3px',
-      borderBottomStyle: 'solid',
-      borderColor: colors.white,
+      color: colors.white
     },
   },
   colors,
