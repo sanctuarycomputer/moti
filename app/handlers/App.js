@@ -42,7 +42,7 @@ const AppNavWrapperHide = {
 const AppNav = new Atomic({
   small: {
     textAlign: 'center',
-    width: '540px',
+    width: '568px',
     position: 'fixed',
     top: '50%',
     left: '0',
@@ -66,21 +66,15 @@ const AppNavLink = new Atomic({
     margin: '0 15px',
     cursor: 'pointer',
     ':hover': {
-      borderBottomWidth: '2px',
-      borderBottomStyle: 'solid',
-      borderColor: greyMid
+      color: white
     }
   },
   states: {
     active: {
-      borderBottomWidth: '2px',
-      borderBottomStyle: 'solid',
-      borderColor: greyMid
+      color: white
     },
     inactive: {
-      borderBottomWidth: '2px',
-      borderBottomStyle: 'solid',
-      borderColor: 'transparent',
+      color: greyMid
     }
   }
 });

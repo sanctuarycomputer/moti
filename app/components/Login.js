@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { oAuthBegin } from '../actions/oauth';
 import { authorizeUserAndLoadImages } from '../actions/application';
 import { didShowFlashMessage } from '../actions/flashMessage';
-import flashMessageText  from '../lib/flashMessage';
 import copy from '../lib/copy';
 import CoreStyles from '../lib/styles';
 
@@ -23,17 +22,21 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return { 
-    loginWithInstgram: () => { return authorizeUserAndLoadImages(this)(dispatch); },
-    didShowFlashMessage:(status, text) => { return dispatch(didShowFlashMessage(status, text)) }
+    loginWithInstagram: function() { 
+      return authorizeUserAndLoadImages(this)(dispatch); 
+    },
+    didShowFlashMessage: (status, text) => { 
+      return dispatch(didShowFlashMessage(status, text));
+    }
   }
 }
 
 const ButtonStyle = {
-  padding: '20px',
+  padding: '15px',
   backgroundColor: 'transparent',
   color: white,
-  border: `4px solid ${white}`,
-  fontSize: '2rem',
+  border: `2px solid ${white}`,
+  fontSize: '1.5rem',
   cursor: 'pointer',
   position: 'absolute',
   zIndex: 1,
@@ -48,7 +51,7 @@ const ButtonStyle = {
   outline: 'none',
   ':hover': {
     color: grey,
-    border: `4px solid ${grey}`
+    border: `2px solid ${grey}`
   }
 }
 
@@ -60,7 +63,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(Radium(props => {
   let styleArray = props.applicationStatus === 'ready' ? [ButtonStyle, ButtonShow] : [ButtonStyle];
    
   if (props.authStatus === 'success') { return null; }
-  if (props.authStatus === 'error') { props.didShowFlashMessage('error', flashMessageText.cantAuth) }
+  if (props.authStatus === 'error') { props.didShowFlashMessage('error', copy.flashMessages.cantAuth) }
   let buttonCopy = props.authStatus === 'idle' ? copy.loginButton : 'Loading...';
-  return ( <button style={styleArray} onClick={props.loginWithInstgram.bind(props.tags)}>{buttonCopy}</button> );
+
+  return ( <button style={styleArray} onClick={props.loginWithInstagram.bind(props.tags)}>{buttonCopy}</button> );
 }));

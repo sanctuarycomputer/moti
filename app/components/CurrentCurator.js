@@ -14,7 +14,7 @@ const {
 
 const { 
   colors: {
-    greyMid
+    white
   }
 } = CoreStyles;
 
@@ -34,7 +34,7 @@ const Styles = {
     left: '0',
     transform: 'rotate(90deg)',
     transformOrigin: 'top left',
-    color: greyMid,
+    color: white,
     letterSpacing: '2px',
   },
   month: {
