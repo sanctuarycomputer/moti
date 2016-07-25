@@ -42,7 +42,6 @@ const mapStateToProps = (state) => {
 @Radium
 export default class Home extends Component {
   render() {
-    console.log(this.props);
     if (this.props.currentUser) { 
       return (
         <div style={[Styles.wrapper]}>
