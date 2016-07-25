@@ -19,6 +19,9 @@ const Styles = {
       '-ms-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(64,64,65,1) 52%, rgba(0,0,0,1) 100%)', 
       'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(64,64,65,1) 52%, rgba(0,0,0,1) 100%)'
     ]
+  },
+  center: {
+    textAlign: 'center'
   }
 }
 
@@ -43,7 +46,10 @@ export default class Home extends Component {
       return (
         <div style={[Styles.wrapper]}>
           <div style={[container.calculate(this.props.breakpoint)]}>
-            <Gallery imageUrls={this.props.images} />
+            {this.props.images ?
+              <Gallery imageUrls={this.props.images} /> :
+              <h1 style={[Styles.center]}>Museum is empty,<br />check back again soon!</h1>
+            }
             <CurrentCurator currentCurator={this.props.currentCurator} />
           </div>
         </div>

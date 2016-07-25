@@ -1,6 +1,6 @@
 export default {
-  lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
   loginButton: 'Enter',
+  about: 'MOTI was founded in 2016 with the purpose of exploring “the image” in contemporary visual culture. In a time when a photograph is no longer just a photograph, an image is no longer just an image, a drawing is no longer just a drawing. A time when anything can be tagged with anything. A time when visual culture is the dominant language. Each month an artist is invited to curate the feature gallery with three hashtags. Any image tagged with these words will feed live into the gallery. The public is asked to filter through the images and save to the permanent collection.',
   flashMessages: {
     saved:'Saved to the permanent collection',
     beenSaved: 'You\'ve already saved this to the permanent collection',

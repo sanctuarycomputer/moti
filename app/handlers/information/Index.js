@@ -20,7 +20,7 @@ const mapStateToProps = state => {
 export default class About extends Component {
   render () {
     return (
-      <p style={[fontSize.calculate(this.props.breakpoint)]}>{Copy.lorem}</p>
+      <p style={[fontSize.calculate(this.props.breakpoint)]}>{Copy.about}</p>
     ); 
   }
 };

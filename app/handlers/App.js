@@ -104,7 +104,6 @@ export default class App extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.currentUser && !nextProps.currentUser) { this.userDidLogout(); }
-    console.log(nextProps.currentPath);
     this.setState(this.stateForPathname(nextProps.currentPath));
   }
 

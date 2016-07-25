@@ -12,6 +12,7 @@ import PermanentGallery from '../components/PermanentGallery';
 import Information from '../handlers/information/Information';
 import InformationIndex from '../handlers/information/Index';
 import InformationCurators from '../handlers/information/Curators';
+import InformationLegal from '../handlers/information/Legal';
 
 export default (
   <Route path ='/' component={App}>
@@ -19,6 +20,7 @@ export default (
 
     <Route path='information' component={Information}>
       <IndexRoute component={InformationIndex} />
+      <Route path='legal' component={InformationLegal} />
       <Route path=':mode' component={InformationCurators} />
     </Route>
 
