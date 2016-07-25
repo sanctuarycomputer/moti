@@ -46,7 +46,7 @@ export default class Home extends Component {
       return (
         <div style={[Styles.wrapper]}>
           <div style={[container.calculate(this.props.breakpoint)]}>
-            {this.props.images ?
+            {this.props.currentCurator ?
               <Gallery imageUrls={this.props.images} /> :
               <h1 style={[Styles.center]}>Museum is empty,<br />check back again soon!</h1>
             }
