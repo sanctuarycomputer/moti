@@ -1,16 +1,25 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Radium from 'radium';
 import CoreStyles from '../../lib/styles';
 
 const {
-  linkStyle
+  linkStyle,
+  fontSize
 } = CoreStyles;
 
+const mapStateToProps = (state) => {
+  return {
+    breakpoint: state.application.breakpoint
+  };
+};
+
+@connect(mapStateToProps)
 @Radium
 export default class Legal extends Component {
   render() {
     return (
-      <p>
+      <p style={[fontSize.calculate(this.props.breakpoint)]}>
         PRIVACY STATEMENT<br/>
         ----<br />
         SECTION 1 - WHAT DO WE DO WITH YOUR INFORMATION?<br/>
