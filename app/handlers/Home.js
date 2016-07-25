@@ -42,11 +42,12 @@ const mapStateToProps = (state) => {
 @Radium
 export default class Home extends Component {
   render() {
+    console.log(this.props);
     if (this.props.currentUser) { 
       return (
         <div style={[Styles.wrapper]}>
           <div style={[container.calculate(this.props.breakpoint)]}>
-            {this.props.images ?
+            {this.props.currentCurator ?
               <Gallery imageUrls={this.props.images} /> :
               <h1 style={[Styles.center]}>Museum is empty,<br />check back again soon!</h1>
             }

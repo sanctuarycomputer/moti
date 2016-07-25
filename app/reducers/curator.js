@@ -16,6 +16,7 @@ function formatCuratorData(initialCuratorsState=[], newCurators=[]) {
       month = date.getMonth().toString(),
       year = date.getFullYear().toString(),
       allCurators = initialCuratorsState.concat(newCurators);
+
   //Sort curators in ascending order
   allCurators.sort((a, b) =>  {
     if(a.date.year < b.date.year) { return -1; }
@@ -46,7 +47,7 @@ function formatCuratorData(initialCuratorsState=[], newCurators=[]) {
 export default function curators(state=initialState, action) {
   switch(action.type) {
     case FIREBASE_DID_UPDATE:
-      return formatCuratorData(state.curators, action.snapshot.val().curators.curators);
+      return formatCuratorData(state.curators, action.snapshot.val().curators);
     default:
       return state;
   }
