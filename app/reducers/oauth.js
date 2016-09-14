@@ -1,9 +1,6 @@
 import { 
-  OAUTH_SIGN_IN_START,
-  OAUTH_SIGN_IN_SUCCESS,
-  DID_FETCH_CURRENT_USER,
-  OAUTH_SIGN_IN_ERROR,
-  CLEAR_CURRENT_USER
+  DID_SIGN_IN,
+  DID_FETCH_CURRENT_USER
 } from '../actions/oauth';
 
 const Status = {
@@ -22,16 +19,8 @@ const initialState = {
 
 export default function oAuth(state=initialState, action) {
   switch(action.type) {
-    case OAUTH_SIGN_IN_START:
-      window.localStorage.removeItem('instagramAccessToken');
-      return {
-        status: Status.PENDING,
-        currentUser: null,
-        error: null,
-        accessToken: null
-      };
-    case OAUTH_SIGN_IN_SUCCESS:
-      window.localStorage.setItem('instagramAccessToken', action.accessToken);
+    case DID_SIGN_IN:
+      window.localStorage.setItem('userUUID', action.accessToken);
       return {
         status: Status.PENDING,
         currentUser: null,
@@ -45,23 +34,6 @@ export default function oAuth(state=initialState, action) {
         error: null,
         accessToken: state.accessToken
       };
-    case OAUTH_SIGN_IN_ERROR:
-      console.log(action.error);
-      window.localStorage.removeItem('instagramAccessToken');
-      return {
-        status: Status.ERROR,
-        currentUser: null,
-        error: action.error,
-        accessToken: null
-      };
-    case CLEAR_CURRENT_USER:
-      window.localStorage.removeItem('instagramAccessToken');
-      return {
-        status: Status.IDLE,
-        currentUser: null,
-        error: null,
-        accessToken: null
-      }
     default:
       return state;
   }

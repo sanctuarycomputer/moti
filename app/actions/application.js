@@ -1,4 +1,4 @@
-import { oAuthBegin } from './oauth';
+import { signIn } from './oauth';
 import { fetchPhotosForHashtag } from './gallery';
 import ENV from '../config/Environment';
 import Firebase from 'firebase';
@@ -35,9 +35,9 @@ export function browserDidResize() {
 /* For Dispatch */
 export function authorizeUserAndLoadImages(tags=[], accessToken) {
   return dispatch => {
-    return oAuthBegin('instagram', accessToken)(dispatch).then(currentUser => {
-      if (!accessToken) { accessToken = window.localStorage.instagramAccessToken; }
-      return Promise.all(tags.map(tag => fetchPhotosForHashtag(tag, accessToken)(dispatch)))
+    return signIn(accessToken)(dispatch).then(currentUser => {
+      if (!accessToken) { accessToken = window.localStorage.userUUID; }
+      return Promise.all(tags.map(tag => fetchPhotosForHashtag(tag)(dispatch)))
     });
   }
 }

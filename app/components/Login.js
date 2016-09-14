@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
 import { connect } from 'react-redux';
-import { oAuthBegin } from '../actions/oauth';
 import { authorizeUserAndLoadImages } from '../actions/application';
 import { didShowFlashMessage } from '../actions/flashMessage';
-import copy from '../lib/copy';
 import CoreStyles from '../lib/styles';
 
 const { 
@@ -64,7 +62,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Radium(props => {
    
   if (props.authStatus === 'success') { return null; }
   if (props.authStatus === 'error') { props.didShowFlashMessage('error', copy.flashMessages.cantAuth) }
-  let buttonCopy = props.authStatus === 'idle' ? copy.loginButton : 'Loading...';
+  let buttonCopy = props.authStatus === 'idle' ? 'Enter' : 'Loading...';
 
-  return ( <button style={styleArray} onClick={props.loginWithInstagram.bind(props.tags)}>{buttonCopy}</button> );
+  return ( <button style={styleArray} onClick={props.loginWithInstagram.bind(props.tags)}>{'Enter'}</button> );
 }));
