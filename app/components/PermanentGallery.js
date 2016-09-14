@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { hasherize } from '../lib/utils';
 import ImageWrapper from './ImageWrapper';
 import { connect } from 'react-redux';
 import Atomic from '../lib/Atomic';
@@ -37,7 +38,7 @@ let masonryOptions = {
 };
 
 const mapStateToProps = (state) => {
-  return { 
+  return {
     firebaseRef: state.application.firebaseRef,
     collection: state.gallery.collection.slice(0),
     breakpoint: state.application.breakpoint,
@@ -60,9 +61,9 @@ export default class PermanentGallery extends Component {
 
     let images = this.props.collection.map((photo, index) => {
       return (
-        <ImageWrapper key={index} 
-                      src={photo.media.images.standard_resolution.url} 
-                      onClick={this.didBumpImage} 
+        <ImageWrapper key={index}
+                      src={photo.media.link}
+                      onClick={this.didBumpImage}
                       media={photo}
                       bumpCount={photo.bumpCount}
                       style={ItemWidth.calculate(this.props.breakpoint)} />

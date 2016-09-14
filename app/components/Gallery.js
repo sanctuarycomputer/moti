@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 const { PropTypes } = React;
 const MULTIPLE = 5;
 
+import { hasherize } from '../lib/utils';
 import ImageWrapper from './ImageWrapper';
 import { connect } from 'react-redux';
 import { manageBumpCount } from '../lib/helpers';
@@ -10,7 +11,7 @@ import { didShowFlashMessage } from '../actions/flashMessage';
 import copy  from '../lib/copy';
 
 const mapStateToProps = (state) => {
-  return { 
+  return {
     photos: state.gallery.photos.slice(0),
     firebaseRef: state.application.firebaseRef,
     collection: state.gallery.collection.slice(0),
@@ -28,9 +29,10 @@ const mapDispatchToProps = (dispatch) => {
 export default class Gallery extends Component {
 
   didClickImageWrapper = (media) => {
+    let mediaId = hasherize(media.link);
 
     // Check if media id is in permanents
-    let match = this.props.collection.find(permanentMedia => permanentMedia.media.id === media.id);
+    let match = this.props.collection.find(permanentMedia => permanentMedia.mediaId === mediaId);
     let permanentsRef = this.props.firebaseRef.child('/permanents');
 
     if(match) {
@@ -38,12 +40,13 @@ export default class Gallery extends Component {
       let imageBumpCountRef = this.props.firebaseRef.child('/permanents/' + match.id + '/bumpCount');
       let currentUser = this.props.currentUser;
       let didBump = manageBumpCount(currentUser, match, imageRef, imageBumpCountRef);
-      
+
       this.props.didShowFlashMessage('warning', copy.flashMessages.beenSaved)
 
     } else {
       let newPermanent = permanentsRef.push();
       newPermanent.set({
+        mediaId: mediaId,
         media,
         bumpCount: 1
       });
@@ -53,9 +56,9 @@ export default class Gallery extends Component {
 
   settingsFromBreakpoint() {
     if (this.props.breakpoint === 'small') {
-      return { nudgeDistance: '0' } 
+      return { nudgeDistance: '0' }
     }
-    return { nudgeDistance: '20%' } 
+    return { nudgeDistance: '20%' }
   }
 
   buildPositioningStyles(nudge={}) {
@@ -70,9 +73,10 @@ export default class Gallery extends Component {
     return Object.assign(Styles.positioning, nudge);
   }
 
-  getBumpCount(id) {
-    let filter = this.props.collection.filter((photo) => {
-      return photo.media.id === id;
+  getBumpCount(link) {
+    let mediaId = hasherize(link);
+    let filter = this.props.collection.filter((media) => {
+      return media.mediaId === mediaId;
     });
     return filter.length ? filter[0].bumpCount : 0;
   }
@@ -90,11 +94,11 @@ export default class Gallery extends Component {
   render() {
     let images = this.props.photos.map((photo, index) => {
       return (
-        <ImageWrapper key={index} 
-                      src={photo.images.standard_resolution.url} 
-                      onClick={this.didClickImageWrapper} 
+        <ImageWrapper key={index}
+                      src={photo.link}
+                      onClick={this.didClickImageWrapper}
                       media={photo}
-                      bumpCount={this.getBumpCount(photo.id)}
+                      bumpCount={this.getBumpCount(photo.link)}
                       style={this.buildPositioningStyles(this.nudge(index))} />
       )
     });
