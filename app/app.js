@@ -30,7 +30,7 @@ const store = createStore(
 );
 
 // Initialize application
-const accessToken = window.localStorage.getItem('instagramAccessToken');
+const accessToken = window.localStorage.getItem('userUUID');
 initializeMOTI(accessToken)(store);
 
 // Setup Boilerplate
