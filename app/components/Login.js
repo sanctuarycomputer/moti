@@ -54,7 +54,6 @@ const ButtonStyle = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Radium(props => {
-  console.log(props);
   return ( 
     <button style={[ButtonStyle]} onClick={props.loginWithInstagram.bind(this, props.tags)}>{'Enter'}</button> 
   );

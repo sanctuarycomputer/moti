@@ -20,8 +20,6 @@ export function fetchPhotosForHashtag(hashtag) {
 
     return getHashtagPhotos(hashtag)
       .then(data => { 
-        console.log('data');
-        console.log(data);
         dispatch(didFinishFetchingPhotos(data)); 
       });
 
