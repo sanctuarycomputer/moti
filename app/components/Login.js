@@ -19,8 +19,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return { 
-    loginWithInstagram: function(tags) { 
-      console.log(authorizeUserAndLoadImages(tags)(dispatch));
+    signIn: function(tags) { 
       return authorizeUserAndLoadImages(tags)(dispatch); 
     },
     didShowFlashMessage: (status, text) => { 
@@ -55,6 +54,6 @@ const ButtonStyle = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Radium(props => {
   return ( 
-    <button style={[ButtonStyle]} onClick={props.loginWithInstagram.bind(this, props.tags)}>{'Enter'}</button> 
+    <button style={[ButtonStyle]} onClick={props.signIn.bind(this, props.tags)}>{'Enter'}</button> 
   );
 }));

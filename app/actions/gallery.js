@@ -19,9 +19,7 @@ export function fetchPhotosForHashtag(hashtag) {
     dispatch(didStartFetchingPhotos());
 
     return getHashtagPhotos(hashtag)
-      .then(data => { 
-        dispatch(didFinishFetchingPhotos(data)); 
-      });
+      .then(data => { dispatch(didFinishFetchingPhotos(data)); });
 
   }
 }
