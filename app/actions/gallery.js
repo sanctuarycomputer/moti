@@ -14,12 +14,16 @@ export function didFinishFetchingPhotos(data) {
 }
 
 /* For Dispatch */
-export function fetchPhotosForHashtag(hashtag, accessToken) {
+export function fetchPhotosForHashtag(hashtag) {
   return dispatch => {
     dispatch(didStartFetchingPhotos());
 
-    return getHashtagPhotos(hashtag, accessToken)
-      .then(data => { dispatch(didFinishFetchingPhotos(data)); });
-    
+    return getHashtagPhotos(hashtag)
+      .then(data => { 
+        console.log('data');
+        console.log(data);
+        dispatch(didFinishFetchingPhotos(data)); 
+      });
+
   }
 }

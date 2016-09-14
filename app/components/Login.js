@@ -14,14 +14,14 @@ const mapStateToProps = state => {
   return { 
     applicationStatus: state.application.status,
     tags: state.curator.currentCurator.tags,
-    authStatus: state.oAuth.status 
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return { 
-    loginWithInstagram: function() { 
-      return authorizeUserAndLoadImages(this)(dispatch); 
+    loginWithInstagram: function(tags) { 
+      console.log(authorizeUserAndLoadImages(tags)(dispatch));
+      return authorizeUserAndLoadImages(tags)(dispatch); 
     },
     didShowFlashMessage: (status, text) => { 
       return dispatch(didShowFlashMessage(status, text));
@@ -42,7 +42,7 @@ const ButtonStyle = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   transition: '1s',
-  opacity: 0,
+  opacity: 1,
   fontFamily: 'inherit',
   fontWeight: '300',
   letterSpacing: '2px',
@@ -53,16 +53,9 @@ const ButtonStyle = {
   }
 }
 
-const ButtonShow = {
-  opacity: 1
-}
-
 export default connect(mapStateToProps, mapDispatchToProps)(Radium(props => {
-  let styleArray = props.applicationStatus === 'ready' ? [ButtonStyle, ButtonShow] : [ButtonStyle];
-   
-  if (props.authStatus === 'success') { return null; }
-  if (props.authStatus === 'error') { props.didShowFlashMessage('error', copy.flashMessages.cantAuth) }
-  let buttonCopy = props.authStatus === 'idle' ? 'Enter' : 'Loading...';
-
-  return ( <button style={styleArray} onClick={props.loginWithInstagram.bind(props.tags)}>{'Enter'}</button> );
+  console.log(props);
+  return ( 
+    <button style={[ButtonStyle]} onClick={props.loginWithInstagram.bind(this, props.tags)}>{'Enter'}</button> 
+  );
 }));

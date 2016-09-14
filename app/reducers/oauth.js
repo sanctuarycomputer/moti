@@ -1,6 +1,6 @@
 import { 
   DID_SIGN_IN,
-  DID_FETCH_CURRENT_USER
+  SIGN_IN_START
 } from '../actions/oauth';
 
 const Status = {
@@ -19,20 +19,20 @@ const initialState = {
 
 export default function oAuth(state=initialState, action) {
   switch(action.type) {
-    case DID_SIGN_IN:
-      window.localStorage.setItem('userUUID', action.accessToken);
+    case SIGN_IN_START:
       return {
         status: Status.PENDING,
         currentUser: null,
         error: null,
-        accessToken: action.accessToken
+        accessToken: null,
       };
-    case DID_FETCH_CURRENT_USER:
+    case DID_SIGN_IN:
+      window.localStorage.setItem('userUUID', action.accessToken);
       return {
         status: Status.SUCCESS,
-        currentUser: action.user,
+        currentUser: { id: action.accessToken },
         error: null,
-        accessToken: state.accessToken
+        accessToken: action.accessToken
       };
     default:
       return state;

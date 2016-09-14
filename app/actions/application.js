@@ -35,10 +35,8 @@ export function browserDidResize() {
 /* For Dispatch */
 export function authorizeUserAndLoadImages(tags=[], accessToken) {
   return dispatch => {
-    return signIn(accessToken)(dispatch).then(currentUser => {
-      if (!accessToken) { accessToken = window.localStorage.userUUID; }
-      return Promise.all(tags.map(tag => fetchPhotosForHashtag(tag)(dispatch)))
-    });
+    signIn(accessToken)(dispatch);
+    return tags.map(tag => fetchPhotosForHashtag(tag)(dispatch));
   }
 }
 

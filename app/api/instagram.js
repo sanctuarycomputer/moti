@@ -1,14 +1,17 @@
 import ENV from '../config/Environment';
 import fetchJsonp from 'fetch-jsonp';
 
-export function getHashtagPhotos(tag, accessToken) {
-  return fetchJsonp(`${ENV.INSTAGRAM_API_ENDPOINT}/v1/tags/${tag}/media/recent?access_token=${accessToken}`)
+
+export function getHashtagPhotos(tag) {
+  console.log('getHashtagPhotos');
+  console.log(tag)
+  return fetchJsonp(`${ENV.GOOGLE_API_ENDPOINT}?q=${tag}&searchType=image&cx=${ENV.GOOGLE_SEARCH_ID}&key=${ENV.GOOGLE_API_KEY}`)
     .then(response => {
       return response.json().then(data => {
-        if (data.meta.code !== 200) {
-          throw new Error(data.meta);
+        if (data.error) {
+          throw new Error(data.error.message);
         } else {
-          return data.data;
+          return data.items;
         }
       })
     });
